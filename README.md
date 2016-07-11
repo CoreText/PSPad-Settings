@@ -1,0 +1,2 @@
+# PSPad-Settings
+My Settings
