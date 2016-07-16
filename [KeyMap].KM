@@ -34,7 +34,7 @@ aRemoveDuplicities=Shift+Ctrl+Alt+K
 
 [File]
 aOpen=Ctrl+O
-aExit=Shift+Alt+F4
+aExit=Ctrl+F4
 aSave=Ctrl+S
 aSaveAs=F2
 aPrint=
@@ -75,7 +75,7 @@ aSaveAsPlugin=
 aSessionSave=Ctrl+Alt+S
 aSessionManager=Shift+Ctrl+Alt+S
 aCheckRecent=
-aFTPDetachFile=
+aFTPDetachFile=Shift+F4
 aClearRecentFiles=
 aRestoreLastClosedFile=Shift+Ctrl+T
 aFTPConnect=Shift+Ctrl+Alt+F
@@ -213,13 +213,13 @@ aRepeatLastAction=Ctrl+Y
 aLoremIpsum=
 
 [Insert]
-aGUID=Shift+Ctrl+Alt+Y
+aGUID=
 aDateTime=Alt+Y
 aDateTimeDialog=Shift+Alt+Y
 
 [Template]
-aBlockToTemplate=
-aVars=
+aBlockToTemplate=Shift+Ctrl+Alt+Y
+aVars=Ctrl+Alt+Y
 
 [Send]
 aMailContents=
@@ -227,7 +227,7 @@ aMailFile=
 
 [Makro]
 aMacroRecord=Shift+F5
-aMacroPlay=Shift+F4
+aMacroPlay=Shift+F6
 aMacro1Play=
 aMacro2Play=
 aMacro3Play=
@@ -261,7 +261,7 @@ aProjInfo=Ctrl+Alt+I
 aProjFromDir=Shift+Alt+N
 aProjAddOpen=
 aProjSaveAs=Shift+Ctrl+P
-aProjSynchroDrive=Ctrl+Alt+E
+aProjSynchroDrive=Shift+Alt+R
 aFindFileInProject=Ctrl+Alt+F
 
 [TextDiff]
