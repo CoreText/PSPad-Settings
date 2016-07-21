@@ -1,0 +1,369 @@
+; PSPad clip definition file for Infobasic
+;
+; Author: Gabriel Ignacio Soriano Luvello        Luvellor@gmail.com
+; last change: 11.3.2015
+;
+[Macro definition]
+
+%nombre%=@E Nombre del Parrafo=
+%desccorta%=@E Descripcion Corta=
+%desclarga%=@E Descripcion Larga=
+%descrip%=@E Descripcion=
+%tabla%=@E Nombre de la tabla=
+%sentencia%=@E Sentencia= 
+%dato1%=@E Tabla/Archivo=    
+%clave%=@E Clave=    
+%coder%=@E Codigo de Error=   
+%condicion%=@E Condicion=
+%nombrer%=@E Nombre de la Rutina= 
+%nombrep%=@E Nombre= 
+%Apellido%=@E Apellido= 
+%Año%=@E Año= 
+%Mes%=@E Mes=
+%Dia%=@E Dia=
+%Abrevia%=@E Abreviatura=
+%indice%=@E Indice=
+%posicionin%=@E Posicion inicio=
+%posicionfi%=@E Posicion Fin=
+%resultado%=@E Resultado=
+%variable1%=@E Variable=
+%variable2%=@E Variable 2=
+%separador%=@C Separador:,,@VM,"@AM";
+%opcion1%=@C Opciones:,,X,"V";"C";
+%campo1%=@E LOCAL.REF =
+%id%=@E ID =
+%region%=@E Region=
+%operaciont%=@C Operacion:,,+,"-";
+%operacion%=@C Operacion:,,+,"-";"*";"/";
+%cantidad%=@E Cantidad:=
+%tiempo%=@C Tiempo:,,C,"W";"M";
+%fecha%=@E Fecha=
+%campos%=@E Campos= 
+%cantidad%=@E Cantidad=
+%archivo%=@E Archivo=
+%ruta%=@E Ruta=
+%texto%=@E Texto=
+; Macros ---------------------------------------------------------------------
+[M.Parrafo | Parrafo Generico]
+*-------------------------------------------------------------------------------------------------------------------------------------
+*<region nombre: %desccorta%> 
+*DESCR: %desclarga%
+*-------------------------------------------------------------------------------------------------------------------------------------
+%nombre%:
+*----------------------
+
+PARRAFO = "%nombre%"
+
+
+RETURN
+*</region>
+[Linea | Linea Larga]
+*-------------------------------------------------------------------------------------------------------------------------------------
+[M.Abrir Tablas | Parrafo generico]
+*-------------------------------------------------------------------------------------------------------------------------------------
+*<region nombre: %desccorta%> 
+*DESCR: %desclarga%
+*----------------------------------------------------------------------------
+ABRIR.TABLA.%nombre%:
+*--------------------------
+
+    FN.%tabla% = '%tabla%'
+    F.%tabla%  = ''
+    
+    CALL OPF(FN.%tabla%,F.%tabla%)
+
+RETURN
+*</region>
+[M.Manejo de Error | Display generico]
+IF (%condicion%) THEN
+   CALL OCOMO ("------------------------------------------------------------")
+   CALL OCOMO ("Parrafo         : ":PARRAFO) 
+   CALL OCOMO ("Sentencia       : ":%sentencia%)
+   CALL OCOMO ("Tabla/Archivo   : ":%dato1%)
+   CALL OCOMO ("Clave           : ":%clave%)
+   CALL OCOMO ("Codigo de Error : ":%coder%)
+   CALL OCOMO ("------------------------------------------------------------")
+   GOSUB CANCELAR
+END
+[M.Dec Mod. | Descripcion en cabecera]
+*------------------------------------------------------------------------
+* Modification History:
+* Desarrollado para : Banco CrediCoop - BCCL
+* Desarrollado por  : %nombrep% %Apellido%
+* Fecha creacion    : %Dia% del %Mes% del %Año%
+* Modificacion      : %desclarga%
+* Buscar            : %Abrevia%-%Año%%Mes%%Dia%
+*--------------------------------------------------------------------------------
+[M.Linea.Ini.Req | Lienea de inicio de modificaciones]
+*INI-%Abrevia%-%Año%%Mes%%Dia%=======================================================
+[M.Linea.Fin.Req | Lienea de Fin de modificaciones]
+*FIN-%Abrevia%-%Año%%Mes%%Dia%=======================================================
+[S.For | Sentencia FOR]
+FOR %indice% = %posicionin% TO %posicionfi%
+   ciclo
+NEXT %indice%
+[S.If | Sin ELSE]
+IF %condicion% THEN      
+   accion
+END
+[S.If else | con ELSE]
+IF %condicion% THEN      
+   Camino a
+END ELSE
+   Camino b
+END
+[M.Parrafo Lectura Tabla | Lectura Tabla por Clave]
+*-------------------------------------------------------------------------------------------------------------------------------------
+*<region nombre: %desccorta%> 
+*DESCR: %desclarga%
+*-------------------------------------------------------------------------------------------------------------------------------------
+LEER.TABLA.%nombre%:
+*----------------------
+
+PARRAFO   = "LEER.TABLA.%nombre%"
+SENTENCIA = "F.READ"
+ENTRADA   = "%tabla%" 
+CLAVE     = %id%
+%coder%   = ""
+
+CALL F.READ(FN.%tabla%,%id%,R.%tabla%,F.%tabla%,%coder%.ERROR)
+
+IF %coder%.ERROR THEN
+   CALL OCOMO ("------------------------------------------------------------")
+   CALL OCOMO ("Parrafo         : ":PARRAFO) 
+   CALL OCOMO ("Sentencia       : ":SENTENCIA)
+   CALL OCOMO ("Tabla/Archivo   : ":ENTRADA)
+   CALL OCOMO ("Clave           : ":%id%)
+   CALL OCOMO ("Codigo de Error : ":%coder%.ERROR)
+   CALL OCOMO ("------------------------------------------------------------")
+   GOSUB CANCELAR
+END
+
+RETURN
+*</region>
+[M.Acumulador | Acumulador Generico]
+%variable1% = %variable1% %operacion% %variable2%
+[M.Contador | Contador Generico]
+%variable1% = %variable1% %operacion% %cantidad%
+[S.Case | Case Generico]
+BEGIN CASE
+   CASE
+       caso 1 
+   CASE
+       caso 2
+   CASE OTHERWISE
+       caso DEFECTO
+END CASE
+[S.While do | While do Generico ]
+WHILE %condicion% DO
+
+     hacer
+
+REPEAT
+[M.Write seq gen | Parrafo Generico Grabado Secuencial]
+*-------------------------------------------------------------------------------------------------------------------------------------
+*<region nombre: %desccorta%> 
+*DESCR: %desclarga%
+*-------------------------------------------------------------------------------------------------------------------------------------
+GRABAR.%archivo%:
+*----------------------
+
+PARRAFO   = "GRABAR.%archivo%"
+SENTENCIA = "WRITESEQ"
+ARCHIVO   = "%archivo%" 
+CLAVE     = ""
+%coder%   = ""
+
+WRITESEQ R.%archivo% TO F.%Ruta%
+    ELSE
+         CALL OCOMO ("------------------------------------------------------------")
+         CALL OCOMO ("Parrafo         : ":PARRAFO) 
+         CALL OCOMO ("Sentencia       : ":SENTENCIA)
+         CALL OCOMO ("Tabla/Archivo   : ":ARCHIVO)
+         CALL OCOMO ("Clave           : ":CLAVE)
+         CALL OCOMO ("Codigo de Error : ":%coder%)
+         CALL OCOMO ("------------------------------------------------------------")
+         GOSUB CANCELAR
+     END
+
+RETURN
+*</region>
+[S.Write seq | Sintaxis ]
+WRITESEQ R.%archivo% TO F.%Ruta%
+    ELSE
+         CALL OCOMO ("------------------------------------------------------------")
+         CALL OCOMO ("Parrafo         : ":PARRAFO) 
+         CALL OCOMO ("Sentencia       : ":SENTENCIA)
+         CALL OCOMO ("Tabla/Archivo   : ":ENTRADA)
+         CALL OCOMO ("Clave           : ":CLAVE)
+         CALL OCOMO ("Codigo de Error : ":%coder%)
+         CALL OCOMO ("------------------------------------------------------------")
+         GOSUB CANCELAR
+     END
+[M.Template.rut.par | template generico de programas rutinas]
+*-----------------------------------------------------------------------------
+* <Rating>xxxx</Rating>
+*-----------------------------------------------------------------------------
+SUBROUTINE %nombrer%
+*-----------------------------------------------------------------------------
+* Desarrollado para : Banco CrediCoop - BCCL
+* Desarrollado por  : %nombrep% %Apellido%
+* Fecha creacion    : %Dia% del %Mes% del %Año%
+* Descripcion       : %desclarga%
+*-----------------------------------------------------------------------------
+* Modification History:
+* Desarrollado para : Banco CrediCoop - BCCL
+* Desarrollado por  : xxxxxxxxxxxxxxxxxxxxx
+* Fecha creacion    : DD del MM del AAA
+* Modificacion      : 
+* Buscar            : XXXX-DDMMAAAA
+*-----------------------------------------------------------------------------
+
+$INCLUDE T24.BP I_COMMON
+$INCLUDE T24.BP I_EQUATE
+
+
+GOSUB INICIO
+GOSUB PROCESO
+GOSUB FIN
+
+RETURN
+
+*-----------------------------------------------------------------------------
+*<region nombre: Inicio> 
+*DESCR: Inicio de la rutina
+*-----------------------------------------------------------------------------
+INICIO:
+*------
+
+PARRAFO = "INICIO"
+
+
+RETURN
+*</region>
+*-----------------------------------------------------------------------------
+*<region nombre: Proceso> 
+*DESCR: Lugar donde se ejecutan las acciones
+*-----------------------------------------------------------------------------
+PROCESO:
+*-------
+
+PARRAFO = "PROCESO"
+
+
+RETURN
+*</region>
+*-----------------------------------------------------------------------------
+*<region nombre: Fin> 
+*DESCR: Ultimas totales y respuestas
+*-----------------------------------------------------------------------------
+FIN:
+*---
+
+PARRAFO = "FIN"
+
+
+RETURN
+*</region>
+*-----------------------------------------------------------------------------
+*<region nombre: Cancelaciones> 
+*DESCR: Ultimo parrafo ejecutado de manejo de cancelaciones
+*-----------------------------------------------------------------------------
+CANCELAR:
+*--------
+
+PARRAFO = "CANCELAR"
+
+
+RETURN
+*</region>
+
+
+END
+[M.parrafo LISTAR completo | Arma el parrafo para el EB.READLIST sin filtro]
+*-------------------------------------------------------------------------------------------------------------------------------------
+*<region nombre: %desccorta%> 
+*DESCR: %desclarga%
+*-------------------------------------------------------------------------------------------------------------------------------------
+LISTAR.TABLA.%nombre%:
+*---------------------
+
+PARRAFO              = "LISTAR.TABLA.%nombre%"
+CONDICION.%nombre%   = ""
+CONDICION.%nombre%   = 'SELECT ':%tabla%
+LISTA.ID.%nombre%    = ''
+CANTIDAD.%nombre%    = ''
+LISTA.ERROR.%nombre% = ''
+
+CALL EB.READLIST(CONDICION.%nombre%,LISTA.ID.%nombre%,'',CANTIDAD.%nombre%,LISTA.ERROR.%nombre%)
+
+
+IF LISTA.ERROR.%nombre% THEN
+   CALL OCOMO ("------------------------------------------------------------")
+   CALL OCOMO ("Parrafo         : ":PARRAFO) 
+   CALL OCOMO ("Sentencia       : ":CONDICION.%nombre%)
+   CALL OCOMO ("Tabla/Archivo   : ":%tabla%)
+   CALL OCOMO ("Clave           : ")
+   CALL OCOMO ("Codigo de Error : ":LISTA.ERROR.%nombre%)
+   CALL OCOMO ("------------------------------------------------------------")
+   GOSUB CANCELAR
+END
+
+
+RETURN
+*</region>
+[M.parrafo LISTAR condicionado | Arma el parrafo para el EB.READLIST con filtro]
+*-------------------------------------------------------------------------------------------------------------------------------------
+*<region nombre: %desccorta%> 
+*DESCR: %desclarga%
+*-------------------------------------------------------------------------------------------------------------------------------------
+LISTAR.TABLA.%nombre%:
+*---------------------
+
+PARRAFO              = "LISTAR.TABLA.%nombre%"
+CONDICION.%nombre%   = ""
+CONDICION.%nombre%   = 'SELECT %tabla% %condicion%'
+LISTA.ID.%nombre%    = ''
+CANTIDAD.%nombre%    = ''
+LISTA.ERROR.%nombre% = ''
+
+CALL EB.READLIST(CONDICION.%nombre%,LISTA.ID.%nombre%,'',CANTIDAD.%nombre%,LISTA.ERROR.%nombre%)
+
+IF LISTA.ERROR.%nombre% THEN
+   CALL OCOMO ("------------------------------------------------------------")
+   CALL OCOMO ("Parrafo         : ":PARRAFO) 
+   CALL OCOMO ("Sentencia       : ":CONDICION.%nombre%)
+   CALL OCOMO ("Tabla/Archivo   : ":%tabla%)
+   CALL OCOMO ("Clave           : ")
+   CALL OCOMO ("Codigo de Error : ":LISTA.ERROR.%nombre%)
+   CALL OCOMO ("------------------------------------------------------------")
+   GOSUB CANCELAR
+END
+
+RETURN
+*</region>
+;Funciones -------------------------------------------------------------------
+[F.DCOUNT | Contador de elementos en un Vector]
+DCOUNT(%variable1%,%separador%)
+[F.TRANS | Devuelve LOCAL.REF]
+TRANS('%tabla%',%id%,%campo1%,'%opcion1%')
+[F.ISDIGIT | Comprueba si es numerico]
+ISDIGIT(%variable1%)
+
+
+;Rutinas
+[Call Dias | Resta/Suma dias a una fecha determinada ]
+CDT(%region%,%resultado%,'%operaciont%%cantidad%%tiempo%')
+[Call Dias tipo | Te dice el tipo de dia]
+AWD(%region%,%fecha%,%resultado%)
+[Call Multi Local.ref | Obtiene multiples local ref]
+MULTI.GET.LOC.REF(%tabla%,%campos%,%resultado%)
+[Call Local.ref | Obtiene local ref]
+GET.LOC.REF(%tabla%,%campos%,%resultado%)
+[Call dig. Verifica. CIU | Verifica el digito del CIU del empleador]
+BCCL.V.PER.DIGVERF(%variable1%,%resultado%)
+[Call Ocommo | Display OCOMMO]
+OCOMO(%texto%)
+[S.CRT | Display]
+CRT %texto%
+

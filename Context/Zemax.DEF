@@ -1,0 +1,1517 @@
+; PSPad code template for Zemax
+; Author: François RIGUET (francois.riguet@reosc.com)
+; last revision 11/2013
+[Macro definition]
+%01value%=@E Value,,
+%03value%=@E Value,,
+%04value%=@E Value,,
+%05value%=@E Value,,
+%01surface%=@E Surface number,,
+%02surface%=@E Surface number,,
+%03surface%=@E Surface number,,
+%01NSCsurface%=@E Non-sequential surface number,,
+%01index%=@E Index,,
+%01vector%=@C Vector,,1,1;2;3;4,
+%01field%=@E Field,,
+%01stdev%=@E Standard deviation,,
+%01string%=@E String variable,,string$
+%01string1%=@E String variable 1,,string1$
+%02string2%=@E String variable 2,,string2$
+%01seed%=@E Seed,,
+%01x%=@E X,,
+%03x%=@E X,,
+%02y%=@E Y,,
+%04y%=@E Y,,
+%05z%=@E Z,,
+%01wavelength%=@E Wavelength number,,
+%02wavelength%=@E Wavelength number,,
+%01vecsubscript%=@E Subscript value (positive),,
+%01code%=@E Property code number,,
+%02code%=@E Property code number,,
+%03code%=@E Property code number,,
+%03nposcode%=@C Code,,,1;2;3;4;5;6,
+%03argument2%=@E Second argument,,
+%02solvcode%=@C Code,,0,0;1;2;3;4;5,
+%03solvparam%=@C Parameter,,0,0;1;2;3,
+%01parameter%=@E Parameter number,,
+%02parameter%=@E Parameter number,,
+%03parameter%=@E Parameter number,,
+%02item%=@E Item number (1-12),,
+%01window%=@E Window,,
+%02line%=@E Line,,
+%02column%=@E Column (data type),,
+%03column%=@E Column,,
+%01row%=@E Row (operand number),,
+%02config%=@E Configuration number,,
+%03data%=@E Data value,,
+%02object%=@E Object number,,
+%04face%=@E Face number,,
+%02detector%=@E Detector number,,
+%03pixel%=@E Pixel number,,
+%04nsdcdata%=@C Data type,,0,0;1;2;3,
+%04nsdddata%=@C Data type,,0,0;1;2,
+%01opecode%=@C Operand code,,EFFL,ABCD;ABSO;ACOS;AMAG;ANAC;ANAR;ANAX;ANAY;ANCX;ANCY;ASIN;ASTI;ATAN;AXCL;BFSD;BIOC;BIOD;BLNK;BSER;CEGT;CELT;CENX;CENY;CEVA;CIGT;CILT;CIVA;CMFV;CMGT;CMLT;CMVA;CNAX;CNAY;CNPX;CNPY;CODA;COGT;COLT;COMA;CONF;CONS;COSI;COVA;CTGT;CTLT;CTVA;CVGT;CVIG;CVLT;CVOL;CVVA;DENC;DENF;DIFF;DIMX;DISA;DISC;DISG;DIST;DIVB;DIVI;DLTN;DMFS;DMGT;DMLT;DMVA;DXDX;DXDY;DYDX;DYDY;EFFL;EFLX;EFLY;EFNO;ENDX;ENPP;EPDI;EQUA;ETGT;ETLT;ETVA;EXPD;EXPP;FCGS;FCGT;FCUR;FDMO;FDRE;FICL;FICP;FOUC;FTGT;FTLT;GBPD;GBPP;GBPR;GBPS;GBPW;GBSD;GBSP;GBSR;GBSS;GBSW;GCOS;GENC;GENF;GLCA;GLCB;GLCC;GLCR;GLCX;GLCY;GLCZ;GMTA;GMTS;GMTT;GOTO;GPIM;GPRT;GPRX;GPRY;GPSX;GPSY;GRMN;GRMX;GTCE;HHCN;IMAE;IMSF;INDX;InGT;InLT;InVA;ISFN;LACL;LINV;LOGE;LOGT;LONA;LPTD;MAXX;MCOG;MCOL;MCOV;MINN;MNAB;MNCA;MNCG;MNCT;MNCV;MNDT;MNEA;MNEG;MNET;MNIN;MNPD;MNSD;MSWA;MSWS;MSWT;MTFA;MTFS;MTFT;MTHA;MTHS;MTHT;MXAB;MXCA;MXCG;MXCT;MXCV;MXDT;MXEA;MXEG;MXET;MXIN;MXPD;MXSD;NORD;NORX;NORY;NORZ;NPGT;NPLT;NPVA;NPXG;NPXL;NPXV;NPYG;NPYL;NPYV;NPZG;NPZL;NPZV;NSDC;NSDD;NSRA;NSRM;NSST;NSTR;NTXG;NTXL;NTXV;NTYG;NTYL;NTYV;NTZG;NTZL;NTZV;OBSN;OOFF;OPDC;OPDM;OPDX;OPGT;OPLT;OPTH;OPVA;OSCD;OSUM;PANA;PANB;PANC;PARA;PARB;PARC;PARR;PARX;PARY;PARZ;PATX;PATY;PETC;PETZ;PIMH;PLEN;PMAG;PMGT;PMLT;PMVA;POPD;POWF;POWP;POWR;PRIM;PROB;PROD;QSUM;RAED;RAEN;RAGA;RAGB;RAGC;RAGX;RAGY;RAGZ;RAID;RAIN;RANG;REAA;REAB;REAC;REAR;REAX;REAY;REAZ;RECI;RELI;RENA;RENB;RENC;RETX;RETY;RGLA;RSCE;RSCH;RSRE;RSRH;RWCE;RWCH;RWRE;RWRH;SAGX;SAGY;SFNO;SINE;SKIN;SKIS;SPCH;SPHA;SQRT;SSAG;STHI;STRH;SUMM;SVIG;TANG;TCGT;TCLT;TCVA;TFNO;TGTH;TMAS;TOLR;TOTR;TRAC;TRAD;TRAE;TRAI;TRAR;TRAX;TRAY;TRCX;TRCY;TTGT;TTHI;TTLT;TTVA;UDOP;USYM;VOLU;WFNO;WLEN;XDGT;XDLT;XDVA;XENC;XENF;XNEA;XNEG;XNET;XXEA;XXEG;XXET;YNIP;ZERN;ZPLM;ZTHI,"
+%02substringnumber%=@E Sub-string number,,
+%01line%=@E Line number,,1
+%01expression%=@E Expression,,
+%02charnumber%=@E Number of characters,,
+%01macro%=@O Macro file,,,Macro files (*.zpl)|*.zpl,",A
+%01windownumber%=@E Window number,,
+%01dblindex%=@E Index value (0-50),,
+%02dblvalue%=@E Value,,
+%02stringvalue%=@E String,,
+%01color%=@E Color number (0 to 24),,0
+%01copysource%=@O Source file,,,File (*.*)|*.*,",A
+%02copydest%=@O Destination file,,,File (*.*)|*.*,",A
+%01declarename%=@E Variable name,,
+%02declaretype%=@C Variable type,,DOUBLE,DOUBLE;INTEGER,
+%03declarenumdim%=@C Number of dimensions,,1,1;2;3;4,
+%04declaredim1%=@E Dimension 1,,
+%05declaredim2%=@E Dimension 2,", ",
+%06declaredim3%=@E Dimension 3,", ",
+%07declaredim4%=@E Dimension 4,", ",
+%01defmerittype%=@C Type (RMS/PV),,0,0;1,
+%02defmeritdata%=@C Data (WF/spot/spot x/spot y/spot x+y),,0,0;1;2;3;4,
+%03defmeritreference%=@C Reference (centroid/chief/unref),,0,0;1;2,
+%04defmeritmethod%=@C Method (Gaussian/rectangular),,0,0;1,
+%05defmeritrings%=@E Number of rings,,
+%06defmeritarms%=@E Number of arms,,
+%07defmeritgrid%=@E Grid size,,
+%08defmeritdelete%=@C Delete vignetted rays (no/yes),,0,0;1
+%09defmeritaxial%=@C Axial symmetry (auto/no/axial),,-1,-1;0;1,
+%10defmeritlateral%=@C Ignore lateral color (no/yes),,0,0;1
+%11defmeritstart%=@E Start (-1 auto/operand number),,-1
+%12defmeritxweight%=@E X weight,,
+%13defmeritoweight%=@E Overall weight,,
+%01deleten%=@E Surface Number,,
+%01deleteconfig%=@E Configuration number,,
+%01deletefile%=@E File name,,
+%01deletemco%=@E Operand row,,
+%01deletemfo%@E Operand row or ALL,,
+%01deleteobjectsurf%=@E Surface number,,
+%02deleteobjectobject%=@E Object number,,
+%01exportwinnum%=@E Window number,,
+%02exportfilename%=@E File name,,
+%03exportdelay%=@E Delay (ms),", ",
+%00exportcadfilename%=@E File name
+%01exportcadvec%=@C File type (IGES/STEP/SAT/STL),,1,0;1;2;3,
+%02exportcadvec%=@E Number of spline points,,
+%03exportcadvec%=@E First surface,,
+%04exportcadvec%=@E Last surface,,
+%05exportcadvec%=@E Layer for rays,,
+%06exportcadvec%=@E Layer for lens,,
+%07exportcadvec%=@C Export dummy surfaces (no/yes),,0,0;1,
+%08exportcadvec%=@C Export surfaces as solids (no/yes),,0,0;1,
+%09exportcadvec%=@C Ray pattern (XY/X/Y/ring/list/none),,0,0;1;2;3;4;5,
+%10exportcadvec%=@E Number of rays,,
+%11exportcadvec%=@E Wave number (0 for all),,
+%12exportcadvec%=@E Field number (0 for all),,
+%13exportcadvec%=@C Delete vignetted rays (no/yes),,1,0;1,
+%14exportcadvec%=@E Dummy surface thickness,,
+%15exportcadvec%=@C Split rays from NSC sources (no/yes),,0,0;1,
+%16exportcadvec%=@C Scatter rays from NSC sources (no/yes),,0,0;1,
+%17exportcadvec%=@C Use polarization for NSC rays (no/yes),,0,0;1,
+%18exportcadvec%=@E Configuration (0/1-n/n+1/n+2/n+3),,0
+%01findfilevariable%=@E Variable to store results in,,TEMPFILE$
+%02findfilefilter%=@E Filter,,C:\ZEMAX\*.ZMX,,"
+%01FORvariable%=@E Variable,,i
+%02FORstart%=@E Start value,,
+%03FORstop%=@E Stop value,,
+%04FORincrement%=@E Increment,,
+%01format%=@E Format,,
+%02formatoption%=@C Option,,,EXP;INT;LIT,
+%01getvector%=@C Vector number,,1,1;2;3;4,
+%02getsurface%=@E Surface number,,
+%02getglass%=@E Glass number,,
+%01getlsfwave%=@E Wavelength number,,0
+%02getlsffield%=@E Field number,,
+%03getlsfsampling%=@C Sampling,,,1;2;3;4;5;6;7,
+%04getlsfvector%=@C Vector number,,1,1;2;3;4,
+%05getlsfmaxradius%=@E Max radial coordinate of LSF,,0
+%06getlsfpolar%=@C Use polarization(no/yes),,0,0;1,
+%01getmtffreq%=@E Frequency,,
+%02getmtfwave%=@E Wavelength number,,0
+%03getmtffield%=@E Field number,,
+%04getmtfsampling%=@C Sampling,,,1;2;3;4;5;6;7,
+%05getmtfvector%=@C Vector number,,1,1;2;3;4,
+%06getmtftype%=@C Data type (MTF/real/imaginary/phase/square wave MTF),,1,1;2;3;4;5,
+%01getpsfwave%=@E Wavelength number,,0
+%02getpsffield%=@E Field number,,
+%03getpsfsampling%=@C Sampling,,,1;2;3;4;5;6;7,
+%04getpsfvector%=@C Vector number,,1,1;2;3;4,
+%05getpsfunnormalized%=@C Normalized PSF,,0,0;1,
+%06getpsfphaseflag%=@C Intensity (0) or phase (1),,0,0;1,
+%07getpsfimagedelta%=@E Spacing between PSF points (um),,0
+%01getsysdata%=@C Data vector number,,1,1;2;3;4,
+%01gettexttextfilename%=@E File name,,,,"
+%02gettexttype%=@E Type,,,,"
+%03gettextsettingsfilename%=@E Settings,,,,"
+%04gettextflag%=@C Settings flag,,0,0;1;2,
+%01getvardata%=@C Data vector number,,1,1;2;3;4,
+%01getzmaxorder%=@E Max order (1 to 37 or 231),,37
+%02getzwave%=@E Wavelength number,,
+%03getzfield%=@ Field number,,
+%04getzsampling%=@C Sampling,,1,1;2;3;4;5;6;7,
+%05getzvector%=@C Output vector,,1,1;2;3;4,
+%06getzzerntype%=@C Zernike type (fringe/standard/annular),,0,0;1;2,
+%07getzepsilon%=@E Annular ratio (for annular Zernike),,
+%08getzreference%=@C OPD Reference (chief ray / surface vertex),,0,0;1,
+%01glasstmplcode%=@E Code,,
+%02glasstmpldata%=@C Data,,,0;1,
+%01gbllclsurf1%=@E Surface 1,,
+%02gbllclsurf2%=@E Surface 2,,
+%03gbllcldirection%=@C Direction (forward/reverse),,,0;1,
+%01graphics%=@C Graphics,,,;NOFRAME;OFF,
+%01gtextx%=@E X position,,
+%02gtexty%=@E Y position,,
+%03gtextangle%=@E Angle,,0
+%04gtexttext%=@E Text (in quotes) or string variable,,
+%01gtextcy%=@E Y position,,
+%02gtextctext%=@E Text,,
+%01gtitle%=@E Title,,
+%01hamnum%=@E Number of cycles (1-99),,1
+%02hamalgo%=@C Algorithm (DLS/OD),,0,0;1,
+%01IFcondition%=@E Condition,,()
+%02IFelse%=@K Else ?,ELSE,
+%01SUBname%=@E Subprogram name,,
+%01gotolabel%=@E Label,,
+%01xpup%=@E X pupil coordinate,,
+%02ypup%=@E Y pupil coordinate,,
+%01gtemcode%=@E Code number,,
+%01lostcode%=@E Code number,,
+%01imagepath%=@E String variable containing the full path to the image,,string$
+%01solmope%=@E Operand number,,
+%03solmcode%=@C Code number,,0,0;1;2;3;4;5;6;7,
+%01sosocode%=@C Code number,,0,0;1,
+%01tolvope%=@E Tolerance operand number,,
+%02tolvcol%=@E Column number,,
+%01glasscat%=@E Catalog number (<1 gives all loaded catalogs),,
+%01tolope%=@E Tolerance operand,,
+%01cmdexe%=@O Executable program,,,Executable program (*.exe)|*.exe,",A
+%02cmdargs%=@E Arguments,,
+%01convfile%=@O Text file,,,Text file (*.*)|*.*,",A
+%02convencoding%=@C Encoding,,,1;2,
+%01deltolrow%=@E Tolerance row number,,
+%01imaout%=@O Output file,,,Output file (*.bim)|*.bim,",A
+%02imain%=@O Input file,,,Input file (*.ima;*.bim)|*.ima;*.bim,",A
+%01imgcombsource1%=@O Source image 1,,,Image file (*.bmp;*.jpg)|*.bmp;*.jpg,",A
+%02imgcombsource2%=@O Source image 2,,,Image file (*.bmp;*.jpg)|*.bmp;*.jpg,",A
+%03imgcombdest%=@O Destination file,,,Image file (*.bmp;*.jpg)|*.bmp;*.jpg,",A
+%04imgcombmode%=@C Mode,,LEFTRIGHT,LEFTRIGHT;TOPBOTTOM,"
+%01imgextractsource%=@O Source image,,,Image file (*.bmp;*.jpg)|*.bmp;*.jpg,",A
+%02imgextractdest%=@O Destination file,,,Image file (*.bmp;*.jpg)|*.bmp;*.jpg,",A
+%03imgextractstartx%=@E X start pixel,,
+%04imgextractstarty%=@E Y start pixel,,
+%05imgextractwidth%=@E Width,,
+%06imgextractheight%=@E Height,,
+%01imashow%=@O IMA/BIM file,,,File (*.bim;*.ima)|*.bim;*.ima,",A
+%01imasumin1%=@O Input BIM file 1,,,BIM file (*.bim)|*.bim,",A
+%02imasumin2%=@O Input BIM file 2,,,BIM file (*.bim)|*.bim,",A
+%03imasumout%=@O Output BIM file,,,BIM file (*.bim)|*.bim,",A
+%01impsurf%=@E Surface number,,
+%02impfile%=@O Data file,,,Data file (*.*)|*.*,",A
+%01inputprompt%=@E Prompt string,,,,"
+%02inputvar%=@E Input variable (add $ for string),,x
+%01inssurf%=@E Surface number,,
+%01insconf%=@E Configuration number,,
+%01insmco%=@E Operand row,,
+%01insmfo%=@E Operand row,,
+%01insnscsurf%=@E Surface number,,
+%02insnscobj%=@E Object number,,
+%01instol%=@E Tolerance row,,
+%01label%=@E Label number or text,,
+%01lineoldx%=@E X start,,
+%02lineoldy%=@E Y start,,
+%03linenewx%=@E X end,,
+%04linenewy%=@E Y end,,
+%01loadzarfile%=@O ZAR File,,,Zemax archive (*.zar)|*.zar,",A
+%02loadzarpath%=@S Extract path,,
+%01detsurf%=@E Surface number,,
+%02detobject%=@E Object number,,
+%03detfile%=@O Detector file,,,Detector file (*.ddc;*.ddp;*.ddr;*.ddv)|*.ddc;*.ddp;*.ddr;*.ddv,",A
+%01lensfile%=@O Lens File,,,Zemax file (*.zmx)|*.zmx,",A
+%02lensflag%=@C Append flag,,0,0;1,
+%03lenssession%=@C Session flag,,1,0;1,
+%02lenssession%=@C Session flag,,1,0;1,
+%01meritfile%=@O Merit function File,,,Merit function file (*.mf)|*.mf,",A
+%01tolfile%=@O Tolerance File,,,Tolerance file (*.tol)|*.tol,",A
+%01l2gsurf1%=@E First surface,,
+%02l2gsurf2%=@E Last surface,,
+%03l2gref%=@E Reference surface,,
+%01lockwin%=@E Window number (0, -1 or n),,
+%01facetin%=@O Input CAD file,,,CAD file (*.*)|*.*,",A
+%02facetout%=@O Output ASCII file,,,ASCII file (*.txt)|*.txt,",A
+%O1makefolder%=@E Folder path,,C:\,,"
+%01settingfile%=@O Settings file,,,Settings file (*.txt)|*.txt,",A
+%02settingtype%=@C Type,,,DVW_DATA;DVW_DETECTOR;DVW_FILTER;DVW_MAXPLOT;DVW_MINPLOT;DVW_ROWCOL;DVW_SCALE;DVW_SHOW;DVW_SMOOTHING;DVW_SURFACE;DVW_ZPLANE;DVW_ZRD;EXD_DISPLAYSIZE;EXD_FIELD;EXD_FILESIZE;EXD_WAVE;FOO_SURFACE;GBM_FIELDSIZE;GBM_INPUT;GBM_OUTPUT;GBM_RAYS;GBM_ROTATION;GBM_SURFACE;GBM_XPIX;GBM_XSIZ;GBM_YPIX;GBM_YSIZ;HPC_FIELD;HPC_IMAGEDELTA;HPC_IMAGESAMP;HPC_PUPILSAMP;HPC_TYPE;HPC_WAVE;HPS_FIELD;HPS_IMAGEDELTA;HPS_IMAGESAMP;HPS_PUPILSAMP;HPS_TYPE;HPS_WAVE;ILL_DETSIZE;ILL_SMOOTH;ILL_SOURCE;ILL_SURFACE;IMA_FIELD;IMA_IMAGESIZE;IMA_IMANAME;IMA_KRAYS;IMA_NA;IMA_OUTNAME;IMA_SURFACE;ISM_ABERRATIONS;ISM_FIELD;ISM_FIELDHEIGHT;ISM_FLIP;ISM_GUARDBAND;ISM_INPUTFILE;ISM_ISAMP;ISM_OUTPUTFILE;ISM_OVERSAMPLING;ISM_PIXELSIZE;ISM_POLARIZATION;ISM_PSAMP;ISM_PSFX;ISM_PSFY;ISM_REFERENCE;ISM_ROTATE;ISM_SHOWAS;ISM_SUPPRESS;ISM_WAVE;ISM_XSIZE;ISM_YSIZE;LAY_RAYS;LSF_COHERENT;LSF_FIELD;LSF_PLOTSCALE;LSF_POLARIZATION;LSF_SAMP;LSF_SPREAD;LSF_TYPE;LSF_WAVE;MTF_DASH;MTF_FIELD;MTF_MAXF;MTF_POLAR;MTF_SAMP;MTF_SDLI;MTF_SURF;MTF_TYPE;MTF_WAVE;PCI_FIELD;PCI_FILESIZE;PCI_RESAMPLE;PCI_RSDCX;PCI_RSDCY;PCI_RSDLX;PCI_RSDLY;PCI_RSNX;PCI_RSNY;PCI_WAVE;POP_AUTO;POP_BEAMTYPE;POP_COMPUTE;POP_END;POP_FIBERFILE;POP_FIBERTYPE;POP_FIELD;POP_FPARAMn;POP_IGNOREPOL;POP_PARAMn;POP_PEAKIRRAD;POP_POSITION;POP_POWER;POP_SAMPX;POP_SAMPY;POP_SOURCEFILE;POP_START;POP_TILTX;POP_TILTY;POP_WAVE;POP_WIDEX;POP_WIDEY;PSF_FIELD;PSF_IMAGEDELTA;PSF_NORMALIZE;PSF_PLOTSCALE;PSF_POLARIZATION;PSF_ROW;PSF_SAMP;PSF_SURFACE;PSF_TYPE;PSF_WAVE;SHA_ROTX;SHA_ROTY;SHA_ROTZ;SPT_RAYS;WFM_FIELD;WFM_SAMP;WFM_SUBSR;WFM_SUBSX;WFM_SUBSY;WFM_WAVE,
+%03settingvalue%=@E Value,,
+%01nstrsurf%=@E Surface number,,
+%02nstrsource%=@E Source number,,
+%03nstrsplit%=@C Split rays ? (0=no),,0,0;1,
+%04nstrscatter%=@C Scatter rays ? (0=no),,0,0;1,
+%05nstrusepolar%=@C Use polar ? (0=no),,0,0;1,
+%06nstrignoreerrors%=@C Ignore errors ? (0=no),,0,0;1,
+%07nstrrandomseed%=@E Random seed (0=random seed),,0
+%08nstrsave%=@E Save ray data ? (0=no),,1
+%09nstrsavefilename%=@E Output data file,,ray_data.zrd,,"
+%10nstrfilter%=@C Filter (change n v... by proper value),,,"Bn";"Dn";"En";"Fn";"Gn";"Hn";"Jn";"Ln";"Mn";"On";"Rn";"Sn";"Tn";"Wn";"X_AXYG(n,v)";"X_AXYL(n,v)";"X_AXZG(n,v)";"X_AXZL(n,v)";"X_AYZG(n,v)";"X_AYZL(n,v)";"X_EXT(n,b) ";"X_GHOST(n,b)";"X_HIT(n,b)";"X_HITFACE(n,f)";"X_HITFACE2(n,f,b)";"X_IAGT(n,v)";"X_IALT(n,v)";"X_IRGT(n,v)";"X_IRLT(n,v)";"X_LGT(n,v) ";"X_LLT(n,v)";"X_MGT(n,v)";"X_MLT(n,v)";"X_NGT(n,v)";"X_NLT(n,v)";"X_ORD(n,b)";"X_SCATTER(n,b)";"X_SCATTERF(n,b)";"X_WAVERANGE(n, a, b)";"X_WAVESHIFT(i,j)";"X_XGT(n,v)";"X_XLT(n,v)";"X_YGT(n,v)";"X_YLT(n,v)";"X_ZGT(n,v)";"X_ZLT(n,v)";"Z","
+%01open%=@O Text file,,,Text file (*.txt)|*.txt,",A
+%01openawintype%=@E Analysis type (3-letter code),,,"
+%02openawinfile%=@O Settings file,,,Settings file (*.cfg)|*.cfg,",A
+%01optimnumcycles%=@E Number of cycles (1-99),,
+%02optimalgo%=@C Algorithm (0: DLS / 1: orthogonal descent),,0,0;1,
+%01optreturndata%=@E Data field,,
+%02optreturnresult%=@E Result,,
+%01outputout%=@E Destination (SCREEN or file),,SCREEN
+%02outputappend%=@K Append,", APPEND",
+%01paraxonoff%=@C Paraxial ray tracing,,,ON;OFF,
+%01pause%=@C Mode,,TIME,'"text"';TIME;THREADS,
+%02pausetime%=@E Time (ms),", ",
+%01pixx%=@E X coordinate,,
+%02pixy%=@E Y coordinate,,
+%00plotparam%=@C Plot parameter,,,BANNER;CHECK;COMM1;COMM2;COMM3;COMM4;COMM5;COMM6;DATA;FORMATX;FORMATY;GO;LABEL;LINE;NEW;RANGEX;RANGEY;TICK;TITLE;TITLEX;TITLEY;WINASPECT,
+%01plotstring%=@E String (BANNER COMMn TITLE TITLEX TITLEY),", ",,,"
+%02plotxinc%=@E X increment (CHECK TICK),", ",
+%03plotyinc%=@E Y increment (CHECK TICK),", ",
+%04plotxarr%=@E X array (DATA),", ",
+%05plotyarr%=@E Y array (DATA),", ",
+%06plotnbpts%=@E Number of points (DATA),", ",
+%07plotcolor%=@E Color (DATA),", ",
+%08plotstyle%=@E Style (DATA),", ",
+%09plotoptions%=@E Options (DATA),", ",
+%10plotfmtstr%=@E Format string (FORMATX FORMATY),", ",
+%11plotx%=@E X position (LABEL),", ",
+%12ploty%=@E Y position (LABEL),", ",
+%13plotangle%=@E Angle (LABEL),", ",
+%14plotsize%=@E Size (LABEL),", ",
+%15plotlblstr%=@E String (LABEL),", ",,,"
+%16plotx1%=@E X1 (LINE),", ",
+%17ploty1%=@E Y1 (LINE),", ",
+%18plotx2%=@E X2 (LINE),", ",
+%19ploty2%=@E Y2 (LINE),", ",
+%20plotminx%=@E Min X (RANGEX),", ",
+%21plotmaxx%=@E Max X (RANGEX),", ",
+%22plotminy%=@E Min Y (RANGEY),", ",
+%23plotmaxy%=@E Max Y (RANGEY),", ",
+%24plottype%=@C Window aspect (WINASPECT),", ",,0;1;2;3,
+%00plot2dparam%=@C Plot parameter,,,ACTIVECURSOR;ASPECT;COMM1;COMM2;COMM3;COMM4;COMM5;CONFIG;CONTOURINTERVAL;DATA;DISPLAYTYPE;GO;HIDEADDRESS;LOGPLOT;NEW;RANGE;SURFACESCALE;TITLE;WINASPECT,
+%01plot2dleft%=@E Left (ACTIVECURSOR),", ",
+%02plot2dright%=@E Right (ACTIVECURSOR),", ",
+%03plot2dbottom%=@E Bottom (ACTIVECURSOR),", ",
+%04plot2dtop%=@E Top (ACTIVECURSOR),", ",
+%05plot2dratio%=@E Ratio (ASPECT),", ",
+%06plot2dstring%=@E String (COMMn CONTOURINTERVAL TITLE),", ",,,"
+%07plot2dconf%=@E Configuration number (CONFIG) (0 for current config/ -1 for all),", ",
+%08plot2darray%=@E Array (DATA),", ",
+%09plot2ddisp%=@C Display type (DISPLAYTYPE),", ",,1;2;3;4;5;6,
+%10plot2dflag%=@C Hide adress flag (HIDEADDRESS),", ",,0;1,
+%11plot2dpeak%=@E Peak (LOGPLOT),", ",
+%12plot2ddecades%=@E Decades (LOGPLOT),", ",
+%13plot2dmin%=@E Min (RANGE),", ",
+%14plot2dmax%=@E Max (RANGE),", ",
+%15plot2dscale%=@E Scale (SURFACESCALE),", ",
+%16plot2dtype%=@C Window aspect (WINASPECT),", ",,0;1;2;3,
+%01poldefjx%=@E Jx field magnitude,,0
+%02poldefjy%=@E Jy field magnitude,,1
+%03poldefphax%=@E Phase x,,0
+%04poldefphay%=@E Phase y,,0
+%01poltrahx%=@E Normalized object X coordinate,,
+%02poltrahy%=@E Normalized object Y coordinate,,
+%03poltrapx%=@E Normalized pupil X coordinate,,
+%04poltrapy%=@E Normalized pupil X coordinate,,
+%05poltrawav%=@E Wavelength number,,
+%06poltravec%=@C Output vector,,1,1;2;3;4,
+%07poltrasurf%=@E Surface number,,
+%01popfile%=@O Output file,,,Output file (*.zbf)|*.zbf,",A
+%02popsurf%=@E Last surface,,
+%01printout%=@E Text and/or data,,
+%01printfile%=@O Text file,,,Text file (*.txt)|*.txt,",A
+%01printwinnum%=@E Window number,,
+%01pwavn%=@E Wavelength number,,
+%01quickfocmode%=@C Mode,,0,0;1;2;3,
+%02quickfoccentr%=@C Centroid,,0,0;1,
+%01randseed%=@E Seed,,
+%01rtrxx%=@E X coordinate,,
+%02rtrxy%=@E Y coordinate,,
+%03rtrxz%=@E Z coordinate,,
+%04rtrxl%=@E L cosine,,
+%05rtrxm%=@E M cosine,,
+%06rtrxn%=@E N cosine,,
+%07rtrxsurf%=@E Start surface number,,
+%08rtrxwav%=@E Wavelength number,,
+%01readvarlist%=@E Variable list (coma sparated),,"x, y, z"
+%01readstr%=@E String,,A$
+%01release%=@E Variable name,,
+%01renameold%=@O Old file,,OLD$,File (*.*)|*.*,",A
+%02renamenew%=@O New file,,NEW$,File (*.*)|*.*,",A
+%01savewinnum%=@E Window number,,
+%02savewinfile%=@O Text file,,,Text file (*.txt)|*.txt,",A
+%01scatter%=@C Scattering,,ON,ON;OFF,
+%01state%=@C State,,0,0;1,
+%01setaimdatacode%=@C Code,,,1;2;3;4;5;6;7;8,
+%02setaimdatavalue%=@E Value,,
+%03setdetpix%=@E Pixel number,,
+%04setdetdatatype%=@C Data type,,0,0;1;2;3;4,
+%05setdetval%=@E Value,,
+%04datatype%=@C Data type,,0,0;1;2;3;4;5,
+%03param%=@E Parameter,,
+%03npropcode%=@E Property code,,
+%01setoprow%=@E Row,,
+%02setopcol%=@C Column,,,1;2;3;4;5;6;7;8;9;10;11;12;13,
+%02value1%=@E Value 1,,
+%03value1%=@E Value 1,,
+%03value2%=@E Value 2,,
+%04value2%=@E Value 2,,
+%01textxsize%=@E X size,,70
+%02textysize%=@E Y size,,40
+%01settolrow%=@E Row,,
+%02settolcol%=@C Column,,,1;2;3;4;5;6;7;8;9;10;11;12;13,
+%02tolcol%=@C Column,,,0;1;2;3;4;5;6,
+%03toldata%=@E Data (operand name for column = 0),,
+%01setvarsurfconf%=@E Surface or configuration number,,
+%02setvarcode%=@C Code (M for configuration - change n by adequate number),,,R;T;C;G;I;J;K;Pn;D;En;M;Nn;On,
+%03setvarstatus%=@E Status,,
+%04setvarobjop%=@E Object or operand (for configuration),,
+%01vecsize%=@E Maximum vector size (< 18 000 000)
+%01dispfile%=@O Image file,,,Image file (*.bmp;*.jpg)|*.bmp;*.jpg,",A
+%01showtext%=@O Text file,,,Text file (*.txt)|*.txt,",A
+%02showsave%=@E Save flag,,1
+%01solve%=@E Solve,,
+%02solvtypecode%=@C Code (replace o and p by object and parameter numbers),,,CF;CV;CM;CC;CP;CN;CO;CA;CE;CQ;CR;CG;CZ;TF;TV;TM;TC;TE;TP;TO;TL;TX;TY;TU;TZ;GF;GM;GP;GS;GO;SA;SU;SP;SM;SZ;KF;KP;KZ;PF_p;PP_p;PC_p;PZ_p;HF;HP;EF_e;EP_e;EZ_p;NSC_PX_o;NSC_PY_o;NSC_PZ_o;NSC_PTX_o;NSC_PTY_o;NSC_PTZ_o;NSC_PMAT_o;NSC_MATF_o;NSC_MATM_o;NSC_MATP_o;NSC_MOFF_o;NSC_ZX_o;NSC_ZY_o;NSC_ZZ_o;NSC_ZTX_o;NSC_ZTY_o;NSC_ZTZ_o;NSC_PP_o_p;NSC_ZP_o_p,
+%03solvarg1%=@E Argument 1,,
+%04solvarg2%=@E Argument 2,,
+%05solvarg3%=@E Argument 3,,
+%06solvarg4%=@E Argument 4,,
+%01tpftpd%=@O Test plate data file,,,Test plate data file (*.tpd)|*.tpd,",A
+%02tpflog%=@O Log file,,,Log file (*.dat)|*.dat,",A
+%03tpfmethod%=@C Method,,0,0;1;2;3;4,
+%04tpfcycles%=@E Number of cycles,,
+%01update%=@C Update (replace n by window number),,,ALL;n;EDITORS;MACROS,
+%01vecnumber%=@C Vector number,,1,1;2;3;4,
+%02vecsubscript%=@E Subscript,,
+%01zbffile%=@O ZBF file,,,ZBF file (*.zbf)|*.zbf,",A
+%02zbfmultax%=@E Real part x polarization,,
+%03zbfmultbx%=@E Imaginary part x polarization,,
+%04zbfmultay%=@E Real part y polarization,,
+%05zbfmultby%=@E Imaginary part y polarization,,
+%02zbfpropvec%=@C Output vector,,1,1;2;3;4,
+%02zbfbeam%=@E Beam array (3D),,
+%03zbfprop%=@E Property array (1D),,
+%02zbfnx%=@E Number of X points (power of 2),,
+%03zbfny%=@E Number of Y points (power of 2),,
+%04zbfwx%=@E Total width X,,
+%05zbfwy%=@E Total width Y,,
+%06zbfdecx%=@E X decenter,,
+%07zbfdecy%=@E Y decenter,,
+%01zbfcoherent%=@C Coherent (1) or incoherent (0) sum,,,0;1,
+%02zbffile1%=@O Input file 1,,,ZBF file (*.zbf)|*.zbf,",A
+%03zbffile2%=@O Input file 2,,,ZBF file (*.zbf)|*.zbf,",A
+%04zbfoutfile%=@O Output file,,,ZBF file (*.zbf)|*.zbf,",A
+%02zbfcx%=@E X tilt center,,0
+%03zbfcy%=@E Y tilt center,,0
+%04zbftx%=@E X tilt slope,,
+%05zbfty%=@E Y tilt slope,,
+%01zrdappin%=@O Input (appened) file,,,ZRD file (*.zrd)|*.zrd,",A
+%02zrdout%=@O Output file,,,ZRD file (*.zrd)|*.zrd,",A
+%01zrdfiltin%=@O Input file,,,ZRD file (*.zrd)|*.zrd,",A
+%03zrdfilter%=@E Filter string,,,,"
+%02zrdsavout%=@O Output file,,,Output file (*.dat)|*.dat,",A
+%04zrdobj%=@E Object number,,
+%01zrdfile1%=@O Input file 1,,,ZRD file (*.zrd)|*.zrd,",A
+%02zrdfile2%=@O Input file 2,,,ZRD file (*.zrd)|*.zrd,",A
+%03zrdoutfile%=@O Output file,,,ZRD file (*.zrd)|*.zrd,",A
+%1project%=@E Project name ?,,
+%2comment%=@E Comment ?,,
+%01nsltsurface%=@E Non sequential surface,,1
+%02nsltsource%=@E Source number (0=all),,0
+%03nsltraysampl%=@C LightningTrace mesh resolution (0=1x/5=1024x),,,0;1;2;3;4;5,
+%04nsltedgesampl%=@C (0=1x/4=256x),,,0;1;2;3;4,
+%01readskip%=@E Number of characters to skip (<0 = starts from end of file),,
+%01aygenrsmxfile%=@O Input Radiant Source model,,,Radiant Source model (*.rmsx)|*.rmsx,",R
+%02raygenrayfile%=@O Output ray file,,output_ray_file.sdf,Ray file (*.sdf)|*.sdf,",R
+%03raygennumrays%=@E Number of rays,,
+%04raygenminazim%=@E Minimum azimuth angle,,
+%05raygenmaxazim%=@E Maximum azimuth angle,,
+%06raygenminincl%=@E Minimum inclination angle,,
+%07raygenmaxincl%=@E Maximum inclination angle,,
+%08raygenoriginmeth%=@C Origination method code,,,0;1;2;3;4;5;6;7;8;9;10;11,
+%09raygenoriginrad%=@E Origination radius (mm),,
+%10raygenspectrumtype%=@C Spectrum type,,,0;1;2;3,
+%11raygenarg1%=@E Argument 1,,
+%12raygenarg2%=@E Argument 2,,
+%13raygenarg3%=@E Argument 3,,
+%01topfile%=@O Tolerance options file,,,Tolerance options file (*.top)|*.top,",R
+%02toloutfile%=@O Output file,,tolerance_report.txt,Output file (*.*)|*.*,",R
+%01zbf2matfile%=@O Input ZBF file,,,ZBF file (*.zbf)|*.zbf,",A
+%02matfile%=@O Output MAT file,,output.mat,MAT file (*.mat)|*.mat,",A
+%03zbfsurfrange%=@E Surface range flag (0=all surfaces),,0,0;1,
+%04zbf2matinteger1%=@E Starting surface number,,
+%05zbf2matinteger2%=@E Final surface number,,
+%01zrd2matfile%=@O Input ZRD file,,,ZRD file (*.zrd)|*.zrd,",A
+%03zrdsavesegment%=@C Save segment flag,,0,0;1,
+%04zrd2matinteger1%=@E First ray,,
+%05zrd2matinteger2%=@E Last ray,,
+%01zrdpbfile%=@O Input ZRD file,,,ZRD file (*.zrd)|*.zrd,",R
+%03zrddetector%=@E Detector object number (0=all detectors),,0
+%04zrdclear%=@C Clear detector ? (0=no/1=yes),,0,0;1,
+%05zrdfilter%=@E Filter string,,,,"
+;
+;
+; Numeric functions
+[ABSO |P Absolute value ]
+ABSO(%01value%)|
+[ACOS |P Arc cosine ]
+ACOS(%01value%)|
+[APMN |P Minimum aperture radius ]
+APMN(%01surface%)|
+[APMX |P Maximum aperture radius ]
+APMX(%01surface%)|
+[APOI |P Ray intensity apodization factor ]
+APOI(%01xpup%, %02ypup%)|
+[APTP |P Aperture type ]
+APTP(%01surface%)|
+[APXD |P Aperture x-decenter ]
+APXD(%01surface%)|
+[APYD |P Aperture y-decenter ]
+APYD(%01surface%)|
+[ASIN |P Arc sine ]
+ASIN(%01value%)|
+[ASPR |P Aspect ratio of the graphics device ]
+ASPR()|
+[ATAN |P Arc tangent ]
+ATAN(%01value%)|
+[ATYP |P System aperture type ]
+ATYP()|
+[AVAL |P System aperture value ]
+AVAL()|
+[CALD |P Return a value from the CALLMACRO buffer ]
+CALD(%01index%)|
+[CONF |P Current configuration number ]
+CONF()|
+[CONI |P Conic constant of the surface ]
+CONI(%01surface%)|
+[COSI |P Cosine ]
+COSI(%01value%)|
+[CURV |P Curvature of the surface ]
+CURV(%01surface%)|
+[EDGE |P Edge thickness at the semi-diameter ]
+EDGE(%01surface%)|
+[EOFF |P End of file flag ]
+EOFF()|
+[ETIM |P Elapsed time in seconds since last TIMER ]
+ETIM()|
+[EXPE |P Exponential (base e) ]
+EXPE(%01value%)|
+[EXPT |P Power of 10 ]
+EXPT(%01value%)|
+[FICL |P Fiber coupling efficiency ]
+FICL(%01vector%)|
+[FLDX |P X-angle or height of specified field ]
+FLDX(%01field%)|
+[FLDY |P Y-angle or height of specified field ]
+FLDY(%01field%)|
+[FTYP |P Current field type ]
+FTYP()|
+[FVAN |P Vignetting angle of specified field ]
+FVAN(%01field%)|
+[FVCX |P X vignetting compression of specified field ]
+FVCX(%01field%)|
+[FVCY |P Y vignetting compression of specified field ]
+FVCY(%01field%)|
+[FVDX |P X vignetting decenter of specified field ]
+FVDX(%01field%)|
+[FVDY |P Y vignetting decenter of specified field ]
+FVDY(%01field%)|
+[FWGT |P Field weighting of specified field ]
+FWGT(%01field%)|
+[GABB |P Abbe number of the glass for the specified surface ]
+GABB(%01surface%)|
+[GAUS |P Random value with a Gaussian distribution ]
+GAUS(%01stdev%)|
+[GETT |P Numerical value from any open text window ]
+GETT(%01window%, %02line%, %03column%)|
+[GIND |P Index at d-line of the glass for the specified surface ]
+GIND(%01surface%)|
+[GLCA |P Global vertex x vector ]
+GLCA(%01surface%)|
+[GLCB |P Global vertex y vector ]
+GLCB(%01surface%)|
+[GLCC |P Global vertex z vector ]
+GLCC(%01surface%)|
+[GLCM |P Value of global coordinates item ]
+GLCM(%01surface%, %02item%)|
+[GLCX |P Global vertex x-coordinate ]
+GLCX(%01surface%)|
+[GLCY |P Global vertex y-coordinate ]
+GLCY(%01surface%)|
+[GLCZ |P Global vertex z-coordinate ]
+GLCZ(%01surface%)|
+[GNUM |P Number of the glass in the glass catalog ]
+GNUM(%01string%)|
+[GPAR |P Partial dispersion coefficient of the glass for the specified surface ]
+GPAR(%01surface%)|
+[GRIN |P Index of refraction at the specified x, y, z position ]
+GRIN(%01surface%, %02wavelength%, %03x%, %04y%, %05z%)|
+[GTEM |P Data from glass substitution template ]
+GTEM(%01gtemcode%)|
+[IMAE |P Geometric image analysis efficiency ]
+IMAE(%01seed%)|
+[INDX |P Index of refraction at the primary wavelength ]
+INDX(%01surface%)|
+[INTE |P Largest integer not greater than the argument ]
+INTE(%01value%)|
+[ISMS |P Odd mirror flag ]
+ISMS(%01surface%)|
+[LOGE |P Base e logarithm ]
+LOGE(%01value%)|
+[LOGT |P Base 10 logarithm ]
+LOGT(%01value%)|
+[LOST |P Lost energy following the most recent NSTR trace ]
+LOST(%01lostcode%)|
+[MAGN |P Square root of x^2+y^2 ]
+MAGN(%01x%, %02y%)|
+[MAXF |P Maximum radial field ]
+MAXF()|
+[MAXG |P Number of glasses currently loaded ]
+MAXG()|
+[MCON |P Extracts data from the Multi-Configuration Editor (extended) ]
+MCON(%01row%, %02config%, %03data%)|
+[MCOP |P Extracts data from the Multi-Configuration Editor ]
+MCOP(%01row%, %02config%)|
+[MFCN |P Update lend and merit function ]
+MFCN()|
+[NCON |P Number of configurations ]
+NCON()|
+[NFLD |P Number of defined fields ]
+NFLD()|
+[NOBJ |P Number of defined NSC objects ]
+NOBJ(%01NSCsurface%)|
+[NPAR |P Parameter value of NSC object ]
+NPAR(%01surface%, %02object%, %03parameter%)|
+[NPOS |P Position value of NSC object ]
+NPOS(%01surface%, %02object%, %03nposcode%)|
+[NPRO |P Numeric or string value from the property pages of NSC objects ]
+NPRO(%01surface%, %02object%, %03code%, %04face%)|
+[NSDC |P Coherent intensity data on detector ]
+NSDC(%01surface%, %02detector%, %03pixel%, %04nsdcdata%)|
+[NSDD |P Incoherent intensity data on detector ]
+NSDD(%01surface%, %02detector%, %03pixel%, %04nsdddata%)|
+[NSUR |P Number of defined surfaces ]
+NSUR()|
+[NWAV |P Number of defined wavelengths ]
+NWAV()|
+[OBJC |P Object with comment ]
+OBJC(%01string%)|
+[OCOD |P Optimization operand code ]
+OCOD(%01opecode%)|
+[ONUM |P optimization operand id number ]
+ONUM(%01string%)|
+[OPDC |P Optical path difference ]
+OPDC()|
+[OPER |P Data from Merit Function Editor ]
+OPER(%01row%, %02column%)|
+[OPEV |P Computes the same value as any optimization operand would ]
+OPEV(%01opecode%, int1, int2, data1, data2, data3, data4)|
+[OPEW |P Computes the same value as any optimization operand would (extended)]
+OPEW(%01opecode%, int1, int2, data1, data2, data3, data4, data5, data6)|
+[OPTH |P Optical path length ]
+OPTH(%01surface%)|
+[PARM |P Parameter value ]
+PARM(%01parameter%, %02surface%)|
+[PIXX |P Number of X pixels in the image ]
+PIXX(%01imagepath%)|
+[PIXY |P Number of Y pixels in the image ]
+PIXY(%01imagepath%)|
+[PMOD |P Paraxial mode ]
+PMOD()|
+[POWR |P Power (x^y) ]
+POWR(%01x%, %02y%)|
+[PVHX |P Data1 parameter from the ZPLM optimization operand ]
+PVHX()|
+[PVHY |P Data2 parameter from the ZPLM optimization operand ]
+PVHY()|
+[PVPX |P Data3 parameter from the ZPLM optimization operand ]
+PVPX()|
+[PVPY |P Data4 parameter from the ZPLM optimization operand ]
+PVPY()|
+[PWAV |P Primary wavelength number ]
+PWAV()|
+[RADI |P Radius of curvature ]
+RADI(%01surface%)|
+[RAGL |P Global l direction cosine of the ray following the surface ]
+RAGL(%01surface%)|
+[RAGM |P Global m direction cosine of the ray following the surface ]
+RAGM(%01surface%)|
+[RAGN |P Global n direction cosine of the ray following the surface ]
+RAGN(%01surface%)|
+[RAGX |P Global x coordinate of the ray intercept ]
+RAGX(%01surface%)|
+[RAGY |P Global y coordinate of the ray intercept ]
+RAGY(%01surface%)|
+[RAGZ |P Global z coordinate of the ray intercept ]
+RAGZ(%01surface%)|
+[RAND |P Random number between 0 and input value ]
+RAND(%01value%)|
+[RANX |P X-direction cosine of the surface normal ]
+RANX(%01surface%)|
+[RANY |P Y-direction cosine of the surface normal ]
+RANY(%01surface%)|
+[RANZ |P Z-direction cosine of the surface normal ]
+RANZ(%01surface%)|
+[RAYE |P Ray-trace error flag ]
+RAYE()|
+[RAYL |P X-direction cosine of the ray ]
+RAYL(%01surface%)|
+[RAYM |P Y-direction cosine of the ray ]
+RAYM(%01surface%)|
+[RAYN |P Z-direction cosine of the ray ]
+RAYN(%01surface%)|
+[RAYO |P Ray optical path length ]
+RAYO(%01surface%)|
+[RAYT |P Ray path length ]
+RAYT(%01surface%)|
+[RAYV |P Vignetted ray flag ]
+RAYV()|
+[RAYX |P X-coordinate of the ray intercept ]
+RAYX(%01surface%)|
+[RAYY |P Y-coordinate of the ray intercept ]
+RAYY(%01surface%)|
+[RAYZ |P Z-coordinate of the ray intercept ]
+RAYZ(%01surface%)|
+[RELI |P Relative illumination ]
+RELI(%01field%)|
+[SAGG |P Surface sag ]
+SAGG(%01x%, %02y%, %03surface%)|
+[SCOM |P String comparison ]
+SCOM(%01string1%, %02string2%)|
+[SDIA |P Semi-diameter ]
+SDIA(%01surface%)|
+[SIGN |P Sign ]
+SIGN(%01value%)|
+[SINE |P Sine ]
+SINE(%01value%)|
+[SLEN |P String length ]
+SLEN(%01string%)|
+[SOLM |P Solve type and data ]
+SOLM(%01solmope%, %02config%, %03solmcode%)|
+[SOLV |P Solve type ]
+SOLV(%01surface%, %02solvcode%, %03solvparam%)|
+[SOSO |P Surface or object number of a solve ]
+SOSO(%01sosocode%)|
+[SPRO |P Surface property ]
+SPRO(%01surface%, %02code%)|
+[SPRX |P Surface property (extended) ]
+SPRX(%01surface%, %02code%, %03argument2%)|
+[SQRT |P Square root ]
+SQRT(%01value%)|
+[STDD |P Tilt and decenter ]
+STDD(%01surface%, %02parameter%)|
+[SURC |P Surface with comment ]
+SURC(%01string%)|
+[SVAL |P String value ]
+SVAL(%01string%)|
+[SYPR |P System data ]
+SYPR(%01code%)|
+[TANG |P Tangent ]
+TANG(%01value%)|
+[THIC |P Thickness ]
+THIC(%01surface%)|
+[TMAS |P Total mass ]
+TMAS()|
+[TOLV |P Tolerance data ]
+TOLV(%01tolvope%, %02tolvcol%)|
+[UNIT |P Current unit type ]
+UNIT()|
+[VEC1 |P Value of the VEC1 array ]
+VEC1(%01vecsubscript%)|
+[VEC2 |P Value of the VEC2 array ]
+VEC2(%01vecsubscript%)|
+[VEC3 |P Value of the VEC3 array ]
+VEC3(%01vecsubscript%)|
+[VEC4 |P Value of the VEC4 array ]
+VEC4(%01vecsubscript%)|
+[VERS |P Zemax version number ]
+VERS()|
+[WAVL |P Wavelength ]
+WAVL(%01wavelength%)|
+[WINL |P Number of the most recently opened analysis windows ]
+WINL()|
+[WINN |P Number of open analysis windows ]
+WINN()|
+[WWGT |P Wavelength weighting ]
+WWGT(%01wavelength%)|
+[XMAX |P Maximum x-coordinate in the graphics window ]
+XMAX()|
+[XMIN |P Minimum x-coordinate in the graphics window ]
+XMIN()|
+[YMAX |P Maximum y-coordinate in the graphics window ]
+YMAX()|
+[YMIN |P Minimum y-coordinate in the graphics window ]
+YMIN()|
+;
+;
+; String functions
+[$BUFFER |B Current string in the lens buffer ]
+$BUFFER()|
+[$CALLSTR |B String from the CALLMACRO string buffer ]
+$CALLSTR(%01index%)|
+[$COAT |B Coating name ]
+$COAT(%01surface%)|
+[$COATINGPATH |B Path name for coating files ]
+$COATINGPATH()|
+[$COMMENT |B Comment string ]
+$COMMENT(%01surface%)|
+[$DATAPATH |B Path name for data files ]
+$DATAPATH()|
+[$DATE |B Date and time ]
+$DATE()|
+[$EXTENSIONPATH |B Path name for ZEMAX extensions ]
+$EXTENSIONPATH()|
+[$FILENAME |B Lens file name ]
+$FILENAME()|
+[$FILEPATH |B Lens file name with the complete path ]
+$FILEPATH()|
+[$GETSTRING |B Sub-string (space delimiter) ]
+$GETSTRING(%01string%, %02substringnumber%)|
+[$GETSTRINGC |B Sub-string (comma delimiter) ]
+$GETSTRINGC(%01string%, %02substringnumber%)|
+[$GLASS |B Glass name ]
+$GLASS(%01surface%)|
+[$GLASSCATALOG |B Glass catalog name ]
+$GLASSCATALOG(%01glasscat%)|
+[$GLASSPATH |B Path name for glass catalog files ]
+$GLASSPATH()|
+[$LEFTSTRING |B Left most n characters ]
+$LEFTSTRING(%01string%, %02charnumber%)|
+[$LENSNAME |B Lens title ]
+$LENSNAME()|
+[$MACROPATH |B Path name for macro files ]
+$MACROPATH()|
+[$NOTE |B Notes information ]
+$NOTE(%01line%)|
+[$OBJECTPATH |B Path name for NSC object files ]
+$OBJECTPATH()|
+[$PATHNAME |B Path name ]
+$PATHNAME()|
+[$PROGRAMPATH |B Path name for program files ]
+$PROGRAMPATH()|
+[$QUOTE |B Returns double quote character ]
+$QUOTE()|
+[$RIGHTSTRING |B  Right  most  n  characters ]
+$RIGHTSTRING(%01string%, %02charnumber%)|
+[$STR |B String formatted expression ]
+$STR(%01expression%)|
+[$TAB |B Returns tab character ]
+$TAB()|
+[$TEMPFILENAME |B Temporary file name ]
+$TEMPFILENAME|
+[$TOLCOMMENT |B Comment for the specified tolerance operand ]
+$TOLCOMMENT(%01tolope%)|
+[$TOLOPERAND |B Operand name for the specified tolerance operand ]
+$TOLOPERAND(%01tolope%)|
+[$UNITS |B Lens units ]
+$UNITS()|
+;
+;
+; Keywords
+[BEEP |R Beep sound ]
+BEEP|
+[CALLMACRO |R Call another ZPL macro ]
+CALLMACRO %01macro%|
+[CALLSETDBL |R Set a double precision numeric value ]
+CALLSETDBL %01dblindex%, %02dblvalue%|
+[CALLSETSTR |R Set string value in buffer ]
+CALLSETSTR %01dblindex%, %02stringvalue%|
+[CLOSE |R Close an ASCII file ]
+CLOSE|
+[CLOSEWINDOW |R Suppress the display of the default output window ]
+CLOSEWINDOW %01windownumber%|
+[COLOR |R Set current pen color ]
+COLOR %01color%|
+[COMMAND |R Execute a shell command ]
+COMMAND %01cmdexe%, %02cmdargs%
+[CONVERTFILEFORMAT |R Convert encoding of a text file ]
+CONVERTFILEFORMAT %01convfile%, %02convencoding%
+[COPYFILE |R Copy source file in a new file ]
+COPYFILE %01copysource% %02copydest%|
+[DECLARE |R Declare array variable ]
+DECLARE %01declarename% %02declaretype% %03declarenumdim% %04declaredim1%%05declaredim2%%06declaredim3%%07declaredim4%|
+[DEFAULTMERIT |R Generate a default merit function ]
+DEFAULTMERIT %01defmerittype% %02defmeritdata% %03defmeritreference% %04defmeritmethod% %05defmeritrings% %06defmeritarms% %07defmeritgrid% %08defmeritdelete% %09defmeritaxial% %10defmeritlateral% %11defmeritstart% %12defmeritxweight% %13defmeritoweight%|
+[DELETE |R Delete a surface ]
+DELETE %01deleten%|
+[DELETECONFIG |R Delete a configuration ]
+DELETECONFIG %01deleteconfig%|
+[DELETEFILE |R Delete a file ]
+DELETEFILE %01deletefile%|
+[DELETEMCO |R Delete a multi-conf operand ]
+DELETEMCO %01deletemco%|
+[DELETEMFO |R Delete a merit function operand ]
+DELETEMFO %01deletemfo%|
+[DELETEOBJECT |R Delete an NSC object ]
+DELETEOBJECT %01deleteobjectsurf%, %02deleteobjectobject%|
+[DELETETOL |R Delete a tolerance ]
+DELETETOL %01deltolrow%|
+[EXPORTBMP |R Export a graphic window as BMP ]
+EXPORTBMP %01exportwinnum%, %02exportfilename%%03exportdelay%|
+[EXPORTCAD |R Export a graphic window as CAD ]
+VEC1(1) = %01exportcadvec%
+VEC1(2) = %02exportcadvec%
+VEC1(3) = %03exportcadvec%
+VEC1(4) = %04exportcadvec%
+VEC1(5) = %05exportcadvec%
+VEC1(6) = %06exportcadvec%
+VEC1(7) = %07exportcadvec%
+VEC1(8) = %08exportcadvec%
+VEC1(9) = %09exportcadvec%
+VEC1(10) = %10exportcadvec%
+VEC1(11) = %11exportcadvec%
+VEC1(12) = %12exportcadvec%
+VEC1(13) = %13exportcadvec%
+VEC1(14) = %14exportcadvec%
+VEC1(15) = %15exportcadvec%
+VEC1(16) = %16exportcadvec%
+VEC1(17) = %17exportcadvec%
+VEC1(18) = %18exportcadvec%
+EXPORTCAD %00exportcadfilename%|
+[EXPORTJPG |R Export a graphic window as JPG ]
+EXPORTJPG %01exportwinnum%, %02exportfilename%%03exportdelay%|
+[EXPORTWMF |R Export a graphic window as WMF ]
+EXPORTWMF %01exportwinnum%, %02exportfilename%|
+[FINDFILE |R Find names of files ]
+FILTER$ = %02findfilefilter%
+FINDFILE %01findfilevariable%, %02findfilefilter%|
+[FOR |R FOR statement ]
+FOR %01FORvariable%, %02FORstart%, %03FORstop%, %04FORincrement%
+    |
+NEXT
+[FORMAT |R Numerical precision format ]
+FORMAT %01format% %02formatoption%|
+[GDATE |R Display current date on graphics ]
+GDATE|
+[GETEXTRADATA |R Get extra data values ]
+GETEXTRADATA %01getvector%, %02getsurface%|
+[GETGLASSDATA |R Get glass data ]
+GETGLASSDATA %01getvector%, %02getglass%|
+[GETLSF |R Calculate the geometric LSF ]
+GETLSF %01getlsfwave%, %02getlsffield%, %03getlsfsampling%, %04getlsfvector%, %05getlsfmaxradius%, %06getlsfpolar%|
+[GETMTF |R Calculate MTF ]
+GETMTF %01getmtffreq%, %02getmtfwave%, %03getmtffield%, %04getmtfsampling%, %05getmtfvector%, %06getmtftype%|
+[GETPSF |R Calculate PSF ]
+GETPSF %01getpsfwave%, %02getpsffield%, %03getpsfsampling%, %04getpsfvector%, %05getpsfunnormalized%, %06getpsfphaseflag%, %07getpsfimagedelta%|
+[GETSYSTEMDATA |R Get system data ]
+GETSYSTEMDATA %01getsysdata%|
+[GETTEXTFILE |R Create a text file ]
+GETTEXTFILE %01gettexttextfilename%, %02gettexttype%, %03gettextsettingsfilename%, %04gettextflag%|
+[GETVARDATA |R Get variable data ]
+GETVARDATA %01getvardata%|
+[GETZERNIKE |R Calculate Zernike coefficients ]
+GETZERNIKE %01getzmaxorder%, %02getzwave%, %03getzfield%, %04getzsampling%, %05getzvector%, %06getzzerntype%, %07getzepsilon%, %08getzreference%|
+[GLASSTEMPLATE |R Glass substitution template ]
+GLASSTEMPLATE %01glasstmplcode%, %02glasstmpldata%|
+[GLENSNAME |R Use lens name for graphics ]
+GLENSNAME|
+[GLOBALTOLOCAL |R Convert coord breaks from global to local references ]
+GLOBALTOLOCAL %01gbllclsurf1%, %02gbllclsurf2%, %03gbllcldirection%|
+[GOSUB |R Sub-program ]
+GOSUB %01SUBname%
+|
+END
+SUB %01SUBname%
+RETURN
+[GOTO |R GOTO statement ]
+GOTO %01gotolabel%
+|
+LABEL %01gotolabel%
+[GRAPHICS |R Create standard Zemax graphics ]
+GRAPHICS %01graphics%|
+[GTEXT |R Graphics labeling ]
+GTEXT %01gtextx%, %02gtexty%, %03gtextangle%, %04gtexttext%|
+[GTEXTCENT |R Label centering on graphics ]
+GTEXTCENT %01gtextcy%, %02gtextctext%|
+[GTITLE |R Garaphics title ]
+GTITLE %01gtitle%|
+[HAMMER |R Hammer optimization ]
+HAMMER %01hamnum%, %02hamalgo%|
+[IF |R IF statement ]
+IF %01IFcondition%
+    |
+%02IFelse%
+ENDIF
+[IMA |R Geometric image analysis ]
+IMA %01imaout%, %02imain%|
+[IMAGECOMBINE |R Combine two images ]
+S1$ = %01imgcombsource1%
+S2$ = %02imgcombsource2%
+D$ = %03imgcombdest%
+M$ = %04imgcombmode%
+IMAGECOMBINE S1$, S2$, D$, M$|
+[IMAGEEXTRACT |R Extract a region from an image ]
+S$ = %01imgextractsource%
+D$ = %02imgextractdest%
+IMAGEEXTRACT S$, D$, %03imgextractstartx%, %04imgextractstarty%, %05imgextractwidth%, %06imgextractheight%|
+[IMASHOW |R Display a BIM/IMA file ]
+IMASHOW %01imashow%|
+[IMASUM |R Sum BIM files ]
+IMASUM %01imasumin1%, %02imasumin2%, %03imasumout%|
+[IMPORTEXTRADATA |R Import extra data from a file ]
+IMPORTEXTRADATA %01impsurf%, %02impfile%|
+[INPUT |R Data input ]
+INPUT %01inputprompt%, %02inputvar%|
+[INSERT |R Insert a surface ]
+INSERT %01inssurf%|
+[INSERTCONFIG |R Insert a configuration ]
+INSERTCONFIG %01insconf%|
+[INSERTMCO |R Insert a multi configuration operand ]
+INSERTMCO %01insmco%|
+[INSERTMFO |R Insert a merit function operand ]
+INSERTMFO %01insmfo%|
+[INSERTOBJECT |R Insert an NSC object ]
+INSERTOBJECT %01insnscsurf%, %02insnscobj%|
+[INSERTTOL |R Insert a tolerance ]
+INSERTTOL %01instol%|
+[LABEL |R Label used with GOTO ]
+LABEL %01label%|
+[LINE |R Draw a line ]
+LINE %01lineoldx%, %02lineoldy%, %03linenewx%, %04linenewy%|
+[LOADARCHIVE |R Open a ZAR file ]
+LOADARCHIVE %01loadzarfile%, %02loadzarpath%|
+[LOADCATALOG |R Reload glass and coating catalogs ]
+LOADCATALOG|
+[LOADDETECTOR |R Load detector data ]
+LOADDETECTOR %01detsurf%, %02detobject%, %03detfile%|
+[LOADLENS |R Load a new lens file ]
+LOADLENS %01lensfile%, %02lensflag%, %03lenssession%|
+[LOADMERIT |R Load a merit function file ]
+LOADMERIT %01meritfile%|
+[LOADTOLERANCE |R Load a tolerance file ]
+LOADTOLERANCE %01tolfile%|
+[LOCALTOGLOBAL |R Convert local to global references ]
+LOCALTOGLOBAL %01l2gsurf1%, %02l2gsurf2%, %03l2gref%|
+[LOCKWINDOW |R Lock windows ]
+LOCKWINDOW %01lockwin%|
+[MAKEFACETLIST |R Transform a CAD file into ASCII listing ]
+MAKEFACETLIST %01facetin%, %02facetout%|
+[MAKEFOLDER |R Create a new folder ]
+MAKEFOLDER %O1makefolder%|
+[MODIFYSETTINGS |R Modify data in a settings file ]
+MODIFYSETTINGS %01settingfile%, %02settingtype%, %03settingvalue%|
+[NSLT |R Initiate a Non-Sequential LightningTrace ]
+NSLT %01nsltsurface%, %02nsltsource%, %03nsltraysampl%, %04nsltedgesampl%|
+[NSTR |R Non sequential trace ]
+NSTR %01nstrsurf%, %02nstrsource%, %03nstrsplit%, %04nstrscatter%, %05nstrusepolar%, %06nstrignoreerrors%, %07nstrrandomseed%, %08nstrsave%, %09nstrsavefilename%, %10nstrfilter%|
+[OPEN |R Open a text file ]
+OPEN %01open%|
+[OPENANALYSISWINDOW |R Open a new analysis window ]
+OPENANALYSISWINDOW %01openawintype%, %02openawinfile%|
+[OPTIMIZE |R Optimize ]
+OPTIMIZE %01optimnumcycles%, %02optimalgo%|
+[OPTRETURN |R Return value from optimization ]
+OPTRETURN %01optreturndata%, %02optreturnresult%|
+[OUTPUT |R Destination for text output ]
+OUTPUT %01outputout%%02outputappend%|
+[PARAXIAL |R Paraxial ray tracing ]
+PARAXIAL %01paraxonoff%|
+[PAUSE |R Pause macro exécution ]
+PAUSE %01pause%%02pausetime%|
+[PIXEL |R Turn on a pixel on current graphics ]
+PIXEL %01pixx%, %02pixy%|
+[PLOT |R Create a plot ]
+PLOT %00plotparam%%01plotstring%%02plotxinc%%03plotyinc%%04plotxarr%%05plotyarr%%06plotnbpts%%07plotcolor%%08plotstyle%%09plotoptions%%10plotfmtstr%%11plotx%%12ploty%%13plotangle%%14plotsize%%15plotlblstr%%16plotx1%%17ploty1%%18plotx2%%19ploty2%%20plotminx%%21plotmaxx%%22plotminy%%23plotmaxy%%24plottype%|
+[PLOT2D |R Create a 2D plot ]
+PLOT2D %00plot2dparam%%01plot2dleft%%02plot2dright%%03plot2dbottom%%04plot2dtop%%05plot2dratio%%06plot2dstring%%07plot2dconf%%08plot2darray%%09plot2ddisp%%10plot2dflag%%11plot2dpeak%%12plot2ddecades%%13plot2dmin%%14plot2dmax%%15plot2dscale%%16plot2dtype%|
+[POLDEFINE |R Define input polarization state ]
+POLDEFINE %01poldefjx%, %02poldefjy%, %03poldefphax%, %04poldefphay%|
+[POLTRACE |R Polarization ray tracing ]
+POLTRACE %01poltrahx%, %02poltrahy%, %03poltrapx%, %04poltrapy%, %05poltrawav%, %06poltravec%, %07poltrasurf%|
+[POP |R Physical optics propagation ]
+POP %01popfile%, %02popsurf%|
+[PRINT |R Output text and data ]
+PRINT %01printout%|
+[PRINTFILE |R Print a text file ]
+PRINTFILE %01printfile%|
+[PRINTWINDOW |R Print a graphic or a text window ]
+PRINTWINDOW %01printwinnum%|
+[PWAV |R Set the primary wavelength ]
+PWAV %01pwavn%|
+[QUICKFOCUS |R Adjust last surface's thickness for refocus ]
+QUICKFOCUS %01quickfocmode%, %02quickfoccentr%|
+[RANDOMIZE |R Change random generator's seed ]
+RANDOMIZE %01randseed%|
+[RAYGENERATOR |R Run the ray generator ]
+RAYGENERATOR %01aygenrsmxfile%, %02raygenrayfile%, %03raygennumrays%, %04raygenminazim%, %05raygenmaxazim%, %06raygenminincl%, %07raygenmaxincl%, %08raygenoriginmeth%, %09raygenoriginrad%, %10raygenspectrumtype%, %11raygenarg1%, %12raygenarg2%, %13raygenarg3%|
+[RAYTRACE |R Ray trace ]
+RAYTRACE %01poltrahx%, %02poltrahy%, %03poltrapx%, %04poltrapy%, %05poltrawav%|
+[RAYTRACEX |R Ray traec from a surface ]
+RAYTRACEX %01rtrxx%, %02rtrxy%, %03rtrxz%, %04rtrxl%, %05rtrxm%, %06rtrxn%, %07rtrxsurf%, %08rtrxwav%|
+[READ |R Read data ]
+READ %01readvarlist%|
+[READNEXT |R Read data ]
+READNEXT %01readvarlist%|
+[READSKIP |R Skip characters of a file ]
+READSKIP %01readskip%|
+[READSTRING |R Read data and put it in a string ]
+READSTRING %01readstr%|
+[RELEASE |R Release a variable from memory ]
+RELEASE %01release%|
+[RELOADOBJECTS |R Reload an NSC object ]
+RELOADOBJECTS %01surface%, %02object%|
+[REMOVEVARIABLES |R Set all variables to fixed ]
+REMOVEVARIABLES|
+[RENAMEFILE |R Rename a file ]
+RENAMEFILE %01renameold%, %02renamenew%|
+[REWIND |R Erase last printed line ]
+REWIND|
+[SAVEARCHIVE |R Save to a Zemax archive ]
+SAVEARCHIVE %01loadzarfile%|
+[SAVEDETECTOR |R Save data from an NSC detector ]
+SAVEDETECTOR %01surface%, %02object%, %03detfile%|
+[SAVELENS |R Save the current lens ]
+SAVELENS %01lensfile%, %02lenssession%|
+[SAVEMERIT |R Save the merit function to a file ]
+SAVEMERIT %01meritfile%|
+[SAVETOLERANCE |R Save tolerances to a file ]
+SAVETOLERANCE %01tolfile%|
+[SAVEWINDOW |R Save window to a file ]
+SAVEWINDOW %01savewinnum%, %02savewinfile%|
+[SCATTER |R Enable scattering ]
+SCATTER %01scatter%|
+[SETAIM |R Set the state of ray aiming ]
+SETAIM %01state%|
+[SETAIMDATA |R Set data for ray aiming ]
+SETAIMDATA %01setaimdatacode%, %02setaimdatavalue%|
+[SETCONFIG |R Set the configuration ]
+SETCONFIG %01deleteconfig%|
+[SETDETECTOR |R Set the detector data ]
+SETDETECTOR %01surface%, %02object%, %03setdetpix%, %04setdetdatatype%, %05setdetval%|
+[SETMCOPERAND |R Set a value in multi-configuration editor ]
+SETMCOPERAND %01row%, %02config%, %03value%, %04datatype%|
+[SETNSCPARAMETER |R Set a parameter of an NSC object ]
+SETNSCPARAMETER %01NSCsurface%, %02object%, %03param%, %04value%|
+[SETNSCPOSITION |R Set the position of an NSC object ]
+SETNSCPOSITION %01NSCsurface%, %02object%, %03nposcode%, %04value%|
+[SETNSCPROPERTY |R Set properties of an NSC object ]
+SETNSCPROPERTY %01NSCsurface%, %02object%, %03npropcode%, %04face%, %05value%|
+[SETOPERAND |R Set a merit function operand ]
+SETOPERAND %01setoprow%, %02setopcol%, %03value%|
+[SETSURFACEPROPERTY |R Set properties of a surface ]
+SETSURFACEPROPERTY %01surface%, %02code%, %03value1%, %04value2%|
+[SETSYSTEMPROPERTY |R Set system properties ]
+SETSYSTEMPROPERTY %01code%, %02value1%, %03value2%|
+[SETTEXTSIZE |R Change the size of characters ]
+SETTEXTSIZE %01textxsize%, %02textysize%|
+[SETTOL |R Set data of a tolerance ]
+SETTOL %01deltolrow%, %02tolcol%, %03toldata%|
+[SETVAR |R Change the status of a variable ]
+SETVAR %01setvarsurfconf%, %02setvarcode%, %03setvarstatus%, %04setvarobjop%|
+[SETVECSIZE |R Set maximum size of vectors ]
+SETVECSIZE %01vecsize%|
+[SETVIG |R Set vignetting factors ]
+SETVIG|
+[SHOWBITMAP |R Display a BMP or JPG image ]
+SHOWBITMAP %01dispfile%|
+[SHOWFILE |R Display a text file ]
+SHOWFILE %01showtext%, %02showsave%|
+[SOLVEBEFORESTOP |R Enable ZPL solves prior to the stop ]
+SOLVEBEFORESTOP|
+[SOLVERETURN |R Return a computed solve value ]
+SOLVERETURN %01solve%|
+[SOLVETYPE |R Change the solve status ]
+SOLVETYPE %01surface%, %02solvtypecode%, %03solvarg1%, %04solvarg2%, %05solvarg3%, %06solvarg4%|
+[STOPSURF |R Set the stop surface ]
+STOPSURF %01surface%|
+[SUB |R Sub-program ]
+GOSUB %01SUBname%
+    |
+END
+SUB %01SUBname%
+RETURN
+[TESTPLATEFIT |R Test plate fit ]
+TESTPLATEFIT %01tpftpd%, %02tpflog%, %03tpfmethod%, %04tpfcycles%|
+[TOLERANCE |R Run a tolerance analysis ]
+TOLERANCE %01topfile%, %02toloutfile%
+[TIMER |R Reset internal clock ]
+TIMER|
+[UNLOCKWINDOW |R Unlock windows ]
+UNLOCKWINDOW %01lockwin%|
+[UPDATE |R Update data ]
+UPDATE %01update%|
+[VEC |R Set vector values ]
+VEC%01vecnumber% %02vecsubscript%, %03value%|
+[XDIFFIA |R Extended diffraction image analysis ]
+XDIFFIA %01popfile%, %02imain%|
+[ZBF2MAT |R Convert a ZBF file to a Matlab MAT file ]
+ZBF2MAT %01zbf2matfile%, %02matfile%, %03zbfsurfrange%, %04zbf2matinteger1%, %05zbf2matinteger2%
+[ZBFCLR |R Clear complex amplitude data in a file ]
+ZBFCLR %01zbffile%|
+[ZBFMULT |R Multiply complex amplitude data in a file ]
+ZBFMULT %01zbffile%, %02zbfmultax%, %03zbfmultbx%, %04zbfmultay%, %05zbfmultby%|
+[ZBFPROPERTIES |R Put beam data in a vector ]
+ZBFPROPERTIES %01zbffile%, %02zbfpropvec%|
+[ZBFREAD |R Read a ZBF file ]
+ZBFREAD %01zbffile%, %02zbfbeam%, %03zbfprop%|
+[ZBFRESAMPLE |R Resample a ZBF file ]
+ZBFRESAMPLE %01zbffile%, %02zbfnx%, %03zbfny%, %04zbfwx%, %05zbfwy%, %06zbfdecx%, %07zbfdecy%|
+[ZBFSHOW |R Display a ZBF file ]
+ZBFSHOW %01zbffile%|
+[ZBFSUM |R Sum two ZBF files ]
+ZBFSUM %01zbfcoherent%, %02zbffile1%, %03zbffile2%, %04zbfoutfile%|
+[ZBFTILT |R Introduce a phase tilt to a ZBF file ]
+ZBFTILT %01zbffile%, %02zbfcx%, %03zbfcy%, %04zbftx%, %05zbfty%|
+[ZBFWRITE |R Append a ZRD file to another ]
+ZRDAPPEND %01zrdappin%, %02zrdout%|
+[ZRD2MAT |R Convert a ZRD file to a Matlab MAT file ]
+ZRD2MAT %01zrd2matfile%, %02matfile%, %03zrdsavesegment%, %04zrd2matinteger1%, %05zrd2matinteger2%
+[ZRDFILTER |R Filter data in a ZRD file ]
+ZRDFILTER %01zrdfiltin%, %02zrdout%, %03zrdfilter%|
+[ZRDPLAYBACK |R Add ray amplitude data from a ZRD file ]
+ZRDPLAYBACK %01zrdpbfile%, %02surface%, %03zrddetector%, %04zrdclear%, %05zrdfilter% 
+[ZRDSAVERAYS |R Open a ZRD file and save rays intersecting an object ]
+ZRDSAVERAYS %01zrdfiltin%, %02zrdsavout%, %03zrdfilter%, %04zrdobj%|
+[ZRDSUM |R Concatenate two ZRD files ]
+ZRDSUM %01zrdfile1%, %02zrdfile2%, %03zrdoutfile%|
+;
+; Useful clips
+[HEADER |R Insert header ]
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Macro:   %FileName%
+! Path:    %FilePath%
+! Author:  %UserName% / %Company%
+! Date:    %Date%
+! Project: %1project%
+! Comment: %2comment%
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+|
+[SEPARATOR |R Insert separator ]
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! §
+;
+;
+[Tree Content]
+Numeric functions
+ ABSO
+ ACOS
+ APMN
+ APMX
+ APOI
+ APTP
+ APXD
+ APYD
+ ASIN
+ ASPR
+ ATAN
+ ATYP
+ AVAL
+ CALD
+ CONF
+ CONI
+ COSI
+ CURV
+ EDGE
+ EOFF
+ ETIM
+ EXPE
+ EXPT
+ FICL
+ FLDX
+ FLDY
+ FTYP
+ FVAN
+ FVCX
+ FVCY
+ FVDX
+ FVDY
+ FWGT
+ GABB
+ GAUS
+ GETT
+ GIND
+ GLCA
+ GLCB
+ GLCC
+ GLCM
+ GLCX
+ GLCY
+ GLCZ
+ GNUM
+ GPAR
+ GRIN
+ GTEM
+ IMAE
+ INDX
+ INTE
+ ISMS
+ LOGE
+ LOGT
+ LOST
+ MAGN
+ MAXF
+ MAXG
+ MCON
+ MCOP
+ MFCN
+ NCON
+ NFLD
+ NOBJ
+ NPAR
+ NPOS
+ NPRO
+ NSDC
+ NSDD
+ NSUR
+ NWAV
+ OBJC
+ OCOD
+ ONUM
+ OPDC
+ OPER
+ OPEV
+ OPEW
+ OPTH
+ PARM
+ PIXX
+ PIXY
+ PMOD
+ POWR
+ PVHX
+ PVHY
+ PVPX
+ PVPY
+ PWAV
+ RADI
+ RAGL
+ RAGM
+ RAGN
+ RAGX
+ RAGY
+ RAGZ
+ RAND
+ RANX
+ RANY
+ RANZ
+ RAYE
+ RAYL
+ RAYM
+ RAYN
+ RAYO
+ RAYT
+ RAYV
+ RAYX
+ RAYY
+ RAYZ
+ RELI
+ SAGG
+ SCOM
+ SDIA
+ SIGN
+ SINE
+ SLEN
+ SOLM
+ SOLV
+ SOSO
+ SPRO
+ SPRX
+ SQRT
+ STDD
+ SURC
+ SVAL
+ SYPR
+ TANG
+ THIC
+ TMAS
+ TOLV
+ UNIT
+ VEC1
+ VEC2
+ VEC3
+ VEC4
+ VERS
+ WAVL
+ WINL
+ WINN
+ WWGT
+ XMAX
+ XMIN
+ YMAX
+ YMIN
+String functions
+ $BUFFER
+ $CALLSTR
+ $COAT
+ $COATINGPATH
+ $COMMENT
+ $DATAPATH
+ $DATE
+ $EXTENSIONPATH
+ $FILENAME
+ $FILEPATH
+ $GETSTRING
+ $GETSTRINGC
+ $GLASS
+ $GLASSCATALOG
+ $GLASSPATH
+ $LEFTSTRING
+ $LENSNAME
+ $MACROPATH
+ $NOTE
+ $OBJECTPATH
+ $PATHNAME
+ $PROGRAMPATH
+ $QUOTE
+ $RIGHTSTRING
+ $STR
+ $TAB
+ $TEMPFILENAME
+ $TOLCOMMENT
+ $TOLOPERAND
+ $UNITS
+Keywords
+ CALLMACRO
+ CALLSETDBL
+ CALLSETSTR
+ CLOSEWINDOW
+ COLOR
+ COMMAND
+ CONVERTFILEFORMAT
+ COPYFILE
+ DECLARE
+ DEFAULTMERIT
+ DELETE
+ DELETECONFIG
+ DELETEMFO
+ DELETEOBJECT
+ DELETETOL
+ EXPORTBMP
+ EXPORTCAD
+ EXPORTJPG
+ EXPORTWMF
+ FINDFILE
+ FOR
+ FORMAT
+ GETEXTRADATA
+ GETGLASSDATA
+ GETLSF
+ GETMTF
+ GETPSF
+ GETSYSTEMDATA
+ GETTEXTFILE
+ GETVARDATA
+ GETZERNIKE
+ GLASSTEMPLATE
+ GLOBALTOLOCAL
+ GOSUB
+ GOTO
+ GRAPHICS
+ GTEXT
+ GTEXTCENT
+ GTITLE
+ HAMMER
+ IF
+ IMA
+ IMAGECOMBINE
+ IMAGEEXTRACT
+ IMASHOW
+ IMASUM
+ IMPORTEXTRADATA
+ INPUT
+ INSERT
+ INSERTCONFIG
+ INSERTMCO
+ INSERTMFO
+ INSERTOBJECT
+ INSERTTOL
+ LABEL
+ LINE
+ LOADARCHIVE
+ LOADDETECTOR
+ LOADLENS
+ LOADMERIT
+ LOADTOLERANCE
+ LOCALTOGLOBAL
+ LOCKWINDOW
+ MAKEFACETLIST
+ MAKEFOLDER
+ MODIFYSETTINGS
+ NSLT
+ NSTR
+ OPEN
+ OPENANALYSISWINDOW
+ OPTIMIZE
+ OPTRETURN
+ OUTPUT
+ PARAXIAL
+ PAUSE
+ PIXEL
+ PLOT
+ PLOT2D
+ POLDEFINE
+ POLTRACE
+ POP
+ PRINT
+ PRINTFILE
+ PRINTWINDOW
+ PWAV
+ QUICKFOCUS
+ RANDOMIZE
+ RAYGENERATOR 
+ RAYTRACE
+ RAYTRACEX
+ READ
+ READNEXT
+ READSKIP
+ READSTRING
+ RELEASE
+ RELOADOBJECTS
+ RENAMEFILE
+ SAVEARCHIVE
+ SAVEDETECTOR
+ SAVELENS
+ SAVEMERIT
+ SAVETOLERANCE
+ SAVEWINDOW
+ SCATTER
+ SETAIM
+ SETAIMDATA
+ SETCONFIG
+ SETDETECTOR
+ SETMCOPERAND
+ SETNSCPARAMETER
+ SETNSCPOSITION
+ SETNSCPROPERTY
+ SETOPERAND
+ SETSURFACEPROPERTY
+ SETSYSTEMPROPERTY
+ SETTEXTSIZE
+ SETTOL
+ SETVAR
+ SETVECSIZE
+ SHOWBITMAP
+ SHOWFILE
+ SOLVEBEFORESTOP
+ SOLVERETURN
+ SOLVETYPE
+ STOPSURF
+ TESTPLATEFIT
+ TOLERANCE
+ UNLOCKWINDOW
+ UPDATE
+ VEC
+ XDIFFIA
+ ZBF2MAT
+ ZBFCLR
+ ZBFMULT
+ ZBFPROPERTIES
+ ZBFREAD
+ ZBFRESAMPLE
+ ZBFSHOW
+ ZBFSUM
+ ZBFTILT
+ ZRD2MAT
+ ZRDAPPEND
+ ZRDFILTER
+ ZRDPLAYBACK 
+ ZRDSAVERAYS
+ ZRDSUM
+Useful clips
+ Header
+ Separator

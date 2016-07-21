@@ -1,0 +1,2548 @@
+; PSPad clip and auto-complete file (DEF) for AutoHotkey 1.1.21.03
+; Date: April 11th 2015
+;
+; ==================================================================
+; G (green)       - Object Functions, Methods and Properties
+; R (red)         - File, Directory, and Disk Management
+; F (fuchsia)     - GUI, MsgBox, InputBox & Other Dialogs
+; M (maroon)      - Keyboard & Mouse Control
+; D (dark gray)   - Process Management
+; N (navy)        - String Management
+; P (purple)      - Window Management
+; B (blue)        - Directives
+;   (black)       - Misc. & Unsorted Commands & PSPad hotkeys
+; ==================================================================
+;
+; --------------------------------------------------------------------
+;                               Macro definition
+; --------------------------------------------------------------------
+[Macro definition]
+; Directives
+%AllowSameLineComments%=@K AllowSameLineComments:,#AllowSameLineComments
+%ClipboardTimeout%=@E ClipboardTimeout (ms):,#ClipboardTimeout ,
+%CommentFlag%=@C Comment String:,#CommentFlag ,,"//";"@";"!";"/";"*;";"C*"
+%ErrorStdOut%=@K ErrorStdOut:,#ErrorStdOut
+%EscapeChar%=@C Escape Char:,#EscapeChar ,,"\";"`"
+%HotkeyInterval%=@E HotkeyInterval (ms):,#HotkeyInterval ,
+%HotkeyModifierTimeout%=@E HotkeyModifierTimeout (ms):,#HotkeyModifierTimeout ,
+%Hotstring%=@C Hotstring:,#Hotstring ,,"-()[]{}':;""/\,.?!`n `t";"`n `t";"-()[]{}"
+%IfWinActive%=@E IfWinActive:,#IfWinActive
+%IfWinExist%=@E IfWinExist:,#IfWinExist
+%IfWinNotActive%=@E IfWinNotActive:,#IfWinNotActive
+%IfWinNotExist%=@E IfWinNotExist:,#IfWinNotExist
+%Include%=@O Include:,#Include ,,AutoHotKey Scripts (*.ahk*)|*.ahk*
+%IncludeAgain%=@O IncludeAgain:,#IncludeAgain ,,AutoHotKey Scripts (*.ahk*)|*.ahk*
+%InstallKeybdHook%=@K InstallKeybdHook:,#InstallKeybdHook ,
+%InstallMouseHook%=@K InstallMouseHook:,#InstallMouseHook ,
+%KeyHistory%=@E MaxEvents (num):,#KeyHistory ,
+%LTrim%=@C LTrim:,#LTrim ,,On;Off
+%MaxHotkeysPerInterval%=@E MaxHotkeys/Interval (num):,#MaxHotkeysPerInterval ,
+%MaxMem%=@E MaxMem (MB):,#MaxMem ,
+%MaxThreads%=@E MaxThreads (num):,#MaxThreads ,
+%MaxThreadsBuffer%=@C MaxThreadsBuffer:,#MaxThreadsBuffer ,,On;Off
+%MaxThreadsPerHotkey%=@E MaxThreads/Hotkey (num):,#MaxThreadsPerHotkey ,
+%NoEnv%=@K NoEnv:,#NoEnv
+%NoTrayIcon%=@K NoTrayIcon:,#NoTrayIcon
+%Persistent%=@K Persistent:,#Persistent
+%SingleInstance%=@C SingleInstance:,#SingleInstance ,,;force;ignore;off
+%UseHook%=@C UseHook:,#UseHook ,,On;Off
+%WinActivateForce%=@K WinActivateForce:,#WinActivateForce
+; mandatory elements
+%A_LineFile%=@E File Name:,,%A_LineFile%
+%A_LineNumber%=@E Line Number:,,%A_LineNumber%
+%BlockInput%=@C BlockInput:,,On,On;Off;Send;Mouse;SendAndMouse;Default
+%ButtonName%=@C ButtonName:,,Yes,Yes;No;OK;Cancel;Abort;Ignore;Retry;Timeout
+%cmd%=@C Command:,,Exist,Exist;Close;Priority;Wait;WaitClose
+%CoordModeAffects%=@C affects:,,ToolTip,ToolTip;Pixel;Mouse;Caret;Menu
+%CoordModeRelative%=@C relative to:,,Screen,Screen;Window;Client
+%DriveGetCmd%=@C DriveGet command:,,List,"List, CDROM|REMOVABLE|FIXED|NETWORK|RAMDISK|UNKNOWN?";"Capacity, C:\";"Filesystem, C:";"Label, C:";"Serial, C:";"Type, C:";"Status, C:\";"StatusCD, D:"
+%DriveSubCommand%=@C Drive sub-command:,,"Lock, D:","Label, D:, NewLabel";"Lock, D:";"Unlock, D:";"Eject, D:, Close?"
+%FileEncoding%=@C Encoding:,,ANSI,ANSI;UTF-8;UTF-16;UTF-8-RAW;UTF-16-RAW;CPnnn
+%GuiControlGetSubCommand%=@C GuiControlGet sub-command:,,Pos,;Pos;Focus;FocusV;Enabled;Visible;Hwnd;Name
+%GuiControlSubCommand%=@C GuiControl sub-command:,,,;Text;Move;MoveDraw;Focus;Enable;Disable;Hide;Show;Choose;ChooseString;Font;+-Option
+%GuiSubCommand%=@C Gui sub-command:,,Add,New;Add;Show;Submit;Cancel;Destroy;Font;Color;Magin;Menu;Hide;Minimize;Maximize;Restore;Flash;Default
+%IsNot%%=@K is not:,not
+%KeyLockState%=@C Lock State:,,On,On;Off;AlwaysOn;AlwaysOff
+%label%=@E Label:,,Label,,
+%LaunchTarget%=@C Launch Target:,,,Max;Min;Hide
+%onoff%=@C Value:,,On,On;Off
+%options%=@C MsgBox type:,,0,1;2;3;4;5;16;32;48;64;256;512;4096;8192
+%RegRootKey%=@C RootKey:,,HKLM,HKLM;HKU;HKCU;HKCR;HKCC
+%RegValueType%=@C ValueType:,,REG_SZ,REG_SZ;REG_EXPAND_SZ;REG_MULTI_SZ;REG_DWORD;REG_BINARY
+%SendMode%=@C SendMode:,,Event,Event;Play;Input;InputThenPlay
+%sound%=@O Filename:,,%SystemRoot%\Media\ding.wav,Auto file (*.wav;*.mp3;*.avi)|*.wav;*.mp3;*.avi
+%text%=@E Text:,,Message,,
+%title%=@E Title:,,Title,,
+%UseErrorLevel%=@K UseErrorLevel:,UseErrorLevel
+%VarType%=@C of Type:,,integer,integer;float;number;digit;xdigit;alpha;upper;lower;alnum;space;time
+%wait%=@E Wait:
+%WhichTime%=@C RootKey:,,M,M;C;A
+; optional elements
+%timeoutoptional%=@E Timeout (s) (optional):
+;
+;
+; --------------------------------------------------------------------
+;              Toralfs special GUI shotcuts for controls  -  Macros
+; --------------------------------------------------------------------
+%GCSep%=@--
+%GID%=@E               Gui ID:,,1
+%GCW%=@E               Controls Width:,w
+%GCH%=@E               Controls Hight:,h
+%GCLTX%=@E             Text Label:,gTxt
+%GCVTX%=@E             Text Variable:,vTxt
+%GCLE%=@E              Edit Label:,gEdt
+%GCVE%=@E              Edit Variable:,vEdt
+%GCLB%=@E              Button Label:,gBtn
+%GCVB%=@E              Button Variable:,vBtn
+%GCLC%=@E              CheckBox Label:,gChk
+%GCVC%=@E              CheckBox Variable:,vChk
+%GCLH%=@E              Hotkey Label:,gHtk
+%GCVH%=@E              Hotkey Variable:,vHtk
+%GCLL%=@E              ListBox Label:,gLsb
+%GCVL%=@E              ListBox Variable:,vLsb
+%GCLLV%=@E             ListView Label:,gLsv
+%GCVLV%=@E             ListView Variable:,vLsv
+%GCLR%=@E              Radio Label:,gRad
+%GCVR%=@E              Radio Variable:,vRad
+%GCLCB%=@E             ComboBox Label:,gCbb
+%GCVCB%=@E             ComboBox Variable:,vCbb
+%GCLD%=@E              DropdownBox Label:,gDdb
+%GCVD%=@E              DropdownBox Variable:,vDdb
+%GCLDT%=@E             DateTime Label:,gDtt
+%GCVDT%=@E             DateTime Variable:,vDtt
+%GCLM%=@E              MonthCal Label:,gMnc
+%GCVM%=@E              MonthCal Variable:,vMnc
+%GCLP%=@E              Picture Label:,gPct
+%GCVP%=@E              Picture Variable:,vPct
+%GCLPG%=@E             Progress Label:,gPrg
+%GCVPG%=@E             Progress Variable:,vprg
+%GCLS%=@E              Slider Label:,gSld
+%GCVS%=@E              Slider Variable:,vSld
+%GCLT%=@E              Tab Label:,gTab
+%GCVT%=@E              Tab Variable:,vTab
+%GCLTV%=@E             TreeView Label:,gTrv
+%GCVTV%=@E             TreeView Variable:,vTrv
+%GCLU%=@E              UpDown Label:,gUpd
+%GCVU%=@E              UpDown Variable:,vUpd
+%GCR%=@E               Control Rows:,r
+%GCS%=@C               Relative Pos:,,,"";"Section";"xs";"ys";"xm";"ym";"Section ys";"Section xs";"xp";"yp"
+%GCTextColor%=@L       Text Color:,c
+%GCColorBackground%=@L Background Color:,Background
+%GCColor%=@L           Color:,c
+%GCDefault%=@K         Default Button,Default
+%GCDisabled%=@K        Disabled Control,Disabled
+%GCHidden%=@K          Hidden Control,Hidden
+%GCFontStyles%=@C      Font Style:,,,"";"norm";"bold";"italic";"strike";"underline"
+%GCFontFace%=@F        Font Face:,
+%GCFontSize%=@E        Font Size:,s
+%GCFontWeight%=@E      Font Weight (1-1000):,w
+%GCCase%=@C            Enforce Case:,,,"";"Lowercase";"Uppercase"
+%GCLimit%=@E           Limit Length:,Limit
+%GCNumber%=@K          Numbers Only,Number
+%GCPassword%=@K        Password Style,Password
+%GCReadOnly%=@K        Read Only,ReadOnly
+%GCMulti%=@K           Allow Multi Select,Multi
+%GCWantReturn%=@K      Ignore Enter,-WantReturn
+%GCWantTab%=@K         Accept Tab,WantTab
+%GCRange%=@E           Range (e.g. 1-100):,Range
+%GCDateRange%=@E       Date Range (20060525-20060531):,Range
+%GCLeft%=@K            Left Justified,Left
+%GCWrap%=@K            Wrap over Range,Wrap
+%GCHorz%=@K            Horizontal Arrows,Horz
+%GCIsolated%=@K        Isolate (without buddy),-16
+%GCAltSubmit%=@K       Use AltSubmit,AltSubmit
+%GCPicture%=@P         Picture:,
+%GCCheck3%=@K          Allow gray Checkbox,Check3
+%GCChecked%=@K         Checked,Checked
+%GCCheckedVar%=@E      Check dependend on Var:,Checked,,,%
+%GCSort%=@K            Sort Entries,Sort
+%GCLongDate%=@K        Long Date Format, LongDate
+%GCTime%=@K            Time Format,Time
+%GCCustomFormat%=@E    Custom Format,
+%GCVertical%=@K        Vertical Control,Vertical
+%GCInvert%=@K          InvertRange,Invert
+%GCCenterThumb%=@K     CenterThumb,Center
+%GCRight%=@K           Right Justified,Right
+%GCNoTicks%=@K         No Ticks,NoTicks
+%GCTickInterval%=@E    Tick Interval:,TickInterval
+%GCToolTip%=@K         Show ToolTip,ToolTip
+%GCBuddy1%=@E          Buddy (left/top):,Buddy1
+%GCBuddy2%=@E          Buddy (right/bottom):,Buddy2
+%GCSegments%=@K        Show as Segments,-Smooth
+%GCTabWrap%=@K         Only single row of Tabs,-Wrap
+%GCTabButtons%=@K      Buttons instead of Tabs:,Buttons
+%GCTabPos%=@C          Tab Position:,,,"";"Left";"Right";"Bottom"
+%GCChoose%=@E          Choose Item:,Choose
+%GCPos%=@E             Position (e.g. x5 y5):,
+%GCVScroll%=@K         Vertical Scrollbar, VScroll
+%GCButtons%=@K         No +/- Buttons, -Buttons
+%GCHScroll%=@K         Horizontal Scrollbar, HScroll
+%GCNoHScroll%=@K       No Horizontal Scrollbar, -HScroll
+%GCImageList%=@E       ImageList, ImageList
+%GCNoLines%=@K         No Lines, -Lines
+%GCEditable%=@K        Editable, -ReadOnly
+
+;
+;
+; >#< InsertMark for additions - macros above - clips below >#<
+;
+;
+; --------------------------------------------------------------------
+;              Toralfs special GUI shotcuts for controls  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[GB |G Adds button control]
+Gui, %GID%:Add, Button, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVB% %GCLB% %GCSep% %GCDefault% %GCDisabled% %GCHidden%, |
+[GC |G Adds checkbox control]
+Gui, %GID%:Add, CheckBox, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVC% %GCLC% %GCSep% %GCCheck3% %GCChecked% %GCCheckedVar% %GCDisabled% %GCHidden%, |
+[GCB |G Adds combobox control]
+Gui, %GID%:Add, ComboBox, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVCB% %GCLCB% %GCSep% %GCAltSubmit% %GCDisabled% %GCHidden%, |
+[GE |G Adds edit control]
+Gui, %GID%:Add, Edit, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVE% %GCLE% %GCSep% %GCRight% %GCCase% %GCLimit% %GCNumber% %GCPassword% %GCReadOnly% %GCWantReturn% %GCWantTab% %GCVScroll% %GCHScroll% %GCDisabled% %GCHidden%, |
+[GD |G Adds dropdownlist control]
+Gui, %GID%:Add, DropDownList, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVD% %GCLD% %GCSep% %GCChoose% %GCCase% %GCSort% %GCAltSubmit% %GCDisabled% %GCHidden%, |
+[GDT |G Adds datetime control]
+Gui, %GID%:Add, DateTime, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVDT% %GCLDT%% %GCSep% %GCLongDate% %GCTime% %GCCustomFormat% %GCDateRange% %GCDisabled% %GCHidden%, |
+[GG |G Adds groupbox control]
+Gui, %GID%:Add, GroupBox, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCSep% %GCDisabled% %GCHidden%, |
+[GH |G Adds hotkey control]
+Gui, %GID%:Add, Hotkey, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCV% %GCL% %GCSep% %GCDisabled% %GCHidden%, |
+[GL |G Adds listbox control]
+Gui, %GID%:Add, ListBox, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVL% %GCLL% %GCSep% %GCChoose% %GCSort% %GCMulti% %GCReadOnly% %GCAltSubmit% %GCVScroll% %GCHScroll% %GCDisabled% %GCHidden%, |
+[GLV |G Adds listview control]
+Gui, %GID%:Add, ListView, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVLV% %GCLLV% %GCSep% %GCAltSubmit% %GCColorBackground% %GCChecked% %GCSort% %GCDisabled% %GCHidden%, |
+[GM |G Adds monthcal control]
+Gui, %GID%:Add, MonthCal, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVM% %GCLM% %GCSep% %GCMulti% %GCDateRange% %GCDisabled% %GCHidden%, |
+[GP |G Adds picture control]
+Gui, %GID%:Add, Picture, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVP% %GCLP% %GCSep% %GCAltSubmit% %GCDisabled% %GCHidden%, %GCPicture%|
+[GPG |G Adds progress control]
+Gui, %GID%:Add, Progress, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVPG% %GCLPG% %GCSep% %GCColorBackground% %GCColor% %GCVertical% %GCRange% %GCSegments% %GCDisabled% %GCHidden%, |
+[GR |G Adds radio control]
+Gui, %GID%:Add, Radio, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVR% %GCLR% %GCSep% %GCChecked% %GCCheckedVar% %GCDisabled% %GCHidden%, |
+[GS |G Adds slider control]
+Gui, %GID%:Add, Slider, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVS% %GCLS% %GCSep% %GCVertical% %GCInvert% %GCCenterThumb% %GCLeft% %GCRange% %GCNoTicks% %GCTickInterval% %GCToolTip% %GCBuddy1% %GCBuddy2% %GCAltSubmit% %GCDisabled% %GCHidden%, |
+[GT |G Adds tab control]
+Gui, %GID%:Add, Tab, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVT% %GCLT% %GCSep% %GCTabWrap% %GCTabButtons% %GCTabPos% %GCDisabled% %GCHidden%, |
+  Gui, %GID%:Tab, TabName
+Gui, %GID%:Tab
+[GTV |G Adds treeview control]
+Gui, %GID%:Add, TreeView, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVTV% %GCLTV% %GCSep% %GCAltSubmit% %GCTextColor% %GCColorBackground% %GCButtons% %GCNoLines% %GCEditable% %GCChecked% %GCNoHScroll% %GCImageList% %GCDisabled% %GCHidden%|
+[GTX |G Adds text control]
+Gui, %GID%:Add, Text, %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVTX% %GCLTX% %GCSep% %GCTextColor% %GCDisabled% %GCHidden%, |
+[GU |G Adds updown control]
+Gui, %GID%:Add, UpDown, %GCRange% %GCLeft% %GCWrap% %GCHorz% %GCSep% %GCIsolated% %GCPos% %GCS% %GCW% %GCH% %GCR% %GCVU% %GCLU% %GCDisabled% %GCHidden%, |
+;
+; --------------------------------------------------------------------
+;              Toralfs special GUI shotcuts for GUI options  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[GO |G Changes options of GUI]
+Gui, %GID%:+AlwaysOnTop -Border -Caption +Default +Disabled +LastFound -MaxmizeBox -MinimizeBox +OwnDialogs +Owner +Resize -SysMenu +ToolWindow |
+[GOF |G Changes font for controls]
+Gui, %GID%:Font, %GCFontStyles% %GCFontSize% %GCFontWeight% %GCHidden%, %GCFontFace%|
+[GOM |G Changes margin of GUI]
+Gui, %GID%:Margin, | ,
+[GOS |G Shows GUI]
+Gui, %GID%:Show, whSize AutoSize xyPosition xCenter yCenter Center Minimize Maximize Restore NoActivate Hide, |
+;
+; --------------------------------------------------------------------
+;                           PSPad hotkeys
+; --------------------------------------------------------------------
+[Retrieve  | Retrieve contents of this variable]*Ctrl+<
+%§|%
+[Quote  | Quote contents of this variable]*Shift+Ctrl+<
+"§|"
+[Hotstring | name of hotstringy label]*Shift+Ctrl+H
+;;########   Hotstring: §   ########
+::§::
+  |
+Return   ;end of hotstring: §
+
+[Hotkey    | name of hotkey label]*Shift+Ctrl+D
+;;########   Hotkey: §   ########
+§::
+  |
+Return   ;end of hotkey: §
+
+[Sub       | name of subroutine label]*Shift+Ctrl+X
+;;########   Sub: §   ########
+§:
+  |
+Return   ;end of sub: §
+
+[Function  | name of function label]*Shift+Ctrl+F
+;;########   Func: §()   ########
+§(){
+  |
+  Return
+}   ;end of func: §()
+
+[OutputDebug  | Output debug string with line# and file]*Alt+O
+OutputDebug, l(%A_LineNumber%):
+(LTrim Join`s
+  |
+) - file(%A_LineFile%)
+;
+; --------------------------------------------------------------------
+;                File, Directory, and Disk Management  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[Drive |R Ejects/retracts tray]
+Drive, %DriveSubCommand%
+[DriveGet |R Retrieves information about drive(s)]
+DriveGet, OutputVar, %DriveGetCmd%
+[DriveSpaceFree |R Free disk space of drive (Megabytes)]
+DriveSpaceFree, OutputVar, C:\
+[FileAppend |R Appends text to file]
+FileAppend, Text, Filename
+[FileCopy |R Copies one or more files]
+FileCopy, Source, Dest, Flag (1 = overwrite)
+[FileCopyDir |R Copies folder along with all its sub-folders & files]
+FileCopyDir, Source, Dest, Flag (1 = overwrite)
+[FileCreateDir |R Creates a folder]
+FileCreateDir, Path
+[FileCreateShortcut |R Creates a shortcut (.lnk) file]
+FileCreateShortcut, Target, C:\My Shortcut.lnk, WorkingDir, Args, Description, IconFile, ShortcutKey, IconNumber, RunState
+[FileDelete |R Deletes one or more files]
+FileDelete, FilePattern
+[FileEncoding |R Sets the default encoding.]
+FileEncoding, %FileEncoding%
+[FileExist() |R Checks if file/dir exists]
+FileExist("FilePattern")
+[FileGetAttrib |R Whether file/folder is read-only, hidden, etc]
+FileGetAttrib, RASHNDOCT, Filename
+[FileGetShortcut |R information about shortcut (.lnk) file]
+FileGetShortcut, LinkFile, OutTarget, OutDir, OutArgs, OutDescription, OutIcon, OutIconNum, OutRunState
+[FileGetSize |R Retrieves size of file]
+FileGetSize, OutputVar, Filename, Units (default bytes, K=kilobytes, M=megabytes)
+[FileGetTime |R Retrieves datetime stamp of file or folder]
+FileGetTime, OutputVar, Filename, %WhichTime%
+[FileGetVersion |R Retrieves the version of a file]
+FileGetVersion, OutputVar, Filename
+[FileInstall |R Includes specified file inside compiled script]
+FileInstall, Source, Dest, Flag (1 = overwrite)
+[FileMove |R Moves or renames one or more files]
+FileMove, Source, Dest, Flag (1 = overwrite)
+[FileMoveDir |R Moves folder along with all its contents]
+FileMoveDir, Source, Dest, Flag (2 = overwrite)
+[FileRead |R Reads all of file's text into variable]
+FileRead, OutputVar, Filename
+[FileReadLine |R specified line from file & stores text in variable]
+FileReadLine, OutputVar, Filename, LineNum
+[FileRecycle |R Sends file or directory to recycle bin]
+FileRecycle, FilePattern
+[FileRecycleEmpty |R Empties the recycle bin]
+FileRecycleEmpty, C:\
+[FileRemoveDir |R Deletes a folder]
+FileRemoveDir, Path, Recurse? (1 = yes)
+[FileSetAttrib |R Sets file/folder attributes]
+FileSetAttrib, Attributes(+-^RASHNOT), FilePattern, OperateOnFolders?, Recurse?
+[FileSetTime |R Changes datetime stamp of one or more files or folders]
+FileSetTime, YYYYMMDDHH24MISS, FilePattern, %WhichTime%, OperateOnFolders?, Recurse?
+[IfExist |R Checks for the existence of a file or folder]
+IfExist, |File|Dir|Pattern
+[IfNotExist |R Checks for the existence of a file or folder]
+IfNotExist, |File|Dir|Pattern
+[IniDelete |R Deletes a value from a standard format .ini file]
+IniDelete, Filename, Section, Key
+[IniRead |R Reads a value from a standard format .ini file]
+IniRead, OutputVar, Filename, Section, Key, Default
+[IniWrite |R Writes value to standard format .ini file]
+IniWrite, Value, Filename, Section, Key
+[Loop (files & folders) |R Retrieves files or folders, one at a time]
+Loop, FilePattern, IncludeFolders?, Recurse?
+{
+  FileName := A_LoopFileName
+  FileFullPath := A_LoopFileLongPath
+  FileRelativeDir := A_LoopFileDir
+  command2
+}
+[Loop, Files |R Retrieves files or folders, one at a time]
+Loop, Files, FilePattern, |D|F|R
+{
+  FileName := A_LoopFileName
+  FileFullPath := A_LoopFileLongPath
+  FileRelativeDir := A_LoopFileDir
+  command2
+}
+[Loop (read file contents) |R Retrieves lines in text file, one at time]
+Loop, Read, InputFile, OutputFile
+{
+  Line := A_LoopReadLine
+  command2
+}
+[SetWorkingDir |script's current working directory]
+SetWorkingDir, DirName
+[SplitPath |R Separates file name or URL into its name, directory, extension, & drive]
+SplitPath, InputVar, OutFileName, OutDir, OutExtension, OutNameNoExt, OutDrive
+;File Object Methods/Properties
+[FileOpen() |G Opens a file.]
+FileOpen(Filename, Flags, Encoding)
+[Read() |G Reads a string of characters from the file and advances the file pointer.]
+Read(Characters)
+[Write() |G Writes a string of characters to the file and advances the file pointer.]
+Write(String)
+[ReadLine() |G Reads a line of text from the file and advances the file pointer.]
+ReadLine()
+[WriteLine() |G Writes a string of characters followed by `n or `r`n depending on the flags used to open the file. Advances the file pointer.]
+WriteLine(String)
+[ReadUInt() |G Reads a number from the file and advances the file pointer.]
+ReadUInt(Num)
+[ReadInt() |G Reads a number from the file and advances the file pointer.]
+ReadInt(Num)
+[ReadInt64() |G Reads a number from the file and advances the file pointer.]
+ReadInt64(Num)
+[ReadShort() |G Reads a number from the file and advances the file pointer.]
+ReadShort(Num)
+[ReadUShort() |G Reads a number from the file and advances the file pointer.]
+ReadUShort(Num)
+[ReadChar() |G Reads a number from the file and advances the file pointer.]
+ReadChar(Num)
+[ReadUChar() |G Reads a number from the file and advances the file pointer.]
+ReadUChar(Num)
+[ReadDouble() |G Reads a number from the file and advances the file pointer.]
+ReadDouble(Num)
+[ReadFloat() |G Reads a number from the file and advances the file pointer.]
+ReadFloat(Num)
+[WriteUInt() |G Writes a number to the file and advances the file pointer.]
+WriteUInt(Num)
+[WriteInt() |G Writes a number to the file and advances the file pointer.]
+WriteInt(Num)
+[WriteInt64() |G Writes a number to the file and advances the file pointer.]
+WriteInt64(Num)
+[WriteShort() |G Writes a number to the file and advances the file pointer.]
+WriteShort(Num)
+[WriteUShort() |G Writes a number to the file and advances the file pointer.]
+WriteUShort(Num)
+[WriteChar() |G Writes a number to the file and advances the file pointer.]
+WriteChar(Num)
+[WriteUChar() |G Writes a number to the file and advances the file pointer.]
+WriteUChar(Num)
+[WriteDouble() |G Writes a number to the file and advances the file pointer.]
+WriteDouble(Num)
+[WriteFloat() |G Writes a number to the file and advances the file pointer.]
+WriteFloat(Num)
+[RawRead() |G Read raw binary data from the file into memory.]
+RawRead(VarOrAddress, Bytes)
+[RawWrite() |G Write raw binary data to the file.]
+RawWrite(VarOrAddress, Bytes)
+[Seek() |G Moves the file pointer.]
+Seek(Distance, Origin)
+[Tell() |G The current position of the file pointer.]
+Tell()
+[Length |G Retrieves or sets the size of the file.]
+Length
+[AtEOF |G A non-zero value if the file pointer has reached the end of the file, otherwise zero.]
+AtEOF
+[Close() |G Closes the file, flushes any data in the cache to disk and releases the share locks.]
+Close()
+[Encoding |G Retrieves or sets the text encoding used by this file object.]
+Encoding
+[__Handle |G A system file handle.]
+__Handle
+;
+;
+; --------------------------------------------------------------------
+;              GUI, MsgBox, InputBox & Other Dialogs  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[FileSelectFile |F Standard dialog that allows user to select files]
+FileSelectFile, OutputVar, Options, RootDir[\DefaultFilename, Prompt, Filter
+[FileSelectFolder |F Displays select folder]
+FileSelectFolder, OutputVar, *StartingFolder, Options, Prompt
+[Gui |F Creates & manages windows & controls]
+Gui, %GuiSubCommand%, Param2, Param3, Param4
+[GuiControl |F Makes variety of changes to control in GUI window]
+GuiControl, %GuiControlSubCommand%, ControlID, Param3
+[GuiControlGet |F Information about control in GUI window]
+GuiControlGet, OutputVar, %GuiControlGetSubCommand%, ControlID, Param4
+[IfMsgBox |F Which button was pushed by last MsgBox command]
+IfMsgBox, %ButtonName%
+{
+  command1
+}
+[IL_Add |F Adds an icon or picture to an ImageList]
+IL_Add(ImageListID, Filename, IconNumber, ResizeNonIcon?)
+[IL_Create |F Creates an empty ImageList]
+IL_Create([InitialCount, GrowCount, LargeIcons?)
+[IL_Destroy |F Destroys an ImageList]
+IL_Destroy(ImageListID)
+[InputBox |F Displays an input box to ask to enter string]
+InputBox, OutputVar, Title, Prompt, HIDE, Width, Height, X, Y, Font, Timeout, Default
+[LV_Add |F Adds a row to a ListView]
+LV_Add(Options, Col1, Col2, ...)
+[LV_Delete |F Deletes a row from a ListView]
+LV_Delete(RowNumber)
+[LV_DeleteCol |F Delets a column from a ListView]
+LV_DeleteCol(ColumnNumber)
+[LV_GetCount |F Gets the total rows in a ListView]
+LV_GetCount("|Selected|Column")
+[LV_GetNext |F Finds the next selected, checked, or focused item in a ListView]
+LV_GetNext(|StartingRowNumber, "C|F")
+[LV_GetText |F Retrieves the text from rows or column headers in a ListView]
+LV_GetText(OutputVar, RowNumber, ColumnNumber)
+[LV_Insert |F Inserts a row into a ListView]
+LV_Insert(RowNumber, Options, Col1, Col2, ...)
+[LV_InsertCol |F Inserts a column into a ListView]
+LV_InsertCol(ColumnNumber, Options, ColumnTitle)
+[LV_Modify |F Modifies a row in a ListView]
+LV_Modify(RowNumber, Options, NewCol1, NewCol2, ...)
+[LV_ModifyCol |F Modifies a column in a ListView]
+LV_ModifyCol(ColumnNumber, Options, ColumnTitle)
+[LV_SetImageList |F Assigns an ImageList to a ListView]
+LV_SetImageList(ImageListID, |0|1|2)
+[MsgBox |F Displays simple message box]
+MsgBox, Text
+[MsgBox+ |F Displays simple message box with optional timeout]
+MsgBox, %options%, %title%, %text%, %timeoutoptional%
+[OnMessage() |F Runs function or function object when script receives message]
+OnMessage(MsgNumber, "FunctionName", MaxThreads)
+[Progress |F Creates or updates window containing progress bar]
+Progress, Param1, SubText, MainText, WinTitle, FontName
+[SB_SetIcon |F Displays an icon to the left of the text]
+SB_SetIcon(Filename, IconNumber, PartNumber)
+[SB_SetParts |F Divides the bar into multiple sections]
+SB_SetParts(Width1, Width2, ... Width255)
+[SB_SetText |F Displays text in the bar]
+SB_SetText(NewText, PartNumber, Style)
+[SplashImage |F Creates or updates window containing image]
+SplashImage, ImageFile, Options, SubText, MainText, WinTitle, FontName
+[SplashTextOn |F customizable text popup window]
+SplashTextOn, Width, Height, Title, Text
+[SplashTextOff |F above window]
+SplashTextOff
+[ToolTip |F Creates an always-on-top window anywhere onscreen]
+ToolTip, Text, X, Y, WhichToolTip
+[TrayTip |F Creates balloon message window neartray icon]
+TrayTip, Title, Text, Seconds, Options
+[TV_Add |F Adds a new item to the TreeView]
+TV_Add(Name,ParentItemID, Options)
+[TV_Delete |F Deletes an item (or all items) from the Tree]
+TV_Delete(ItemID)
+[TV_GetChild |F Returns the ID of the item's top child]
+TV_GetChild(ParentItemID)
+[TV_GetCount |F Returns the number of items in the tree]
+TV_GetCount()
+[TV_GetNext |F Returns the ID of the sibling below the item (or traverses entire tree)]
+TV_GetNext(ItemID, "Checked | Full")
+[TV_Get |F Returns expanded/checked/bold status of the item]
+TV_Get(ItemID, "Expand | Check | Bold")
+[TV_GetParent |F Returns the ID of the item's parent (or 0)]
+TV_GetParent(ItemID)
+[TV_GetPrev |F Returns the ID of the sibling above the item]
+TV_GetPrev(ItemID)
+[TV_GetSelection |F Returns the ID of the selected item]
+TV_GetSelection()
+[TV_GetText |F Retrieves the item's text/name]
+TV_GetText(OutputVar, ItemID)
+[TV_Modify |F Modifies the attributes and/or name of an item]
+TV_Modify(ItemID, Options, NewName)
+[TV_SetImageList() |F Sets or replaces the TreeView's ImageList.]
+TV_SetImageList(ImageListID, |0|2)
+;
+;
+; --------------------------------------------------------------------
+;                      Keyboard & Mouse Control  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[Hotkey |M Creates, modifies, enables, or disables hotkey]
+Hotkey, KeyName, Label, Options
+[ListHotkeys |M Displays hotkeys in use bycurrent script]
+ListHotkeys
+[Pause |M Pauses script's current thread]
+Pause, |On|Off|Toggle, OperateOnUnderlyingThread?
+[Reload |M Replace scurrently running instance of script]
+Reload
+[Suspend |M Disables all or selected hotkeys]
+Suspend, |On|Off|Toggle|Permit
+[BlockInput |M Dis/enables mouse & keyboard]
+BlockInput, %BlockInput%
+[ControlSend |M to window or control]
+ControlSend, Control, Keys, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlSendRaw |M to window or control]
+ControlSendRaw, Control, Keys, WinTitle, WinText, ExcludeTitle, ExcludeText
+[GetKeyName() |M Retrieves the name/text of a key.]
+GetKeyName(key)
+[GetKeySC() |M Retrieves the scan code of a key.]
+GetKeySC(key)
+[GetKeyState |M Checks if key or button is down or up]
+GetKeyState, OutputVar, WhichKey, Mode (|P|T)
+[GetKeyState() |M Returns state of key or button]
+GetKeyState(KeyName, "P" or "T")
+[GetKeyVK() |M Retrieves the virtual key code of a key.]
+GetKeyVK(key)
+[KeyHistory |M History of most recent keystrokes and mouse clicks]
+KeyHistory
+[KeyWait |M Waits for key or button to be released or pressed down]
+KeyWait, KeyName, Options
+[Input |M Waits for the user to type string]
+Input, OutputVar, Options, EndKeys, MatchList
+[Send |M simulated keystrokes to active window]
+Send, Keys
+[SendEvent |M simulated keystrokes to active window]
+SendEvent, Keys
+[SendInput |M Same as Send, but generally faster and more reliable]
+SendInput, Keys
+[SendMode |M Turns Send into SendInput or SendPlay ]
+SendMode, %SendMode%
+[SendPlay |M Same as Send, but generally faster and more reliable]
+SendPlay, Keys
+[SendRaw |M simulated keystrokes to active window]
+SendRaw, Keys
+[SetKeyDelay |M Sets delay after each keystroke]
+SetKeyDelay, Delay, PressDuration
+[SetNumLockState |M state of Numlock key]
+SetNumLockState, %KeyLockState%
+[SetScrollLockState |M state of Scrolllock key]
+SetScrollLockState, %KeyLockState%
+[SetCapsLockState |M state of Capslock key]
+SetCapsLockState, %KeyLockState%
+[SetStoreCapslockModeSend |M Whether to restore state of CapsLock]
+SetStoreCapslockMode, %KeyLockState%
+[ControlClick |M Mouse button or mouse wheel event to control]
+ControlClick, Control-or-Pos, WinTitle, WinText, WhichButton, ClickCount, Options, ExcludeTitle, ExcludeText
+[Click |M Clicks or holds mouse button, or turns mouse wheel]
+Click, 
+[MouseClick |M Clicks or holds mouse button, or turns mouse wheel]
+MouseClick, WhichButton, X, Y, ClickCount, Speed, |D|U, R
+[MouseClickDrag |M Clicks, holds mouse button, moves, releases]
+MouseClickDrag, WhichButton, X1, Y1, X2, Y2, Speed, R
+[MouseGetPos |M Retrieves current position of mouse cursor]
+MouseGetPos, OutputVarX, OutputVarY, OutputVarWin, OutputVarControl, |1|2|3
+[MouseMove |M Moves mouse cursor]
+MouseMove, X, Y, Speed, R
+[SetDefaultMouseSpeed |M Mouse speed if unspecified]
+SetDefaultMouseSpeed, Speed
+[SetMouseDelay |M Delay after each mouse movement or click]
+SetMouseDelay, Delay
+;
+;
+; --------------------------------------------------------------------
+;                         Process Management  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[Exit |D Exits current thread]
+Exit, ExitCode
+[OnExit() |D Specifies a function to run automatically when the script exits.]
+OnExit(Func, AddRemove)
+[ExitApp |D Terminates script unconditionally]
+ExitApp, ExitCode
+[OnExit |D Specifies subroutine to run whenscript exits]
+OnExit, Label
+[OnClipboardChange() |D Registers a function to run whenever the clipboard's content changes.]
+OnClipboardChange(Func, AddRemove)
+[OutputDebug |D Sends a string to the debugger for display]
+OutputDebug, Text
+[Process |D Performs operations on process]
+Process, %cmd%, PID-or-Name, Param3
+[Run |D Runs an external program]
+Run, Target, WorkingDir, %LaunchTarget% %UseErrorLevel%, OutputVarPID
+[RunAs |D Specifies user credentials to use Run and RunWait]
+RunAs, User, Password, Domain
+[RunWait |D Runs an external program & waits u]
+RunWait, Target, WorkingDir, %LaunchTarget% %UseErrorLevel%, OutputVarPID
+[Shutdown |D Shuts down, restarts, or logs offsystem]
+Shutdown, Code
+[Sleep |D Waits specified amount of time before continuing]
+Sleep, Delay
+;
+;
+; --------------------------------------------------------------------
+;                         String Management  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[Asc() |N ASCII code of a first char in string]
+Asc(String)
+[Chr() |N Get character that corresponds to ASCII code]
+Chr(Number)
+[EnvGet |N Retrieves an environment variable]
+EnvGet, OutputVar, EnvVarName
+[EnvSet |N Writes value to variable contained in environment]
+EnvSet, EnvVar, Value
+[Format() |N Formats a variable number of input values according to a format string.]
+Format(FormatStr, Value)
+[FormatTime |N Transforms timestamp into specified date/time format]
+FormatTime, OutputVar, YYYYMMDDHH24MISS, Format
+[If Var is type |N If var is (not) type]
+If Var is %IsNot% %VarType%
+{
+  command1
+}
+[If var |N If is something other than blank or 0]
+If (var) {
+  command1
+}
+[IfEqual |N If var = value]
+IfEqual, var, value
+{
+  command1
+}
+[IfNotEqual |N If var <> value]
+IfNotEqual, var, value
+{
+  command1
+}
+[IfGreater |N If var > value]
+IfGreater, var, value
+{
+  command1
+}
+[IfGreaterOrEqual |N If var >= value]
+IfGreaterOrEqual, var, value
+{
+  command1
+}
+[IfLess |N If var < value]
+IfLess, var, value
+{
+  command1
+}
+[IfLessOrEqual |N If var <= value]
+IfLessOrEqual, var, value
+{
+  command1
+}
+[IfInString |N Checks if variable contains specified string]
+IfInString, var, SearchString
+{
+  command1
+}
+[IfNotInString |N Checks if variable contains specified string]
+IfNotInString, var, SearchString
+{
+  command1
+}
+[InStr() |N Searches for substring]
+InStr(Haystack, Needle, CaseSensitive?, StartingPos)
+[Loop (parse string) |N Retrieves substrings from a string]
+Loop, Parse, InputVar, |Delimiters|CSV, OmitChars
+  {
+    Line := A_LoopField
+    command2
+  }
+[Ord() |N Returns the ordinal value (numeric character code) of the first character in String.]
+Ord(String)
+[SetEnv |N Assigns value to variable.]
+SetEnv, var, Value
+[SetFormat |N Sets format of integers & floating point numbers]
+SetFormat, |Float|Fast|Integer|Fast, TotalWidth.DecimalPlaces|hex|d
+[Sort |N Arranges in alphabetical, numerical, or random order]
+Sort, varName, Options
+[StringCaseSense |N whether string comparisons are case sensitive (default is off)]
+StringCaseSense, %onoff%
+[StringGetPos |N Position ofspecified substring within string]
+StringGetPos, OutputVar, InputVar, SearchText, L#|R#, Offset
+[StringLeft |N Retrieves number of characters fromleft hand sid]
+StringLeft, OutputVar, InputVar, Count
+[StringRight |N Retrieves number of characters fromright hand sid]
+StringRight, OutputVar, InputVar, Count
+[StringLen |N Count of how many characters are in string]
+StringLen, OutputVar, InputVar
+[StrLen() |N Length of string]
+StrLen(String)
+[StringLower |N Converts string to lowercase]
+StringLower, OutputVar, InputVar, T
+[StringUpper |N Converts string to uppercase]
+StringUpper, OutputVar, InputVar, T
+[StringMid |N Retrieves characters from specified position in string]
+StringMid, OutputVar, InputVar, StartChar, Count, L
+[StringReplace |N Replaces the specified substring with a new string]
+StringReplace, OutputVar, InputVar, SearchText, ReplaceText, All
+[StrReplace() |N Replaces the specified substring with a new string.]
+StrReplace(Haystack, SearchText, ReplaceText, OutputVarCount, Limit := -1)
+[StringSplit |N An array of substrings using specified delimiters]
+StringSplit, OutputArray, InputVar, Delimiters, OmitChars
+[StrSplit() |N Separates a string into an array of substrings using the specified delimiters.]
+StrSplit(String, DelimiterArray, OmitChars)
+[StringTrimLeft |N Removes number of characters from left side of a string]
+StringTrimLeft, OutputVar, InputVar, Count
+[StringTrimRight |N Removes number of characters from right side of a string]
+StringTrimRight, OutputVar, InputVar, Count
+[SubStr() |N Extracts a substring from a string]
+SubStr(String, StartingPos, Length)
+[Trim() |N Trims characters from the beginning and/or end of a string.]
+Trim(String, " `t")
+[LTrim() |N Trims characters from the end of a string.]
+LTrim(String, " `t")
+[RTrim() |N Trims characters from the beginning of a string.]
+RTrim(String, " `t")
+[RegExMatch() |N Determines whether a string contains a pattern (regular expression)]
+RegExMatch(Haystack, NeedleRegEx, UnquotedOutputVar = "", StartingPos = 1)
+[RegExReplace() |N Replaces occurrences of a pattern (regular expression) inside a string]
+RegExReplace(Haystack, NeedleRegEx, Replacement = "", OutputVarCount = "", Limit = -1, StartingPos = 1)
+;
+;
+; --------------------------------------------------------------------
+;                         Window Management  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[WinMenuSelectItem |P menu item frommenu bar of window]
+WinMenuSelectItem, WinTitle, WinText, Menu, SubMenu1, SubMenu2, SubMenu3, SubMenu4, SubMenu5, SubMenu6, ExcludeTitle, ExcludeText
+[SetControlDelay |P delay after each control-modifying command]
+SetControlDelay, Delay
+[SendMessage |P Sends message to window or control]
+SendMessage, Msg, wParam, lParam, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[PostMessage |P Places message queue of window or control]
+PostMessage, Msg, wParam, lParam, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[Menu |P Creates, deletes, modifies & displays menus & menu items]
+Menu, MenuName, Cmd, P3, P4, P5
+[Control |P Makes variety of changes to control]
+Control, Cmd, Value, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlFocus |P Input focus to given control on window]
+ControlFocus, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlGet |P Retrieves various types of information about control]
+ControlGet, OutputVar, Cmd, Value, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlGetFocus |P Which control of target window has focus]
+ControlGetFocus, OutputVarWinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlGetPos |P position & size of control]
+ControlGetPos, X, Y, Width, Height, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlGetText |P text from control]
+ControlGetText, OutputVar, Control, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlMove |P Moves or resizes control]
+ControlMove, Control, X, Y, Width, Height, WinTitle, WinText, ExcludeTitle, ExcludeText
+[ControlSetText |P text of control]
+ControlSetText, Control, NewText, WinTitle, WinText, ExcludeTitle, ExcludeText
+[GroupActivate |P next window in window group]
+GroupActivate, GroupName, R
+[GroupAdd |P Adds window specification to group, creating group if necessary]
+GroupAdd, GroupName, WinTitle, WinText, Label, ExcludeTitle, ExcludeText
+[GroupClose |P Closes active window if it was just activated by GroupActivate/Deactivate]
+GroupClose, GroupName, |A|R
+[GroupDeactivate |P to Activates next window not in group]
+GroupDeactivate, GroupName, R
+[DetectHiddenText |P Invisible text in window is seen]
+DetectHiddenText, %onoff%
+[DetectHiddenWindows |P Invisible windows are seen by script]
+DetectHiddenWindows, %onoff%
+[DllCall |P Calls a function in a DLL]
+DllCall("DllFile\Function", Type1, Arg1, Type2, Arg2, "Cdecl ReturnType")
+[IfWinActive |P Checks if specified window exists and currently active ]
+IfWinActive, WinTitle, WinText, ExcludeTitle, ExcludeText
+[IfWinNotActive |P Checks if specified window exists and currently not active]
+IfWinNotActive, WinTitle, WinText, ExcludeTitle, ExcludeText
+[IfWinExist |P Checks if specified window exists]
+IfWinExist, WinTitle, WinText, ExcludeTitle, ExcludeText
+[IfWinNotExist |P Checks if specified window not exists]
+IfWinNotExist, WinTitle, WinText, ExcludeTitle, ExcludeText
+[SetTitleMatchMode |P Sets window titles search mode]
+SetTitleMatchMode, |Fast|Slow|RegEx|1|2|3
+[SetWinDelay |P Sets delay after windowing command]
+SetWinDelay, Delay
+[StatusBarGetText |P Retrieves text from standard status bar control]
+StatusBarGetText, OutputVar, Part#, WinTitle, WinText, ExcludeTitle, ExcludeText
+[StatusBarWait |P Waits until window's status bar contains specified string]
+StatusBarWait, BarText, Seconds, Part#, WinTitle, WinText, Interval, ExcludeTitle, ExcludeText
+[WinActivate |P Brings window to foreground]
+WinActivate, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinActivateBottom |P Activates least recently used (bottommost) matching window]
+WinActivateBottom, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinActive() |P Returns Unique ID (HWND) of active window]
+WinActive("WinTitle", "WinText", "ExcludeTitle", "ExcludeText")
+[WinClose |P Closes window]
+WinClose, WinTitle, WinText, SecondsToWait, ExcludeTitle, ExcludeText
+[WinExist() |P Returns Unique ID (HWND) of first matching window]
+WinExist("WinTitle", "WinText", "ExcludeTitle", "ExcludeText")
+[WinGetActiveStats |P WinGetActiveTitle and WinGetPos in one command]
+WinGetActiveStats, Title, Width, Height, X, Y
+[WinGetActiveTitle |P title of active window]
+WinGetActiveTitle, OutputVar
+[WinGetClass |P Retrieves window's class name]
+WinGetClass, OutputVar, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinGet |P Retrieves window's ID, process ID/Name, or list of its controls. Can retrieve list of windows matching specified criteria]
+WinGet, OutputVar, Cmd, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinGetPos |P Retrieves position & size of given window]
+WinGetPos, X, Y, Width, Height, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinGetText |P Retrieves text from window]
+WinGetText, OutputVar, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinGetTitle |P Retrieves title of window]
+WinGetTitle, OutputVar, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinHide |P Hides window]
+WinHide, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinKill |P Forces window to close]
+WinKill, WinTitle, WinText, SecondsToWait, ExcludeTitle, ExcludeText
+[WinMaximize |P Enlarges window to its Max size]
+WinMaximize, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinMinimize |P Collapses window into buttons on taskbar]
+WinMinimize, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinMinimizeAll |P Collapses all windows into buttons on taskbar]
+WinMinimizeAll
+[WinMinimizeAllUndo |P Invert effect of previous WinMinimizeAll]
+WinMinimizeAllUndo
+[WinMove |P Changes position and/or size of window]
+WinMove, WinTitle, WinText, X, Y, Width, Height, ExcludeTitle, ExcludeText
+[WinRestore |P Unminimizes or unmaximizes]
+WinRestore, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinSet |P Makes window always on top, transparent, or other changes]
+WinSet, |AlwaysOnTop|Trans, On|Off|Toggle|Value(0-255), WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinSetTitle |P Changes title of window]
+WinSetTitle, WinTitle, WinText, NewTitle, ExcludeTitle, ExcludeText
+[WinShow |P Unhides hidden window]
+WinShow, WinTitle, WinText, ExcludeTitle, ExcludeText
+[WinWait |P Waits until specified window exists]
+WinWait, WinTitle, WinText, Seconds, ExcludeTitle, ExcludeText
+[WinWaitActive |P Waits until specified window is active]
+WinWaitActive, WinTitle, WinText, Seconds, ExcludeTitle, ExcludeText
+[WinWaitClose |P Waits until specified window does not exist]
+WinWaitClose, WinTitle, WinText, Seconds, ExcludeTitle, ExcludeText
+[WinWaitNotActive |P Waits until specified window is not active]
+WinWaitNotActive, WinTitle, WinText, Seconds, ExcludeTitle, ExcludeText
+;
+;
+; --------------------------------------------------------------------
+;                             Directives  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[Directives |B Add directives]
+%AllowSameLineComments%
+%ClipBoardTimeOut%
+%CommentFlag%
+%ErrorStdOut%
+%EscapeChar%
+%HotkeyInterval%
+%HotkeyModifierTimeout%
+%Hotstring%
+%IfWinActive%
+%IfWinExist%
+%IfWinNotActive%
+%IfWinNotExist%
+%Include%
+%IncludeAgain%
+%InstallKeybdHook%
+%InstallMouseHook%
+%KeyHistory%
+%MaxHotkeysPerInterval%
+%MaxMem%
+%MaxThreads%
+%MaxThreadsBuffer%
+%MaxThreadsPerHotkey%
+%NoEnv%
+%NoTrayIcon%
+%Persistent%
+%SingleInstance%
+%UseHook%
+%WinActivateForce%
+[AllowSameLineComments |B Only for use in .aut files]
+%AllowSameLineComments%
+[ClipBoardTimeOut |B Changes how long script keeps trying to open clipboard]
+%ClipBoardTimeOut%
+[CommentFlag |B Changes script's comment symbol]
+%CommentFlag%
+[ErrorStdOut |B Sends any syntax error]
+%ErrorStdOut%
+[EscapeChar |B Changes script's escape character]
+%EscapeChar%
+[HotkeyInterval |B rate of hotkey activations]
+%HotkeyInterval%
+[HotkeyModifierTimeout |B behavior of hotkey modifiers: CTRL, ALT, WIN, & SHIFT]
+%HotkeyModifierTimeout%
+[Hotstring |B Changes hotstring options or ending characters]
+%Hotstring%
+[IfWinActive |B Creates context-sensitive hotkeys and hotstrings]
+%IfWinActive%
+[IfWinExist |B Creates context-sensitive hotkeys and hotstrings]
+%IfWinExist%
+[IfWinNotActive |B Creates context-sensitive hotkeys and hotstrings]
+%IfWinNotActive%
+[IfWinNotExist |B Creates context-sensitive hotkeys and hotstrings]
+%IfWinNotExist%
+[Include |B Include external file]
+%Include%
+[IncludeAgain |B Include external file again]
+%Include%
+[InstallKeybdHook |B Unconditional installation of keyboard hook]
+%InstallKeybdHook%
+[InstallMouseHook |B Unconditional installation of mouse hook]
+%InstallMouseHook%
+[MaxHotkeysPerInterval |B Rate of hotkey activations]
+%MaxHotkeysPerInterval%
+[MaxMem |B Max capacity of each var, in megabytes]
+%MaxMem%
+[MaxThreads |B Max number of simultaneous threads]
+%MaxThreads%
+[MaxThreadsBuffer |B Causes hotkeys to buffer]
+%MaxThreadsBuffer%
+[MaxThreadsPerHotkey |B Max number of simultaneous threads per hotkey]
+%MaxThreadsPerHotkey%
+[NoEnv |B No auto-resolution to env-variables ]
+%NoEnv%
+[NoTrayIcon |B Disables showing of tray icon]
+%NoTrayIcon%
+[Persistent |B Keeps non-hotkey script permanently running]
+%Persistent%
+[SingleInstance |B More than one instance of script]
+%SingleInstance%
+[UseHook |B Forces use of hook to implement keyboard hotkeys]
+%UseHook%
+[WinActivateForce |B Skip gentle method, go straight to forceful method]
+%WinActivateForce%
+;
+;
+; --------------------------------------------------------------------
+;                     Misc. & Unsorted Commands  -  Clips [Ctrl+Space]
+; --------------------------------------------------------------------
+[Abs() | Absolute value]
+Abs(Number)
+[ACos() | Arccosine]
+ACos(Number)
+[ASin() | Arcsine]
+ASin(Number)
+[ATan() | Arctangent]
+ATan(Number)
+[AutoTrim | Whether SetEnv & var = remove spaces & tabs]
+AutoTrim, %onoff%
+[Break | Exits (terminates) loop. Valid only inside loop]
+Break LabelOrNumber
+[Ceil() | Rounds up to nearest integer]
+Ceil(Number)
+[class | base object that defines properties and behaviour for set of objects]
+class ClassName extends ClassName {
+  __New(){
+
+  }
+
+  __Set(){
+
+  }
+
+  __Get(){
+
+  }
+
+  __Call(){
+
+  }
+
+  __Delete(){
+
+  }
+}
+[ClipWait | Waits until clipboard contains data]
+ClipWait, SecondsToWait, 1
+[Continue | Skips rest of current loop iteration & begins new one]
+Continue LabelOrNumber
+[CoordMode | Sets coordinate mode]
+CoordMode, %CoordModeAffects%, %CoordModeRelative%
+[Cos() | Cosine]
+Cos(Number)
+[Critical | Prevents the current thread from being interrupted]
+Critical, |On|Off|Value
+[Edit | Opens current script for editing in associated editor]
+Edit
+[Else | Specifies command to perform IF-command = FALSE]
+Else
+[EnvAdd | Var += value]
+EnvAdd, Var, Value, TimeUnits
+[EnvDiv | Var /= value]
+EnvDiv, Var, Value
+[EnvMult | Var *= value]
+EnvMult, Var, Value
+[EnvSub | Var -= value]
+EnvSub, Var, Value, TimeUnits
+[EnvUpdate | Notifies OS that environment variables have changed]
+EnvUpdate
+[Exp() | "e" raised to a power]
+Exp(Number)
+[Floor() | Rounds down to nearest integer]
+Floor(Number)
+[GoSub | Jumps to label]
+GoSub, Label
+[Goto | Jumps to label]
+Goto, Label
+[If between | Checks if var is between two values (inclusive)]
+If Varnot between Low and High
+ {
+  command1
+}
+[If contains | Checks if var contains one of the items in a list]
+If Var not contains value1,value2,...
+{
+  command1
+}
+[If in | Checks if var matches one of the items in a list]
+If Var not in value1,value2,...
+{
+  command1
+}
+[If Else | Compares a variable to a value]
+If (var = "Value")
+{
+  command1
+  command2
+}
+Else
+{
+  command1
+  command2
+}
+[If Else+ | Compares a variable to a value]
+If (var = "Value") {
+  command1
+  command2
+}Else {
+  command1
+  command2
+}
+[ImageSearch | Searches a region of the screen for an image]
+ImageSearch, OutputVarX, OutputVarY, X1, Y1, X2, Y2, ImageFile
+[IsFunc | Checks if FunctionName exists as function]
+IsFunc(FunctionName)
+[IsLabel | Checks if LabelName exists as subroutine, hotkey or hotstring]
+IsLabel(LabelName)
+[IsByRef() | Returns 1 if Var is a ByRef parameter and the caller supplied a variable.]
+IsByRef(Var)
+[IsObject() | Determines if a value is an object.]
+IsObject(Obj)
+[For, Until | Applies a condition to the continuation of a For-loop.]
+For Key,Value in |Expression  {
+  command1
+} Until Expression
+[For | Repeats a series of commands once for each key-value pair in an object.]
+For Key,Value in |Expression  {
+  command1
+}
+[Loop | Perform a series of commands repeatedly]
+Loop, Count
+{
+  ID := A_Index
+  If var%A_Index% =
+  break
+}
+[Loop, Until | Applies a condition to the continuation of a Loop-loop.]
+Loop % |Count {
+  ID := A_Index
+} Until Expression
+[Loop (registry) | Retrieves contents of registry subkey]
+Loop, %RegRootKey%, Key, IncludeSubkeys?, Recurse?
+{
+  RegName := A_LoopRegName
+  RegType := A_LoopRegType
+  command2
+}
+[Loop, Reg | Retrieves contents of registry subkey]
+Loop, Reg, %RegRootKey%\Key, KVM
+{
+  RegName := A_LoopRegName
+  RegType := A_LoopRegType
+  command2
+}
+[Ln() | Natural logarithm (base e)]
+Ln(Number)
+[Log() | Logarithm (base 10)]
+Log(Number)
+[ListLines | Displays script lines most recently executed]
+ListLines, |On|Off
+[ListVars | Displays script's variables and value]
+ListVars
+[Mod() |F Remainder of Division]
+Mod(Dividend, Divisor)
+[StrGet() | Copies a string from a memory address.]
+StrGet(Address, Length, Encoding)
+[NumGet() | Return binary number stored at address+offset]
+NumGet(VarOrAddress, Offset = 0, Type = "UInt")
+[StrPut() | Copies a string to a memory address.]
+StrPut(String, Address, Length, Encoding)
+[NumPut() | Stores Number in binary format at address+offset ]
+NumPut(Number, VarOrAddress, Offset = 0, Type = "UInt")
+[PixelGetColor | Color of pixel at specified x, y screen coordinates]
+PixelGetColor, OutputVar, X, Y, |Alt|Slow|RGB
+[PixelSearch | Searches screen for pixel of color(s)]
+PixelSearch, OutputVarX, OutputVarY, X1, Y1, X2, Y2, ColorID, variation, |Fast|RGB
+[Round() |F Rounds off a number]
+Round(Number, Places)
+[Random | Generates pseudo-random number]
+Random, OutputVar, Min, Max
+[RegDelete | Deletes subkey or value from registry]
+RegDelete, %RegRootKey%\SubKey, ValueName
+[RegisterCallback() | Create address that redirects call to function]
+RegisterCallback("FunctionName", Options = "", ParamCount = FormalCount, EventInfo = Address)
+[RegRead | Reads value from registry]
+RegRead, OutputVar, %RegRootKey%\SubKey, ValueName
+[RegWrite | Writes value to registry]
+RegWrite, %RegValueType%, %RegRootKey%\SubKey, ValueName, Value
+[Return | Returns from subroutine]
+Return, Expression
+[Sin() | Sine]
+Sin(Number)
+[SendLevel | Controls which artificial keyboard and mouse events are ignored by hotkeys and hotstrings.]
+SendLevel, 1
+[SetBatchLines | how fast script will run (affects CPU utilization)]
+SetBatchLines, |-1 | 20ms | LineCount
+[SetRegView | Sets the registry view used by RegRead, RegWrite, RegDelete and registry loops.]
+SetRegView, |32|64|Default
+[SetTimer | Causes subroutine launch at specified time interval]
+SetTimer, %label% ,%onoff%, Priority
+[SoundBeep | Emits a tone from the PC speaker]
+SoundBeep, Frequency, Duration
+[SoundGet | Retrieves various settings from sound device]
+SoundGet, OutputVar, ComponentType, ControlType, DeviceNumber
+[SoundGetWaveVolume | wave output volume from sound device]
+SoundGetWaveVolume, OutputVar, DeviceNumber
+[SoundPlay | Plays sound, video, or other supported file type]
+SoundPlay, Filename, wait
+[SoundSet | Changes various settings of sound device]
+SoundSet, NewSetting, ComponentType, ControlType, DeviceNumber
+[SoundSetWaveVolume | wave output volume for sound device]
+SoundSetWaveVolume, Percent, DeviceNumber
+[Sqrt() | Square root ]
+Sqrt(Number)
+[SysGet | Retrieves screen info & system properties]
+SysGet, OutputVar, Sub-command, Param3
+[Tan() | Tangent]
+Tan(Number)
+[Thread | Disables timer or sets priority/interruptibility of threads]
+Thread, Setting, P2, P3
+[Transform | Performs miscellaneous math functions]
+Transform, OutputVar, Cmd, Value1, Value2
+[Try | Guards statements against runtime errors and exceptions.]
+Try {
+  |command1
+} Catch Exception {
+  command1
+} Finally {
+  command1
+}
+[Throw | Signals the occurrence of an error.]
+Throw Exception(Message, What, Extra)
+[Exception | Creates an object common to exceptions.]
+Exception(Message, What, Extra)
+[URLDownloadToFile | Download file from internet]
+URLDownloadToFile, URL, Filename
+[VarSetCapacity() | Shrinks or enlarges a variable]
+GrantedCapacity := VarSetCapacity(Var, RequestedCapacity, FillByte)
+[While | Loops until the expression evaluates to false]
+While, Expression
+{
+  ID := A_Index
+  command2
+}
+;Object Methods/Properties
+[Array() |G Create an linear array.]
+Array(Item1, Item2, ...)
+[Object() |G Create an associated array.]
+Object("KeyA", ValueA, "KeyB", ValueB, ...)
+[InsertAt() |G Inserts one or more values at a given position within a linear array.]
+InsertAt(Pos, Value1, Value2, ...)
+[RemoveAt() |G Removes items from the given position in a linear array.]
+RemoveAt(Pos, Length)
+[Push() |G Appends values to the end of an array.]
+Push(Value, Value2, Value3, ...)
+[Pop() |G Removes and returns the last array element.]
+Pop()
+[Delete() |G Removes key-value pairs from an object.]
+Delete(FirstKey, LastKey)
+[MaxIndex() |G If any integer keys are present, MaxIndex returns the highest.]
+MaxIndex()
+[MinIndex() |G If any integer keys are present, MinIndex returns the lowest.]
+MinIndex()
+[Length() |G Adjusts the capacity of an object or one of its fields.]
+Length()
+[SetCapacity() |G Adjusts the capacity of an object or one of its fields.]
+SetCapacity()
+[GetCapacity() |G Returns the current capacity of an object or one of its fields.]
+GetCapacity()
+[GetAddress() |G Returns the current address of the field's string buffer, if it has one.]
+GetAddress()
+[_NewEnum() |G Returns a new enumerator to enumerate this object's key-value pairs.]
+_NewEnum()
+[HasKey() |G Returns true if Key is associated with a value (even "") within Object, otherwise false.]
+HasKey()
+[Clone() |G Returns a shallow copy of the object.]
+Clone()
+[ObjInsertAt() |G Inserts one or more values at a given position within a linear array.]
+ObjInsertAt(Obj, Pos, Value1, Value2, ...)
+[ObjRemoveAt() |G Removes items from the given position in a linear array.]
+ObjRemoveAt(Obj, Pos, Length)
+[ObjPush() |G Appends values to the end of an array.]
+ObjPush(Obj, Value, Value2, Value3, ...)
+[ObjPop() |G Removes and returns the last array element.]
+ObjPop(Obj)
+[ObjDelete() |G Removes key-value pairs from an object.]
+ObjDelete(Obj, FirstKey, LastKey)
+[ObjMaxIndex() |G If any integer keys are present, MaxIndex returns the highest.]
+ObjMaxIndex(Obj)
+[ObjMinIndex() |G If any integer keys are present, MinIndex returns the lowest.]
+ObjMinIndexObj()
+[ObjSetCapacity() |G Adjusts the capacity of an object or one of its fields.]
+ObjSetCapacity(Obj, MaxItems)
+[ObjGetCapacity() |G Returns the current capacity of an object or one of its fields.]
+ObjGetCapacity(Obj)
+[ObjGetAddress() |G Returns the current address of the field's string buffer, if it has one.]
+ObjGetAddress(Obj)
+[ObjNewEnum() |G Returns a new enumerator to enumerate this object's key-value pairs.]
+ObjNewEnum(Obj)
+[ObjHasKey() |G Returns true if Key is associated with a value (even "") within Object, otherwise false.]
+ObjHasKey(Obj)
+[ObjClone() |G Returns a shallow copy of the object.]
+ObjClone(Obj)
+[ObjAddRef() |G Increments an object's reference count.]
+ObjAddRef(Ptr)
+[ObjRelease() |G Decrements an object's reference count.]
+ObjRelease(Ptr)
+[ObjRawSet() |G Stores or overwrites a key-value pair in the object.]
+ObjRawSet(Object, Key, Value)
+;Function Object Methods/Properties
+[Func() |G Retrieve a reference to a function.]
+Func("MyFunc")
+[Call() |G Calls the function.]
+Call(Parameters)
+[Bind() |G Binds parameters to the function and returns a BoundFunc object.]
+Bind(Parameters)
+[Name |G Returns the function's name.]
+Name
+[IsBuiltIn |G Returns true if the function is built-in and false otherwise.]
+IsBuiltIn
+[IsVariadic |G Returns true if the function is variadic and false otherwise.]
+IsVariadic
+[MinParams |G Returns the number of required parameters.]
+MinParams
+[MaxParams |G Returns the number of formally-declared parameters for a user-defined function or maximum parameters for a built-in function.]
+MaxParams
+[IsByRef() |G Determines whether a parameter is ByRef.]
+IsByRef(ParamIndex)
+[IsOptional() |G Determines whether a parameter is optional.]
+IsOptional(ParamIndex)
+[ObjBindMethod() |G Creates a BoundFunc object which calls a method of a given object.]
+ObjBindMethod(Obj, Method, Params)
+;COM Object Functions
+[ComObjActive() |G Retrieves a running object that has been registered with OLE.]
+ComObjActive(CLSID)
+[ComObject() |G Creates an object representing a typed value to be passed as a parameter or return value.]
+ComObject(VarType, Value, Flags)
+[ComObjArray() |G Creates a SafeArray for use with COM.]
+ComObjArray(VarType, Count1, Count2, Count3, ...)
+[ComObjConnect() |G Connects the object's event sources to functions with a given prefix.]
+ComObjConnect(ComObject, Prefix)
+[ComObjCreate() |G Creates a COM object.]
+ComObjCreate(CLSID, IID)
+[ComObjError() |G Enables or disables notification of COM errors.]
+ComObjError(1)
+[ComObjFlags() |G Retrieves or changes flags which control a COM wrapper object's behaviour.]
+ComObjFlags(ComObject, NewFlags, Mask)
+[ComObjGet() |G Returns a reference to an object provided by a COM component.]
+ComObjGet(Name)
+[ComObjQuery() |G Queries a COM object for an interface or service.]
+ComObjQuery(ComObject, SID, IID)
+[ComObjType() |G Retrieves type information from a COM object.]
+ComObjType(ComObject)
+[ComObjValue() |G Retrieves the value or pointer stored in a COM wrapper object.]
+ComObjValue(ComObject)
+;
+;
+; --------------------------------------------------------------------
+;                     Keywords for Auto-Complete [Ctrl+J]
+; --------------------------------------------------------------------
+[Keywords]
+__Call
+__Delete
+__Get
+__Handle
+__New
+__Set
+_NewEnum
+A_AhkPath
+A_AhkVersion
+A_AppData
+A_AppDataCommon
+A_AutoTrim
+A_BatchLines
+A_CaretX
+A_CaretY
+A_ComputerName
+A_ControlDelay
+A_Cursor
+A_DD
+A_DDD
+A_DDDD
+A_DefaultMouseSpeed
+A_Desktop
+A_DesktopCommon
+A_DetectHiddenText
+A_DetectHiddenWindows
+A_EndChar
+A_EventInfo
+A_ExitReason
+A_FileEncoding
+A_FormatFloat
+A_FormatInteger
+A_Gui
+A_GuiControl
+A_GuiControlEvent
+A_GuiEvent
+A_GuiHeight
+A_GuiWidth
+A_GuiX
+A_GuiY
+A_Hour
+A_IconFile
+A_IconHidden
+A_IconNumber
+A_IconTip
+A_Index
+A_IPAddress1
+A_IPAddress2
+A_IPAddress3
+A_IPAddress4
+A_Is64bitOS
+A_ISAdmin
+A_IsAdmin
+A_IsCompiled
+A_IsCritical
+A_IsPaused
+A_IsSuspended
+A_IsUnicode
+A_KeyDelay
+A_Language
+A_LastError
+A_LineFile
+A_LineNumber
+A_LoopField
+A_LoopFileAttrib
+A_LoopFileDir
+A_LoopFileExt
+A_LoopFileFullPath
+A_LoopFileLongPath
+A_LoopFileName
+A_LoopFileShortName
+A_LoopFileShortPath
+A_LoopFileSize
+A_LoopFileSizeKB
+A_LoopFileSizeMB
+A_LoopFileTimeAccessed
+A_LoopFileTimeCreated
+A_LoopFileTimeModified
+A_LoopReadLine
+A_LoopRegKey
+A_LoopRegName
+A_LoopRegSubkey
+A_LoopRegTimeModified
+A_LoopRegType
+A_MDAY
+A_Min
+A_MM
+A_MMM
+A_MMMM
+A_Mon
+A_MouseDelay
+A_MSec
+A_MyDocuments
+A_Now
+A_NowUTC
+A_NumBatchLines
+A_OSType
+A_OSVersion
+A_PriorHotkey
+A_PriorKey
+A_ProgramFiles
+A_Programs
+A_ProgramsCommon
+A_PtrSize
+A_RegView
+A_ScreenDPI
+A_ScreenHeight
+A_ScreenWidth
+A_ScriptDir
+A_ScriptFullPath
+A_ScriptHwnd
+A_ScriptName
+A_Sec
+A_Space
+A_StartMenu
+A_StartMenuCommon
+A_Startup
+A_StartupCommon
+A_StringCaseSense
+A_Tab
+A_Temp
+A_ThisFunc
+A_ThisHotkey
+A_ThisLabel
+A_ThisMenu
+A_ThisMenuItem
+A_ThisMenuItemPos
+A_TickCount
+A_TimeIdle
+A_TimeIdlePhysical
+A_TimeSincePriorHotkey
+A_TimeSinceThisHotkey
+A_TitleMatchMode
+A_TitleMatchModeSpeed
+A_UserName
+A_WDay
+A_WinDelay
+A_WinDir
+A_WorkingDir
+A_YDay
+A_YEAR
+A_YWeek
+A_YYYY
+Abort
+AboveNormal
+Abs
+ACos
+ActiveX
+Add
+ahk_class
+ahk_exe
+ahk_group
+ahk_id
+ahk_pid
+All
+AllowSameLineComments
+Alnum
+Alpha
+Alt
+AltDown
+AltSubmit
+AltTab
+AltTabAndMenu
+AltTabMenu
+AltTabMenuDismiss
+AltUp
+AlwaysOnTop
+And
+AppsKey
+Array
+Asc
+ASin
+ATan
+AtEOF
+AutoSize
+AutoTrim
+Background
+BackgroundTrans
+BackSpace
+BelowNormal
+Between
+Bind
+BitAnd
+BitNot
+BitOr
+BitShiftLeft
+BitShiftRight
+BitXOr
+Blind
+BlockInput
+bold
+Border
+Bottom
+Break
+Browser_Back
+Browser_Favorites
+Browser_Forward
+Browser_Home
+Browser_Refresh
+Browser_Search
+Browser_Stop
+BS
+Button
+Buttons
+ByRef
+Call
+Cancel
+Capacity
+CapsLock
+Caption
+Caret
+Catch
+CDFS
+CDROM
+Ceil
+Center
+Check
+Check3
+Checkbox
+Checked
+CheckedGray
+Choose
+Choose1
+Choose10
+Choose11
+Choose12
+Choose13
+Choose14
+Choose15
+Choose16
+Choose17
+Choose18
+Choose19
+Choose2
+Choose20
+Choose21
+Choose22
+Choose23
+Choose24
+Choose25
+Choose26
+Choose27
+Choose28
+Choose29
+Choose3
+Choose30
+Choose31
+Choose32
+Choose33
+Choose34
+Choose35
+Choose36
+Choose37
+Choose38
+Choose39
+Choose4
+Choose40
+Choose41
+Choose42
+Choose43
+Choose44
+Choose45
+Choose46
+Choose47
+Choose48
+Choose49
+Choose5
+Choose50
+Choose51
+Choose52
+Choose53
+Choose54
+Choose55
+Choose56
+Choose57
+Choose58
+Choose59
+Choose6
+Choose60
+Choose61
+Choose62
+Choose63
+Choose64
+Choose65
+Choose66
+Choose67
+Choose68
+Choose69
+Choose7
+Choose70
+Choose71
+Choose72
+Choose73
+Choose74
+Choose75
+Choose76
+Choose77
+Choose78
+Choose79
+Choose8
+Choose80
+Choose81
+Choose82
+Choose83
+Choose84
+Choose85
+Choose86
+Choose87
+Choose88
+Choose89
+Choose9
+Choose90
+Choose91
+Choose92
+Choose93
+Choose94
+Choose95
+Choose96
+Choose97
+Choose98
+Choose99
+ChooseString
+Chr
+class
+Click
+Client
+Clipboard
+ClipboardAll
+ClipboardTimeout
+ClipWait
+Clone
+Close
+Color
+ComboBox
+CommentFlag
+ComObjActive
+ComObjArray
+ComObjConnect
+ComObjCreate
+ComObject
+ComObjError
+ComObjFlags
+ComObjGet
+ComObjQuery
+ComObjType
+ComObjValue
+ComSpec
+Contains
+Continue
+Control
+ControlClick
+ControlFocus
+ControlGet
+ControlGetFocus
+ControlGetPos
+ControlGetText
+ControlList
+ControlMove
+ControlSend
+ControlSendRaw
+ControlSetText
+CoordMode
+Cos
+Count
+Critical
+Ctrl
+CtrlBreak
+CtrlDown
+CtrlUp
+Custom
+Date
+DateTime
+Days
+DDL
+Default
+Del
+Delete
+DeleteAll
+Delimiter
+Deref
+Destroy
+DetectHiddenText
+DetectHiddenWindows
+Digit
+Disable
+Disabled
+DllCall
+Down
+DPIScale
+Drive
+DriveGet
+DriveSpaceFree
+DropDownList
+Edit
+Eject
+Eject
+Else
+Enable
+Enabled
+Encoding
+End
+Enter
+EnvAdd
+EnvDiv
+EnvGet
+EnvMult
+EnvSet
+EnvSub
+EnvUpdate
+Error
+ErrorLevel
+ErrorStdOut
+Esc
+Escape
+EscapeChar
+Exception
+Exist
+Exit
+ExitApp
+Exp
+Expand
+ExStyle
+extends
+F1
+F10
+F11
+F12
+F13
+F14
+F15
+F16
+F17
+F18
+F19
+F2
+F20
+F21
+F22
+F23
+F24
+F3
+F4
+F5
+F6
+F7
+F8
+F9
+False
+FAT
+FAT32
+FileAppend
+FileCopy
+FileCopyDir
+FileCreateDir
+FileCreateShortcut
+FileDelete
+FileEncoding
+FileExist
+FileGetAttrib
+FileGetShortcut
+FileGetSize
+FileGetTime
+FileGetVersion
+FileInstall
+FileMove
+FileMoveDir
+FileOpen
+FileRead
+FileReadLine
+FileRecycle
+FileRecycleEmpty
+FileRemoveDir
+Files
+FileSelectFile
+FileSelectFolder
+FileSetAttrib
+FileSetTime
+FileSystem
+Finally
+First
+FIXED
+Flash
+Float
+FloatFast
+Floor
+Focus
+Font
+Format
+FormatTime
+FromCodePage
+Func
+GetAddress
+GetCapacity
+GetKeyName
+GetKeySC
+GetKeyState
+GetKeyVK
+global
+Gosub
+Goto
+Grid
+Group
+GroupActivate
+GroupAdd
+GroupBox
+GroupClose
+GroupDeactivate
+Gui
+GuiClose
+GuiContextMenu
+GuiControl
+GuiControlGet
+GuiDropFiles
+GuiEscape
+GuiSize
+HasKey
+Hdr
+Hidden
+Hide
+High
+HKCC
+HKCR
+HKCU
+HKEY_CLASSES_ROOT
+HKEY_CURRENT_CONFIG
+HKEY_CURRENT_USER
+HKEY_LOCAL_MACHINE
+HKEY_USERS
+HKLM
+HKU
+Home
+Hotkey
+HotkeyInterval
+HotkeyModifierTimeout
+Hotstring
+Hours
+hp
+HScroll
+Hwnd
+Icon
+IconSmall
+ID
+IDLast
+If
+IfEqual
+IfExist
+IfGreater
+IfGreaterOrEqual
+IfInString
+IfLess
+IfLessOrEqual
+IfMsgBox
+IfNotEqual
+IfNotExist
+IfNotInString
+IfWinActive
+IfWinExist
+IfWinNotActive
+IfWinNotExist
+Ignore
+IL_Add
+IL_Create
+IL_Destroy
+ImageList
+ImageSearch
+in
+Include
+IncludeAgain
+IniDelete
+IniRead
+IniWrite
+Input
+InputBox
+Ins
+Insert
+InsertAt
+InstallKeybdHook
+InstallMouseHook
+InStr
+Integer
+IntegerFast
+Interrupt
+Is
+IsBuiltIn
+IsByRef
+IsByRef
+IsFunc
+IsLabel
+IsObject
+IsOptional
+IsVariadic
+italic
+Join
+Joy1
+Joy10
+Joy11
+Joy12
+Joy13
+Joy14
+Joy15
+Joy16
+Joy17
+Joy18
+Joy19
+Joy2
+Joy20
+Joy21
+Joy22
+Joy23
+Joy24
+Joy25
+Joy26
+Joy27
+Joy28
+Joy29
+Joy3
+Joy30
+Joy31
+Joy32
+Joy4
+Joy5
+Joy6
+Joy7
+Joy8
+Joy9
+JoyAxes
+JoyButtons
+JoyInfo
+JoyName
+JoyPOV
+JoyR
+JoyU
+JoyV
+JoyX
+JoyY
+JoyZ
+KeyHistory
+KeyWait
+Label
+Label
+LAlt
+LastFound
+LastFoundExist
+Launch_App1
+Launch_App2
+Launch_Mail
+Launch_Media
+LButton
+LControl
+LCtrl
+Left
+Length
+Length
+Limit
+Limit1
+Limit2
+Limit3
+Limit4
+Limit5
+Limit6
+Limit7
+Limit8
+Limit9
+Lines
+Link
+List
+ListBox
+ListHotkeys
+ListLines
+ListVars
+ListView
+Ln
+local
+Lock
+Lock
+Log
+Logoff
+Loop
+Low
+Lower
+Lowercase
+LShift
+LTrim
+LV_Add
+LV_Delete
+LV_DeleteCol
+LV_GetCount
+LV_GetNext
+LV_GetText
+LV_Insert
+LV_InsertCol
+LV_Modify
+LV_ModifyCol
+LV_SetImageList
+LWin
+LWinDown
+LWinUp
+MainWindow
+Margin
+MaxHotkeysPerInterval
+Maximize
+MaximizeBox
+MaxIndex
+MaxMem
+MaxParams
+MaxSize
+MaxThreads
+MaxThreadsBuffer
+MaxThreadsPerHotkey
+MButton
+Media_Next
+Media_Play_Pause
+Media_Prev
+Media_Stop
+Menu
+Minimize
+MinimizeBox
+MinIndex
+MinMax
+MinParams
+MinSize
+Minutes
+Mod
+MonthCal
+Mouse
+MouseClick
+MouseClickDrag
+MouseGetPos
+MouseMove
+Move
+MsgBox
+Multi
+NA
+Name
+NETWORK
+new
+NewLabel
+No
+NoActivate
+NoDefault
+NoEnv
+NoHide
+NoIcon
+NoMainWindow
+norm
+Normal
+NoSort
+NoSortHdr
+NoStandard
+not
+NoTab
+NoTimers
+NoTrayIcon
+NTFS
+Number
+NumGet
+NumLock
+Numpad0
+Numpad1
+Numpad2
+Numpad3
+Numpad4
+Numpad5
+Numpad6
+Numpad7
+Numpad8
+Numpad9
+NumpadAdd
+NumpadClear
+NumpadDel
+NumpadDiv
+NumpadDot
+NumpadDown
+NumpadEnd
+NumpadEnter
+NumpadHome
+NumpadIns
+NumpadLeft
+NumpadMult
+NumpadPgdn
+NumpadPgup
+NumpadRight
+NumpadSub
+NumpadUp
+NumPut
+ObjAddRef
+ObjBindMethod
+ObjClone
+ObjDelete
+Object
+ObjGetAddress
+ObjGetCapacity
+ObjHasKey
+ObjInsertAt
+ObjMaxIndex
+ObjMinIndex
+ObjNewEnum
+ObjPop
+ObjPush
+ObjRawSet
+ObjRelease
+ObjRemoveAt
+ObjSetCapacity
+Off
+Ok
+On
+OnClipboardChange
+OnExit
+OnMessage
+Or
+Ord
+OutputDebug
+OwnDialogs
+Owner
+Owner1
+Owner10
+Owner11
+Owner12
+Owner13
+Owner14
+Owner15
+Owner16
+Owner17
+Owner18
+Owner19
+Owner2
+Owner20
+Owner21
+Owner22
+Owner23
+Owner24
+Owner25
+Owner26
+Owner27
+Owner28
+Owner29
+Owner3
+Owner30
+Owner31
+Owner32
+Owner33
+Owner34
+Owner35
+Owner36
+Owner37
+Owner38
+Owner39
+Owner4
+Owner40
+Owner41
+Owner42
+Owner43
+Owner44
+Owner45
+Owner46
+Owner47
+Owner48
+Owner49
+Owner5
+Owner50
+Owner51
+Owner52
+Owner53
+Owner54
+Owner55
+Owner56
+Owner57
+Owner58
+Owner59
+Owner6
+Owner60
+Owner61
+Owner62
+Owner63
+Owner64
+Owner65
+Owner66
+Owner67
+Owner68
+Owner69
+Owner7
+Owner70
+Owner71
+Owner72
+Owner73
+Owner74
+Owner75
+Owner76
+Owner77
+Owner78
+Owner79
+Owner8
+Owner80
+Owner81
+Owner82
+Owner83
+Owner84
+Owner85
+Owner86
+Owner87
+Owner88
+Owner89
+Owner9
+Owner90
+Owner91
+Owner92
+Owner93
+Owner94
+Owner95
+Owner96
+Owner97
+Owner98
+Owner99
+Parse
+Password
+Pause
+Persistent
+PGDN
+PGUP
+Pic
+Picture
+Pixel
+PixelGetColor
+PixelSearch
+Pop
+Pos
+Position
+PostMessage
+Pow
+PrintScreen
+Priority
+Process
+ProcessName
+ProgramFiles
+Progress
+Push
+Radio
+RAlt
+RAMDISK
+Random
+Range
+Raw
+RawRead
+RawWrite
+RButton
+RControl
+RCtrl
+Read
+ReadChar
+ReadDouble
+ReadFloat
+ReadInt
+ReadInt64
+ReadLine
+ReadOnly
+ReadShort
+ReadUChar
+ReadUInt
+ReadUShort
+Realtime
+Redraw
+Reg
+REG_BINARY
+REG_DWORD
+REG_DWORD_BIG_ENDIAN
+REG_EXPAND_SZ
+REG_FULL_RESOURCE_DESCRIPTOR
+REG_LINK
+REG_MULTI_SZ
+REG_QWORD
+REG_RESOURCE_LIST
+REG_RESOURCE_REQUIREMENTS_LIST
+REG_SZ
+RegDelete
+RegExMatch
+RegExReplace
+Region
+RegisterCallback
+RegRead
+RegWrite
+Relative
+Reload
+REMOVABLE
+RemoveAt
+Rename
+Report
+Resize
+Restore
+Retry
+Return
+RGB
+Right
+Round
+RShift
+RTrim
+Run
+RunAs
+RunWait
+RWin
+RWinDown
+RWinUp
+SB_SetIcon
+SB_SetParts
+SB_SetText
+Screen
+ScrollLock
+Seconds
+Section
+Seek
+Send
+SendEvent
+SendInput
+SendLevel
+SendMessage
+SendMode
+SendPlay
+SendRaw
+Serial
+SetBatchLines
+SetCapacity
+SetCapsLockState
+SetControlDelay
+SetDefaultMouseSpeed
+SetEnv
+SetFormat
+SetKeyDelay
+SetMouseDelay
+SetNumLockState
+SetRegView
+SetScrollLockState
+SetStoreCapslockMode
+SetTimer
+SetTitleMatchMode
+SetWinDelay
+SetWorkingDir
+Shift
+ShiftAltTab
+ShiftDown
+ShiftUp
+Show
+Shutdown
+Sin
+Single
+SingleInstance
+Sleep
+Slider
+Sort
+SortDesc
+SoundBeep
+SoundGet
+SoundGetWaveVolume
+SoundPlay
+SoundSet
+SoundSetWaveVolume
+Space
+SplashImage
+SplashTextOff
+SplashTextOn
+SplitPath
+Sqrt
+Standard
+static
+Status
+StatusBar
+StatusBarGetText
+StatusBarWait
+StatusCD
+StrGet
+strike
+StringCaseSense
+StringGetPos
+StringLeft
+StringLen
+StringLower
+StringMid
+StringReplace
+StringRight
+StringSplit
+StringTrimLeft
+StringTrimRight
+StringUpper
+StrLen
+StrPut
+StrReplace
+StrSplit
+Style
+Submit
+SubStr
+Suspend
+SysGet
+SysMenu
+Tab
+Tab2
+TabStop
+Tan
+Tell
+Text
+Theme
+this
+Thread
+Throw
+Tile
+Time
+Tip
+ToCodePage
+ToggleCheck
+ToggleEnable
+ToolTip
+ToolWindow
+Top
+Topmost
+TransColor
+Transform
+Transparent
+Tray
+TrayTip
+TreeView
+Trim
+True
+Try
+TryAgain
+TV_Add
+TV_Delete
+TV_Get
+TV_GetChild
+TV_GetCount
+TV_GetNext
+TV_GetParent
+TV_GetPrev
+TV_GetSelection
+TV_GetText
+TV_Modify
+TV_SetImageList
+Type
+UDF
+UnCheck
+underline
+Unicode
+UNKNOWN
+Unlock
+Unlock
+Until
+Up
+UpDown
+Upper
+Uppercase
+URLDownloadToFile
+UseErrorLevel
+UseHook
+UTF-16
+UTF-16-RAW
+UTF-8
+UTF-8-RAW
+VarSetCapacity
+Vis
+VisFirst
+Visible
+Volume_Down
+Volume_Mute
+Volume_Up
+VScroll
+Wait
+WaitClose
+WantCtrlA
+WantF2
+WantReturn
+WheelDown
+WheelLeft
+WheelRight
+WheelUp
+While
+WinActivate
+WinActivateBottom
+WinActivateForce
+WinActive
+WinClose
+Window
+WinExist
+WinGet
+WinGetActiveStats
+WinGetActiveTitle
+WinGetClass
+WinGetPos
+WinGetText
+WinGetTitle
+WinHide
+WinKill
+WinMaximize
+WinMenuSelectItem
+WinMinimize
+WinMinimizeAll
+WinMinimizeAllUndo
+WinMove
+WinRestore
+WinSet
+WinSetTitle
+WinShow
+WinWait
+WinWaitActive
+WinWaitClose
+WinWaitNotActive
+wp
+Wrap
+Write
+WriteChar
+WriteDouble
+WriteFloat
+WriteInt
+WriteInt64
+WriteShort
+WriteUChar
+WriteUInt
+WriteUShort
+XButton1
+XButton2
+Xdigit
+xm
+xp
+xs
+Yes
+ym
+yp
+ys

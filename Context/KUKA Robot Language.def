@@ -1,0 +1,943 @@
+; PSPad clip definition file for KRL
+; author:  Lionel Arnace
+; last revision 23. janv. 2007  14:42
+;
+[Macro definition] 
+;definition des variables pour les trigger
+%choix%=@C Distance ou Path,, DISTANCE,PATH;DISTANCE,
+%bool%=@C TRUE ou FALSE,, TRUE,FALSE;TRUE,
+%path%=@E DISTANCE: 
+%delay%=@E DELAY
+%actiontrig%=@E Action ou Sous Prog:
+%condition%=@E Condition:
+
+;definition des variables pour le mode operateur
+%mode%=@C Mode ,, #T1,#T1;#T2;#AUT;#EX,
+
+;definition des variable pour msg_t
+%type%=@C Type de message ,, #NOTIFY,#NOTIFY;#STATE;#QUIT;#DIALOG,
+%param_typ%=@C Type de parametre ,, #VALUE,#VALUE;#WORDS;#KEY,
+%key%=@E Clé pour la base de donnée ,,
+%modul%=@E Nom de la base de donnée ,,
+%param%=@E nom de la variable en parametre ,,
+%dlg_format%=@E Texte du message dialog ,,
+%valid%=@C Affichage message ,, TRUE,TRUE;FALSE,
+;def message soft 4.0.x
+%Numero_mess%=@E Numéro de message
+%Message%=@E Message
+%Dial_1%=@E Text Touche 1,,_
+%Dial_2%=@E Text Touche 2,,_
+%Dial_3%=@E Text Touche 3,,_
+%Dial_4%=@E Text Touche 4,,_
+%Dial_5%=@E Text Touche 5,,_
+%Dial_6%=@E Text Touche 6,,_
+%Dial_7%=@E Text Touche 7,,_
+
+;definition pour l'instruction switch
+%switchvar%=@E Nom de la variable ,,
+
+;definition variable pour le $pro_state
+%pro_state1%=@C Test du process niveau robot,, #P_FREE,#P_FREE;#P_RESET;#P_ACTIVE;#P_STOP;#P_END
+
+;definition variable pour le $pro_mode
+%pro_mode%=@C Test du mode de déplacement,, #GO,#GO;#FMSTEP;#FISTEP
+
+;definition variable pour les timer
+%num_timerstop%=@E Numero du Timer,,
+%num_timer%=@E Numero du Timer,,
+%valeur_timer%=@E Valeur Timer ,,
+
+;definition variable $advance
+%val_advance%=@C valeur avance calcul,, 1,1;2;3;4;5
+
+;definition pour SIGNAL entree et sortie
+%Val_nom_Signal_E%=@E Nom de l entrée
+%Val_nom_Signal_S%=@E Nom de la Sortie
+%Val_num_entree%=@E Numero Entree
+%Val_num_entree1%=@E Numero Entree début
+%Val_num_entree2%=@E Numero Entree fin
+%Val_num_Sortie%=@E Numero Sortie
+%Val_num_Sortie1%=@E Numero Sortie début
+%Val_num_Sortie2%=@E Numero Sortie fin
+%Commentaire%=@ commentaire
+
+;definition pour sortie pulse
+%Val_varpulse_Sortie%=@E Nom ou N°Sortie
+%Etat_Pulse%=@C Etat Pulse ,, FALSE,FALSE;TRUE,
+%Val_Tps_Pulse%=@E Tps en sec
+
+;Definition special WOP
+
+;definition message wop
+%Num_message%=@E Numero du message
+%type_message%=@C Type de message ,, #INFORME,#INFORME;#AQUIT;#DIAL,
+
+;Insertion d'un graf
+%Nom_prog_Conteneur%=@E Nom du programme Conteneur
+%Nom_Graf%=@E Nom du GRAF
+
+;Insertion fonction
+%NomFonction%=@E Nom de la fonction
+
+;Définition d'un FRAME
+%Nom_Frame%=@E Nom du FRAME
+
+;Définition d'un FOLD
+%Nom_Fold%=@E Nom du FOLD
+
+[KRC4_ModuleSPS| Module WOP SPS KRC4]
+&ACCESS RV
+&REL 3
+DEF %Nom_prog_Conteneur%( )
+
+END
+
+GLOBAL DEF Init_%Nom_Graf%_Sps ( Init_Command :IN )
+
+;--- Declarations ---
+DECL Init_Command Init_Command
+DECL INT Inc_Sps_Init 
+
+SWITCH Init_Command
+
+ CASE #CANCEL_CELL
+
+  
+ CASE #INIT_SPS
+
+ENDSWITCH
+ 
+END
+
+GLOBAL DEF A_%Nom_Graf%_Sps ( )
+; Management of the periphery
+Peri_%Nom_Graf% ( )
+;grafs calling
+G_Modul ( )
+END
+
+DEF Peri_%Nom_Graf% ( )
+IF ($PRO_STATE1==#P_FREE) OR ($PRO_STATE1==#P_RESET) THEN
+  INIT_%Nom_Graf%_SPS(#CANCEL_CELL)
+ENDIF
+END
+DEF G_Modul ( )
+
+END
+
+[KRC4_ModuleSRC| Module WOP SRC KRC4]
+DEF  %Nom_prog_Conteneur% ( )
+;FOLD INI executed only T1 or T2
+    CONTINUE
+    IF ($MODE_OP==#T1) OR ($MODE_OP==#T2) THEN
+  ;FOLD BASISTECH INI
+    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+    INTERRUPT ON 3 
+    BAS (#INITMOV,0 )
+  ;ENDFOLD (BASISTECH INI)
+  ;FOLD USER INI
+    ;Make your modifications here
+
+  ;ENDFOLD (USER INI)
+    ENDIF
+;ENDFOLD (INI)
+
+;FOLD PTP PT_LoopPos1  Vel= 100 % DEFAULT;%{PE}%R 5.2.28,%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:PT_LoopPos1, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FPT_LoopPos1
+BAS(#PTP_PARAMS,100)
+PTP Xpt_LoopPos1 
+;ENDFOLD
+
+
+;FOLD PTP PT_LoopPos1  Vel= 100 % DEFAULT;%{PE}%R 5.2.28,%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:PT_LoopPos1, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FPT_LoopPos1
+BAS(#PTP_PARAMS,100)
+PTP Xpt_LoopPos1 
+;ENDFOLD
+END
+
+GLOBAL DEF Init_%Nom_Graf%_SRC ( INIT_COMMAND :IN)
+
+;---- Declarations ----
+DECL Init_Command INIT_COMMAND
+INT Inc_Src_Init
+
+SWITCH INIT_COMMAND
+
+CASE #INIT_CELL
+
+ ;init variables to the installation run
+ 
+ 
+ ;--- Init output ---
+
+ 
+ ;--- Init variables ---
+ 
+
+CASE #STOP_ROBOT
+;Switch off output if necessary
+
+
+ENDSWITCH
+
+END
+
+[ModuleWOP_SRCV4.0| Module WOP_SRC]
+DEF  %Nom_prog_Conteneur% ( )
+ ;FOLD INI execute uniquement en T1 ou T2
+    CONTINUE
+    IF ($MODE_OP==#T1) OR ($MODE_OP==#T2) THEN
+  ;FOLD BASISTECH INI
+    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+    INTERRUPT ON 3 
+    BAS (#INITMOV,0 )
+  ;ENDFOLD (BASISTECH INI)
+  ;FOLD USER INI
+    ;Make your modifications here
+
+  ;ENDFOLD (USER INI)
+    ENDIF
+ ;ENDFOLD (INI)
+
+ ;FOLD PTP PT_Bouclage1  Vel= 100 % DEFAULT;%{PE}%R 5.2.28,%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:PT_Bouclage1, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FPT_Bouclage1
+BAS(#PTP_PARAMS,100)
+PTP XPT_Bouclage1 
+ ;ENDFOLD
+
+
+ ;FOLD PTP PT_Bouclage1  Vel= 100 % DEFAULT;%{PE}%R 5.2.28,%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:PT_Bouclage1, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FPT_Bouclage1
+BAS(#PTP_PARAMS,100)
+PTP XPT_Bouclage1 
+ ;ENDFOLD
+END
+
+GLOBAL DEF INIT_%Nom_Graf%_SRC ( INIT_COMMAND :IN)
+
+ ;---- Declarations ----
+DECL Init_Command INIT_COMMAND
+INT Inc_Src_Init
+
+SWITCH INIT_COMMAND
+
+CASE #INIT_CELL
+
+ ;init des variables au demarage de l installation
+ 
+ 
+ ;--- Initialisation des messages ---
+ $MSG_T.VALID=FALSE
+ WAIT SEC 1
+ 
+ ;--- Initialisation des sorties ---
+
+ 
+ ;--- Initialisation des variables ---
+ 
+
+CASE #STOP_ROBOT
+ ;coupure de sortie si necessaire en cas d arret robot
+
+ENDSWITCH
+
+END
+
+[ModuleWOP_SPSV4.0| Module WOP_SPS]
+&ACCESS RV
+&REL 3
+DEF %Nom_prog_Conteneur%sub( )
+ ;**************************************************
+ ;Module Kuka France: Gestion %Nom_prog_Conteneur%
+ ;Auteur:KUKA FRANCE
+ ;Creation:22/09/2005
+ ;DMAJ:
+ ;**************************************************
+
+
+
+ ;A DEPLACER DANS LE INIT DU SPS
+ ;******************************
+ ;FOLD Gestion %Nom_Graf%
+ A_%Nom_Graf%_Sps ( )
+ ;ENDFOLD Gestion %Nom_Graf%
+ 
+ ;A DEPLACER DANS LE USER_PLC DU SPS
+ ;**********************************
+ ;FOLD INIT %Nom_Graf%
+ Init_%Nom_Graf%_Sps ( #INIT_SPS )
+ ;ENDFOLD INIT %Nom_Graf%
+ 
+ ;A CONFIGURER ET DEPLACER DANS LE CONFIG.DAT
+ ;*******************************************
+ ;FOLD --- Gestion %Nom_Graf% ---
+ ;Entrees
+SIGNAL E_Etat_%Nom_Graf% $IN[1026]  TO $IN[1026] ;Etat%Nom_Graf% 
+
+ ;Pilotage par BP
+INT E_BPRecul_%Nom_Graf%[4]
+E_BPRecul_%Nom_Graf%[1]=1026
+
+INT E_BPAvance_%Nom_Graf%[4]
+E_BPAvance_%Nom_Graf%[1]=1026
+
+ ;Info etat Butee
+INT E_%Nom_Graf%_Recul[4,1]
+E_%Nom_Graf%_Recul[1,1]=1026
+
+INT E_%Nom_Graf%_Avance[4,1]
+E_%Nom_Graf%_Avance[1,1]=1026
+
+INT Inc_%Nom_Graf%_Sps=0 
+INT M_Inc_%Nom_Graf%_Peri=0
+
+ ;Sorties
+ ;Recul %Nom_Graf%
+INT S_Recul_%Nom_Graf%[4,2]
+S_Recul_%Nom_Graf%[1,1]=999 ;EV
+S_Recul_%Nom_Graf%[1,2]=999 ;Voyant
+
+ ;Avance Butee
+INT S_Avance_%Nom_Graf%[4,2]
+S_Avance_%Nom_Graf%[1,1]=999 ;EV
+S_Avance_%Nom_Graf%[1,2]=999 ;Voyant
+
+ ;Variables
+ ;Nombre de Butee
+INT Nbre_%Nom_Graf%=1
+
+ ;move enable butee
+BOOL M_MoveEnable_%Nom_Graf%[4]
+M_MoveEnable_%Nom_Graf%[1]=FALSE
+
+ ;Demande de pilotage en auto
+BOOL M_DemRecul_%Nom_Graf%[4]
+M_DemRecul_%Nom_Graf%[1]=FALSE
+
+BOOL M_DemAvance_%Nom_Graf%[4]
+M_DemAvance_%Nom_Graf%[1]=FALSE
+
+ ;Pilotage en mouvement
+BOOL M_Recul_%Nom_Graf%[4]
+M_Recul_%Nom_Graf%[1]=FALSE
+
+BOOL M_Avance_%Nom_Graf%[4]
+M_Avance_%Nom_Graf%[1]=FALSE
+
+ ;Demande d initialisation
+BOOL M_InitRecul_%Nom_Graf%[4]
+M_InitRecul_%Nom_Graf%[1]=FALSE
+
+BOOL M_InitAvance_%Nom_Graf%[4]
+M_InitAvance_%Nom_Graf%[1]=FALSE
+
+ ;Demande de pilotage en manu
+BOOL M_BPRecul_%Nom_Graf%[4]
+M_BPRecul_%Nom_Graf%[1]=FALSE
+
+BOOL M_BPAvance_%Nom_Graf%[4]
+M_BPAvance_%Nom_Graf%[1]=FALSE
+
+ ;Demande de pilotage US
+BOOL US_Recul_%Nom_Graf%[4]
+US_Recul_%Nom_Graf%[1]=FALSE
+
+BOOL US_Avance_%Nom_Graf%[4]
+US_Avance_%Nom_Graf%[1]=FALSE
+
+ ;Voyants
+ ;Fixe
+BOOL MV_FIXAvance_%Nom_Graf%[4]
+MV_FIXAvance_%Nom_Graf%[1]=TRUE
+
+BOOL MV_FIXRecul_%Nom_Graf%[4]
+MV_FIXRecul_%Nom_Graf%[1]=FALSE
+
+ ;Cligno
+BOOL MV_CLIAvance_%Nom_Graf%[4]
+MV_CLIAvance_%Nom_Graf%[1]=FALSE
+
+BOOL MV_CLIRecul_%Nom_Graf%[4]
+MV_CLIRecul_%Nom_Graf%[1]=TRUE
+
+ ;Demande d acquittement des defauts
+BOOL M_DemAcq_Def%Nom_Graf%[4]
+M_DemAcq_Def%Nom_Graf%[1]=FALSE
+
+ ;Validation exterieur de la peripherie des mouvements
+BOOL M_ExtValRecul_%Nom_Graf%[4]
+M_ExtValRecul_%Nom_Graf%[1]=FALSE
+
+BOOL M_ExtValAvance_%Nom_Graf%[4]
+M_ExtValAvance_%Nom_Graf%[1]=FALSE
+
+ ;Mode de pilotage de la butee
+BOOL M_%Nom_Graf%_BiStable[4]
+M_%Nom_Graf%_BiStable[1]=TRUE
+
+ ;Stop des mouvements en cas de defaut
+BOOL M_StopMouv_Def%Nom_Graf%[4]
+M_StopMouv_Def%Nom_Graf%[1]=TRUE
+
+ ;Etape des graphs
+INT Etape_%Nom_Graf%[4]
+Etape_%Nom_Graf%[1]=0
+
+ ;Etat des B%Nom_Graf%
+ ;1:Recul, 2:Avance, -1:En cours de recul, -2:En cours de avance, 101:Defaut de recul, 102:Defaut de avance
+INT Action_%Nom_Graf%[4]
+Action_%Nom_Graf%[1]=2
+
+ ;Etat attendu
+INT Etat_%Nom_Graf%Attendu[4]
+Etat_%Nom_Graf%Attendu[1]=2
+
+ ;Temps de detection defaut
+INT M_TpsDef_%Nom_Graf%=10
+
+ ;Tableau
+REAL M_Cpt_%Nom_Graf%[20]
+M_Cpt_%Nom_Graf%[1]=28856.0
+M_Cpt_%Nom_Graf%[2]=28856.0
+M_Cpt_%Nom_Graf%[3]=28856.0
+M_Cpt_%Nom_Graf%[4]=27214.0
+M_Cpt_%Nom_Graf%[5]=27214.0
+M_Cpt_%Nom_Graf%[6]=27214.0
+M_Cpt_%Nom_Graf%[7]=27214.0
+M_Cpt_%Nom_Graf%[8]=27214.0
+M_Cpt_%Nom_Graf%[9]=27214.0
+M_Cpt_%Nom_Graf%[10]=27214.0
+M_Cpt_%Nom_Graf%[11]=27214.0
+M_Cpt_%Nom_Graf%[12]=27214.0
+M_Cpt_%Nom_Graf%[13]=27214.0
+M_Cpt_%Nom_Graf%[14]=27214.0
+M_Cpt_%Nom_Graf%[15]=27214.0
+M_Cpt_%Nom_Graf%[16]=27214.0
+M_Cpt_%Nom_Graf%[17]=27214.0
+M_Cpt_%Nom_Graf%[18]=27214.0
+M_Cpt_%Nom_Graf%[19]=27214.0
+M_Cpt_%Nom_Graf%[20]=27214.0
+
+STRUC Diag_Graph_%Nom_Graf% INT Def_%Nom_Graf%
+DECL Diag_Graph_%Nom_Graf% DiagGraph%Nom_Graf%={Def_%Nom_Graf% 0}
+ ;ENDFOLD --- Gestion %Nom_Graf% ---
+
+ 
+END
+
+GLOBAL DEF Init_%Nom_Graf%_Sps ( Init_Command :IN )
+
+ ;--- Declarations ---
+DECL Init_Command Init_Command
+DECL INT Inc_Sps_Init 
+
+SWITCH Init_Command
+
+ CASE #ABANDON_CELL
+
+  
+ CASE #INIT_SPS
+
+ ;--- Initialisations des Sorties ---
+  FOR Inc_%Nom_Graf%_Sps=1 TO Nbre_%Nom_Graf%
+   $OUT[S_Recul_%Nom_Graf%[Inc_%Nom_Graf%_Sps,1]]=FALSE
+   $OUT[S_Avance_%Nom_Graf%[Inc_%Nom_Graf%_Sps,1]]=FALSE
+   $OUT[S_Recul_%Nom_Graf%[Inc_%Nom_Graf%_Sps,2]]=FALSE
+   $OUT[S_Avance_%Nom_Graf%[Inc_%Nom_Graf%_Sps,2]]=FALSE
+  ENDFOR
+  
+   ;--- Initialisations des Memoires ---
+  FOR Inc_%Nom_Graf%_Sps=1 TO Nbre_%Nom_Graf%
+   MV_FIXRecul_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   MV_FIXAvance_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_Avance_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_Recul_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_DemAvance_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_DemRecul_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_InitAvance_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_InitRecul_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_BPAvance_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_BPRecul_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   Etape_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=0
+   Action_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=0
+   Etat_%Nom_Graf%Attendu[Inc_%Nom_Graf%_Sps]=0
+   US_Recul_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   US_Avance_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+   M_DemAcq_Def%Nom_Graf%[Inc_%Nom_Graf%_Sps]=FALSE
+  ENDFOR
+  
+   ;Graph defaut
+  DiagGraph%Nom_Graf%.Def_%Nom_Graf%=0
+  
+   ;Compteurs
+  FOR Inc_%Nom_Graf%_Sps=1 TO 20
+   M_Cpt_%Nom_Graf%[Inc_%Nom_Graf%_Sps]=M_Tps_Actuel
+  ENDFOR
+  
+  ;Temps avant defaut (S)
+   M_TpsDef_%Nom_Graf%=10
+  ENDSWITCH
+
+ 
+END
+
+GLOBAL DEF A_%Nom_Graf%_Sps ( )
+ 
+Peri_%Nom_Graf% ( ) ;gestion de la peripherie
+
+G_%Nom_Graf% ( ) ;Appel des grafs
+END
+
+DEF Peri_%Nom_Graf% ( )
+
+IF ($PRO_STATE1==#P_FREE) OR ($PRO_STATE1==#P_RESET) THEN
+  INIT_%Nom_Graf%_SPS(#ABANDON_CELL)
+ENDIF
+
+ M_MoveEnable_%Nom_Graf%[1]=FALSE ;Gestion du move enable
+ ;--- Acquittement defauts ---
+IF M_DemAcq_Def%Nom_Graf%[1] AND (Action_%Nom_Graf%[1]>=100) THEN
+ M_DemAcq_Def%Nom_Graf%[1]=FALSE
+ Action_%Nom_Graf%[1]=0
+ Etape_%Nom_Graf%[1]=0
+ M_Cpt_%Nom_Graf%[1]=M_Tps_Actuel
+ DiagGraph%Nom_Graf%.Def_%Nom_Graf%=0
+ENDIF
+ 
+ ;--- Gestion %Nom_Graf% ---
+FOR M_Inc_%Nom_Graf%_Peri=1 TO Nbre_%Nom_Graf%
+ ;Anulation des demandes de mouvement %Nom_Graf% si pas de mode externe
+ IF NOT $EXT THEN
+  M_DemRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=FALSE
+  M_DemAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=FALSE
+ ELSE
+  US_Avance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=FALSE ;Pas de prise en compte des demandes de US si mode externe
+ ENDIF
+ ;--- Conditions de pilotage venant de l'exterieur ---
+ M_ExtValRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=TRUE ;Mettre en conditions des etats d'autre actionneurs afin d'autoriser le recul  %Nom_Graf%
+ M_ExtValAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=TRUE ;Mettre en conditions des etats d'autre actionneurs afin d'autoriser l'avance  %Nom_Graf%
+ ;--- Conditions de pilotage en manu ---
+ M_BPRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=$IN[E_BPRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]] AND X_Rob_EnManu
+ M_BPAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=$IN[E_BPAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]] AND X_Rob_EnManu
+ ;--- Condition de pilotage en automatique ---
+ M_Avance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=(M_DemAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR M_BPAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR US_Avance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR M_InitAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]) AND M_ExtValAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]
+ M_Recul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]=(M_DemRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR M_BPRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR US_Recul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR M_InitRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]) AND M_ExtValRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri]
+ ;--- Gestion des voyants ---
+ IF X_Rob_EnManu THEN
+  $OUT[S_Avance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri,2]]=MV_FIXAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR (MV_CliAvance_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] AND B_Cligno)
+  $OUT[S_Recul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri,2]]=MV_FIXRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] OR (MV_CliRecul_%Nom_Graf%[M_Inc_%Nom_Graf%_Peri] AND B_Cligno)
+ ENDIF
+ENDFOR
+ 
+ 
+END
+
+DEF G_%Nom_Graf% ( )
+ ;FOLD --- SP G_%Nom_Graf% ( ) ---
+ ;--- Pilotage de %Nom_Graf% ---
+SWITCH Etape_%Nom_Graf%[1]
+CASE 0
+ ;Mode de pilotage Bi-Stable
+ IF M_%Nom_Graf%_BiStable[1] THEN
+  $OUT[S_Recul_%Nom_Graf%[1,1]]=FALSE 
+  $OUT[S_Avance_%Nom_Graf%[1,1]]=FALSE 
+ ENDIF
+ ;Gestion des voyants
+ MV_FIXAvance_%Nom_Graf%[1]=(E_Etat_%Nom_Graf%=='B10')
+ MV_FIXRecul_%Nom_Graf%[1]=(E_Etat_%Nom_Graf%=='B01')
+ MV_CliAvance_%Nom_Graf%[1]=(E_Etat_%Nom_Graf%<>'B10')
+ MV_CliRecul_%Nom_Graf%[1]=(E_Etat_%Nom_Graf%<>'B01')
+ M_DemAcq_Def%Nom_Graf%[1]=FALSE
+ M_Cpt_%Nom_Graf%[1]=M_Tps_Actuel
+ ;Recul %Nom_Graf%
+ IF M_Recul_%Nom_Graf%[1] AND ((E_Etat_%Nom_Graf%<>'B01') OR (Action_%Nom_Graf%[1]<>1)) THEN
+  Etape_%Nom_Graf%[1]=1
+ ENDIF
+ ;Avance %Nom_Graf%
+ IF M_Avance_%Nom_Graf%[1] AND ((E_Etat_%Nom_Graf%<>'B10') OR (Action_%Nom_Graf%[1]<>2)) THEN
+  Etape_%Nom_Graf%[1]=2
+ ENDIF
+ 
+CASE 1 ;Recul%Nom_Graf%
+ Etat_%Nom_Graf%Attendu[1]='B01'
+ $OUT[S_Recul_%Nom_Graf%[1,1]]=TRUE
+ $OUT[S_Avance_%Nom_Graf%[1,1]]=FALSE
+ IF E_Etat_%Nom_Graf%=='B01' THEN
+  Action_%Nom_Graf%[1]=1 ;action atteinte
+  Etape_%Nom_Graf%[1]=0
+ ELSE
+  Action_%Nom_Graf%[1]=-1 ;action en cours	
+ ENDIF
+ ;On retourne a 0 si on relache la demande
+ IF NOT M_Recul_%Nom_Graf%[1] AND NOT M_%Nom_Graf%_BiStable[1] THEN
+  Etape_%Nom_Graf%[1]=0
+ ENDIF
+ 
+CASE 2 ;Avance
+ Etat_%Nom_Graf%Attendu[1]='B10'
+ $OUT[S_Recul_%Nom_Graf%[1,1]]=FALSE
+ $OUT[S_Avance_%Nom_Graf%[1,1]]=TRUE
+ IF E_Etat_%Nom_Graf%=='B10' THEN
+  Action_%Nom_Graf%[1]=2 ; action atteinte
+  Etape_%Nom_Graf%[1]=0
+ ELSE
+  Action_%Nom_Graf%[1]=-2 ;action en cours	
+ ENDIF
+ ;On retourne a 0 si on relache la demande
+ IF NOT M_Avance_%Nom_Graf%[1] AND NOT M_%Nom_Graf%_BiStable[1] THEN
+  Etape_%Nom_Graf%[1]=0
+ ENDIF
+
+CASE 100,101,102 ;Defaut de pilotage
+ ;Gestion des sorties de pilotage de %Nom_Graf% suivant la strategie de defaut
+ IF M_StopMouv_Def%Nom_Graf%[1] AND (Action_%Nom_Graf%[1]==101) THEN
+  $OUT[S_Recul_%Nom_Graf%[1,1]]=FALSE
+  $OUT[S_Avance_%Nom_Graf%[1,1]]=TRUE
+  MV_FIXRecul_%Nom_Graf%[1]=FALSE
+  MV_CliRecul_%Nom_Graf%[1]=FALSE
+ ENDIF
+ IF M_StopMouv_Def%Nom_Graf%[1] AND (Action_%Nom_Graf%[1]==102) THEN
+  $OUT[S_Recul_%Nom_Graf%[1,1]]=TRUE
+  $OUT[S_Avance_%Nom_Graf%[1,1]]=FALSE
+  ;Gestion des voyants
+  MV_FIXAvance_%Nom_Graf%[1]=FALSE
+  MV_CliAvance_%Nom_Graf%[1]=FALSE
+ ENDIF
+ENDSWITCH
+
+ ;--- Detection defaut de pilotage ---
+IF (ABS(M_Tps_Actuel-M_Cpt_%Nom_Graf%[1])>M_TpsDef_%Nom_Graf%) AND ( (Action_%Nom_Graf%[1]==-1) OR (Action_%Nom_Graf%[1]==-2) )THEN
+ ;Controle de l etat des capteurs de l actionneur si le temps est ecoule
+ Action_%Nom_Graf%[1]=100+Etape_%Nom_Graf%[1]
+ Etape_%Nom_Graf%[1]=Action_%Nom_Graf%[1]
+ DiagGraph%Nom_Graf%.Def_%Nom_Graf%=(Etat_%Nom_Graf%Attendu[1] B_EXOR E_Etat_%Nom_Graf%)
+ENDIF
+ ;ENDFOLD --- SP G_%Nom_Graf% ( ) ---
+
+END
+
+
+
+[Message WOP|Ajouter un message WOP V3.3]
+WHILE NOT AffMessSRC (%type_message%,%Num_message%,1,1,#Sans_Param,1) ;
+  WAIT SEC 0;acquitter
+ENDWHILE
+[Message WOP V4.0.x|Ajouter un message WOP V4.0x]
+ ;FOLD Messages.%type% N° %Numero_mess%, %Message%;%{PE}%MKUKATPUSER
+   AffMessSrc (%type% ,%Numero_mess%) 
+ ;ENDFOLD
+
+[Message DIAL WOP V4.0.x|Ajouter DIALOG WOP V4.0x] 
+ ;FOLD Messages.Dialog : %Message% No %1., SoftKeys %Dial_1%,  %Dial_2%,  %Dial_3%,  %Dial_4%,  %Dial_5%,  %Dial_6%,  %Dial_7%;%{PE}%MKUKATPUSER
+   AffDlgMessSrc (%Numero_mess%, "%Dial_1%", "%Dial_2%", "%Dial_3%", "%Dial_4%", "%Dial_5%", "%Dial_6%", "%Dial_7%") 
+ ;ENDFOLD
+
+[Prog Recherche| Inserer un prog de recherche]
+ ;**************** A coller dans le $CONFIG.DAT *******************************
+CONST REAL C_Haut_Mini=0.0
+FRAME Xpt_Tampon,Decalage,Pt_Recherche,Xp_Mem_Prise
+INT M_Pas_Recherche,M_Inc1,M_Inc_Max
+DECL E6POS Pt_Bas_Pile[1]
+Pt_Bas_Pile[1]={x 99999.0,y 9999.0,z 9999.0,a 9999.0,b 9999.0,c 9999.0,s 9999,t 9999}
+DECL E6POS Pt_Haut_Pile[1]
+Pt_Haut_Pile[1]={x 99999.0,y 9999.0,z 9999.0,a 9999.0,b 9999.0,c 9999.0,s 9999,t 9999}
+
+ ;ATTENTION pensez a reinitialiser le point de memoire prise Xp_Mem_Prise
+ ;a chaque nouvelle pile
+ ;*****************Fin de section a coller dans le $CONFIG.DAT*****************
+
+
+ ;FOLD Programme de Recheche
+PTP Pt_Haut_Pile[1]
+CONTINUE
+$ADVANCE=1
+Decalage=$NULLFRAME
+Pt_Recherche=$NULLFRAME
+Pt_Recherche.Z=-5.0;-2.5
+$APO.CPTP=1
+ ;BAS(#VEL_PTP,100)
+ ;BAS(#ACC_PTP,100)
+BAS(#VEL_CP,1.0)
+BAS(#ACC_CP,50)
+M_Inc_Max=10000000
+FOR M_Inc1=1 TO M_Inc_Max
+    LIN_REL Pt_Recherche C_DIS
+    CONTINUE
+    IF ($meas_pulse[1]==TRUE) THEN
+       lin_rel {z -5.0};permet une petite descente pour fermer les pinces
+ ;Mettre ici l action de fermeture pince ou aspiration etc
+       PTP $pos_act
+       Xp_Mem_Prise.Z=($POS_ACT.Z-X_Haut_Claie)
+       EXIT
+    ELSE
+      IF ($POS_ACT.Z<((Pt_Bas_Pile[1].Z)+C_Haut_Mini)) THEN
+        LIN Pt_Haut_Pile[1]
+        X_Pile_Terminee=TRUE
+        EXIT
+      ENDIF
+    ENDIF
+ENDFOR
+ ;ENDFOLD Programme de Recheche
+
+;Instructions
+[Or| Ou]
+OR |
+[Exor| Ou Exclusif]
+EXOR |
+[And| Et]
+AND |
+[Not| Non]
+NOT |
+[DEF | Definition Prog ou Sous Prog]
+DEF | ( )
+
+END
+[Switch| Aiguillage]
+SWITCH |%switchvar%
+
+CASE 1
+
+CASE 2
+
+DEFAULT
+
+ENDSWITCH
+
+[IF THEN ELSE| test conditionnel]
+IF ( ) THEN   
+
+ELSE
+
+ENDIF
+[LOOP| Boucle sans fin]
+LOOP
+|
+ENDLOOP
+[FOR| Répéter n fois]
+FOR |=   TO  
+
+ENDFOR
+[WHILE| répéter tant que]
+WHILE (%condition%)
+|
+ENDWHILE
+[REPEAT| répéter jusqu'a ce que]
+REPEAT
+|
+UNTIL(%condition%)
+[EXIT| Sortie prématurée d'une boucle]
+EXIT
+[interrupt| declaration]
+INTERRUPT DECL | WHEN  DO  %condition%
+
+[INTERRUPT ON| Active une interruption]
+INTERRUPT ON |
+[INTERRUPT OFF| Désactive une interrution]
+INTERRUPT OFF |
+[INTERRUPT ENABLE| Libére une interruption masquée]
+INTERRUPT ENABLE |
+[INTERRUPT DISABLE| Masque une interruption active]
+INTERRUPT DISABLE |
+[BRAKE| Arret robot SP interruption]
+BRAKE
+[BRAKE F| Arret robot SP interruption]
+BRAKE F
+[RESUME| Uniquement SP interrupion]
+RESUME
+[TTRIGGER| point de depart]
+TRIGGER WHEN DISTANCE=0 DELAY=0 DO %condition%;PRIO-1|
+[TTRIGGER| point d'arrivé]
+TRIGGER WHEN DISTANCE=1 DELAY=0 DO %condition%;PRIO-1|
+[TTRIGGER  | distance ] 
+TRIGGER WHEN %choix%= %path% DELAY=%delay% DO %actiontrig% ;PRIO-1
+[WAIT FOR| Attente ]
+WAIT FOR %condition%|
+[WAIT SEC| Tempo en sec]
+WAIT SEC %condition%|
+[PTP_REL| Ptp relatif ]
+PTP_REL{|}
+[LIN_REL| Linèaire relatif ]
+LIN_REL{|}
+[CIRC_REL| Circulaire relatif ]
+CIRC_REL{|},{}
+[Signal Entree| Declaration d'un signal]
+SIGNAL %Val_Nom_Signal_E% $IN[%Val_num_entree%];%Commentaire%
+[Signal Sortie| Declaration d'un signal]
+SIGNAL %Val_Nom_Signal_S% $OUT[%Val_num_sortie%];%Commentaire%
+[Groupe Entrees| Declaration d'un groupe d'entrées]
+SIGNAL %Val_Nom_Signal_E% $IN[%Val_num_entree1%] TO $IN[%Val_num_entree2%];%Commentaire%
+[Groupe Sortie| Declaration d'un groupe de sorties]
+SIGNAL %Val_Nom_Signal_S% $OUT[%Val_num_sortie1%] TO $OUT[%Val_num_sortie2%];%Commentaire%
+
+;Variables système
+[$IN| Entree]
+$IN[%Val_num_entree%]=%bool%
+[$OUT| Sortie]
+$OUT[%Val_num_sortie1%]=%bool%
+[PULSE | Sortie Pulse]
+PULSE(%Val_varpulse_Sortie% , %Etat_Pulse% , %Val_Tps_Pulse%)
+[$ANIN| Entree Analogique]
+$ANIN[|]==
+[$ANOUT| Sortie Analogique]
+$ANOUT[|]=
+[$ADVANCE| Avance au calcul]
+$ADVANCE=%val_advance%
+[$OV_PRO| Vitesse Programme]
+$OV_PRO=|
+[$OV_JOG| Vitesse manuelle]
+$OV_JOG=|
+[$MODE_OP | clef de mode #T1,#T2,#AUT,#EX]
+($MODE_OP==%mode%)|
+[$VEL_ACT| Vitesse Actuelle du CDO en m/sec]
+$VEL_ACT==|
+[$Timer_stop| True-->Arret Timer / False-->Depart Timer]
+$TIMER_STOP[%num_timerstop%]=%bool%
+[$Timer| Valeur timer en ms]
+$TIMER[%num_timer%]=%valeur_timer%
+[$Base| Repère Pièce]
+$BASE=BASE_DATA[|]
+[$Tool| Repère Outil]
+$TOOL=TOOL_DATA[|]
+[FRAME| Reprère FRAME]
+%Nom_Frame%={X 0.0,Y 0.0,Z 0.0,A 0.0,B 0.0,C 0.0}
+[$Pro_State1| Etat du Prog Src #P_FREE,#P_RESET,#P_ACTIVE,#P_STOP,#P_END]
+($PRO_STATE1==%pro_state1%|)
+[$Pro_Mode| Mode de déroulement prog #GO,#FMSTEP,#FISTEP]
+$PRO_MODE==%pro_mode%|
+[$Msg_T| Init structure messages]
+$MSG_T={VALID FALSE,RELEASE FALSE,TYP %type%,MODUL[] "%modul%",KEY[] "%key%",PARAM_TYP %param_typ%,PARAM[] "%param%",DLG_FORMAT[] "%dlg_format%",ANSWER 0}
+[$Msg_T| Valid TRUE ou FALSE]
+$MSG_T.VALID=%valid%
+[FOLD | Définir un FOLD]
+ ;FOLD %Nom_Fold%
+
+ ;ENDFOLD %Nom_Fold%
+ 
+[Tempo_SPS| Gestion du temps SPS dans un graph]
+M_COUNT_START[10]=M_ACTUAL_TIME
+IF (ABS(M_COUNT_START[10]-M_Actual_Time)>3) THEN
+ 
+ENDIF
+
+[KRC4_Sous Prog Fonction BOOL| Sousprog BOOL fonction KRC4]
+DEFFCT BOOL %NomFonction% ( )
+
+ENDFCT
+
+[KRC4_Sous Prog Fonction INT| Sousprog INT fonction KRC4]
+DEFFCT INT %NomFonction% ( )
+
+ENDFCT
+
+[KRC4_Sous Prog Fonction REAL| Sousprog REAL fonction KRC4]
+DEFFCT REAL %NomFonction% ( )
+
+ENDFCT
+
+[Fonction Tronquer Decimal| fonction qui tronque une valeur décimale]
+DEF trunc_function()
+END
+
+; *****************************************************************
+; INFO: truncate to the given decimals
+;!!!  The accuracy of KRL real variables is automatical limited 
+;!!!  and round to 7  decimal places
+;!!!  e.g.   123456789.1234   ->  123456800     !!!
+; *****************************************************************
+
+GLOBAL DEFFCT Real TRUNC(InReal:IN, DecimalPlace:IN)
+
+  DECL REAL InReal,RealHelpVar,OutReal
+  DECL INT DecimalPlace,i,IntHelpvar,IntMerker
+
+  IF (DecimalPlace<>0) THEN
+  
+    DecimalPlace = ABS(DecimalPlace)
+    IntHelpVar=1
+    FOR i = 1 TO DecimalPlace
+      IntHelpVar = IntHelpVar * 10
+      RealHelpVar = IntHelpVar
+    ENDFOR
+    OutReal = InReal *  RealHelpVar
+    OutReal = OutReal - 0.5
+    IntMerker = OutReal
+    OutReal = IntMerker
+    OutReal = OutReal / RealHelpVar
+  
+  ELSE
+    RealHelpVar = InReal - 0.5
+    IntHelpVar = RealHelpVar
+    OutReal = IntHelpVar   ;trancate 0 DecimalPlace
+  ENDIF  
+    
+
+  RETURN OutReal
+  
+ENDFCT
+
+[Fonction RealToString| fonction Transfert un real dans un string]
+DEF RealToString_Function()
+
+END
+
+
+GLOBAL DEFFCT Bool RealToString (DestStr[]:OUT, RealVar:IN) 
+ 
+  DECL CHAR DestStr[]
+  DECL Real RealVar
+  DECL STATE_T STATE
+  DECL INT OFFSET
+  DECL Bool Conversion_Ok
+  
+  OFFSET=0
+  IF STRCLEAR(Deststr[]) THEN
+    SWRITE(DestStr[],STATE,OFFSET,"%f",RealVar)
+    Conversion_Ok=true
+  ELSE
+    Conversion_Ok=false
+  ENDIF
+  Return(Conversion_Ok)
+  
+ENDFCT
+
+[Fonction GetDistance| Calcule la distance entre 2 points]
+GLOBAL DEFFCT Real GetDistance(p1:in, p2:in )
+  
+  ; calculate the distance of 2 postions
+   
+  e6pos p1,p2 
+  real dx,dy,dz
+  
+  dx=p1.x-p2.x
+  dy=p1.y-p2.y
+  dz=p1.z-p2.z
+  
+  return(sqrt((dx*dx)+(dy*dy)+(dz*dz)))
+  
+ENDFCT
+
+[Fonction CrossProduct| Calcule le produit croisé de 3 vecteurs]
+GLOBAL DEF  CrossProduct (Vector1[] :OUT,Vector2[] :OUT,Vector3[] :OUT)
+  ; calculate the cross product (outer produkt or cartesian product)
+  ; of the 3 dimensional vektors Vector1,Vector2 .
+  ; the result is vector3.
+  
+  DECL REAL Vector1[],Vector2[],Vector3[]
+  
+  Vector3[1] = Vector1[2]*Vector2[3] - Vector1[3]*Vector2[2]
+  Vector3[2] = Vector1[3]*Vector2[1] - Vector1[1]*Vector2[3]
+  Vector3[3] = Vector1[1]*Vector2[2] - Vector1[2]*Vector2[1]
+  
+END
+;
+[FOLD | FOLD]
+;FOLD SP Init_Suction Box_Src ( )

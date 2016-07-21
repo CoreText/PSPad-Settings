@@ -1,0 +1,297 @@
+; PSPad clip definition file for MX Command Language
+; last revision 24-8-2006
+;
+; This file is based on a clip library which was created by Hans Veenstra and 
+; John Pittock for the TextPad Editor;
+;
+; Updated in Dec 2004 by Wolfgang Weh
+; - adjusted/modified for PSPad
+; - added additional major and minor options
+; - added sample Macro Definitions
+; August 2006, Wolfgang Weh
+; - minor tweaks 
+;
+[Macro Definition]
+%TTFFont%=@F TTF Font,,,,
+%TTFHeight%=@E Font Height,,0.3,,
+%InputFile%=@O InputFile:,,,Input Files (*.inp)|*.inp,,
+;-------------------------------------------------------------------------------
+[MOSS |M Major option MOSS]
+MOSS,|Optional Job Name
+[MOSS |M MX Input File Header]
+MOSS
+   //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+   // design by  : Mr. Moss
+   // design date:
+   // subject    :
+   // 
+   //\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+|
+[DustBin |R Move strings to the DustBin]
+DELE,DustBin
+CREA,DustBin
+COPY,ModelName,DustBin
+061 ,|StringMask
+999 
+DELE,DustBin
+
+;-------------------------------------------------------------------------------
+[DELETE |M Delete a model]
+DELETE,|ModelName
+[CREATE |M Create a model]
+CREATE,|ModelName
+[DELE CREA |M Delete & ReCreate a model]
+DELETE,|ModelName
+CREATE,ModelName
+
+[FINISH |M Finish]
+FINISH|
+[OUTPUT |M Close]
+OUTPUT
+|
+[OUTPUT |M Open OutputFile]
+OUTPUT,.\|OutputFileName.prn
+
+[AUTO ON | Switch Autodraw ON]
+AUTODRAW,ON
+|
+[AUTO OFF | Switch Autodraw OFF]
+AUTODRAW,OFF
+|
+[   |B Comment Line]
+   // | 
+[000 |B Comment Line]
+000// | 
+;-------------------------------------------------------------------------------
+[EDIT |M Start major option EDIT]
+EDIT,|ModelName
+[002 |B create a text string]
+   // field 3 must have an * REF first character
+   // field 9 character height (drawing units) default= 0.15
+   // after 001, ad desired text
+002,3=|NEW,5=COX,6=COY,bea,,carh
+001,
+[002 |B create a contour string]
+   // CONT level only to be typed in the first in the first record
+002,3=NEW,4=CONT,5=COX,6=COY
+[004 |B Delete a string]
+004,3=|StringName
+[005 |B Delete point - int]
+005,    ,|LINT,STL,,StartChn,StartPnt,10=SEQNR OF INT
+[005 |B Delete int - point]
+005,|LINT,    ,STL,7=SEQNR OF INT,EndChn,EndPnt
+[005 |B Delete part of a string]
+005,3=|stl,,StartChn,StartPnt,,EndChn,EndPnt
+[006 |B insert a gap]
+006,3=|stl,,StartChn,StartPnt,,EndChn,EndPnt
+[008 |B create a string]
+008,3=|NEW,,COX,COY,levl,cox1,coy1,levl1
+[012 |B join 2 strings]
+012,|SUB,SUB1,new
+[020 |B change string label]
+020,|sub,nsub,NEW
+[021 |B change any string dimension]
+021,3=|sub,dimsearch,new
+[022 |B change string dimension]
+022,3=|STL,,chain,pnr,,COX,COY,levl
+[025 |B delete a point]
+025,3=|sub,,StartChn,StartPnt
+[026 |B insert a point]
+   // case 1 insert a point at a given chainage
+026,3=|REF,5=CHAIN
+[027 |B convert to 6D M-string]
+   // code field 2 REGU to obtain regular chainage points only
+   // NEW initial character must be an M
+027,|SL,regu,NEW,CHD,StartChn,StartPnt,7=CHI,EndChn,EndPnt
+[028 |B create str with extra points]
+   // code fld 2 MOSS for moss curve fitting (default)
+   // code fld 2 SPLINE for spline curve fitting
+   // code fld 2 DIST and give the distance in field 4
+   // code fld 2 DIVI to divide string elements equally and
+   //            give the number in field 4
+   // code fld 2 TOLE to divide string  equally until distance
+   //            between points smaller than distance in field 4
+028,|SUB,,NEW,tol,StartChn,StartPnt,,EndChn,EndPnt
+[030 |B change a series of stringnames]
+   // STL if all four characters are coded only one string
+   // will be selected
+030,|stl,,MSK
+[031 |B delete a series of strings]
+031,|MSK
+[032 |B delete loops/tail ends]
+   // code field 4 1.0 to remove one loop only
+   // code field 4 -1.0 to remove tail ends and leave
+   //              field 5, 6 and 7 open
+   // leave field 4 blank to remove all loops
+   // field 7      intersection point number if only one loop
+   //              is to be deleted
+032,3=|STL,,cox,coy,,cox1,coy1
+[035 |B add slope signature string]
+035,|REF,4=CHI,StartChn,StartPnt,,EndChn,EndPnt
+   //  field 7=0 will suppress curve fitting on the first string
+   //  field 10=0 will suppress curve fitting on the scnd string
+036,SUB,SUB1,NEW,7=1,10=0
+;-------------------------------------------------------------------------------
+[COPY |M Start major option COPY]
+COPY,|SourceModel,TargetModel
+[060 |B 060 - copy strings]
+060,|StringMask,InOut,BdryName
+[061 |B 061 - move strings]
+061,|LAB
+[066 |B 066 - copy triangulation string]
+   // leave blank to copy all triangulations in the model
+   // To copy individual strings use full string label
+   // To copy groups of strings use partial label
+066,|
+;-------------------------------------------------------------------------------
+[DESIGN |M Start major option DESIGN]
+DESIGN,|ModelName
+[099 |b simplified design]
+099,|REF,sub,3=NEW
+[099 SPRD |b simplified design with SPRD]
+099,|REF,sub,3=NEW,5=StartChn,StartPnt,8=EndChn,EndPnt
+[100 |B add string cons H/ cons C]
+100,|REF,sub,3=NEW,4=CROS,StartChn,StartPnt,7=HOFFSET,EndChn,EndPnt
+[101 |B add string linear H/ cons C]
+101,|REF,sub,3=NEW,4=CROS,StartChn,StartPnt,7=HOFFSET,EndChn,EndPnt,10=HOFFSETE
+[102 |B add string REFerse H/ cons C]
+102,|REF,sub,3=NEW,4=CROS,StartChn,StartPnt,7=HOFFSET,EndChn,EndPnt,10=HOFFSETE
+[103 |B add string ext/cont C]
+103,|REF,sub,3=NEW,voffset,StartChn,StartPnt,hoffset,EndChn,EndPnt
+[104 |B hor ext of slope/offset]
+103,|REF,    ,3=NEW,,StartChn,StartPnt,,EndChn,EndPnt
+   //   7=horizontal offset to be applied from REF2
+104,    ,2=REF1,3=NEW,4=VOFFSET,7=HOFFSET
+[110 |B add string cons H/ cons V]
+110,|REF,sub,3=NEW,4=VOFFSET,StartChn,StartPnt,7=HOFFSET,EndChn,EndPnt
+[111 |B add string linear H/ cons C]
+111,|REF,sub,3=NEW,4=VOFFSET,StartChn,StartPnt,7=HOFFSET,EndChn,EndPnt,10=HOFFSETE
+[112 |B add string REFerse H/ cons C]
+112,REF,sub,3=NEW,4=VOFFSET,StartChn,StartPnt,7=HOFFSET,EndChn,EndPnt,10=HOFFSETE
+[120 |B amend levels: cons V offset]
+120,|REF,sub,3=NEW,datum,StartChn,StartPnt,7=VOFFSET,EndChn,EndPnt
+[121 |B amend levels: linear V offset]
+121,|REF,sub,3=NEW,datum,StartChn,StartPnt,7=VOFFSET,EndChn,EndPnt,10=VOFFSETE
+[122 |B amend levels: sym REF curve offset]
+122,|REF,sub,3=NEW,datum,StartChn,StartPnt,7=VOFFSET,EndChn,EndPnt,10=VOFFSETE
+[130 |B amend levels: cons crossfall]
+130,|REF,sub,3=NEW,,StartChn,StartPnt,7=CROS,EndChn,EndPnt
+[131 |B amend levels: linear crossfall]
+131,|REF,sub,3=NEW,,StartChn,StartPnt,7=CROS,EndChn,EndPnt,crose
+[132 |B amend levels: symm REF curve crossfall]
+132,|REF,sub,3=NEW,,StartChn,StartPnt,7=CROS,EndChn,EndPnt,10=CROSE
+[133 |B amend levels: superelevation]
+133,|REF,sub,3=NEW,4=SPEED,StartChn,StartPnt,crosmin,EndChn,EndPnt,crosmax
+[134 |B amend levels: extend crossfall (2 strings)]
+   // if field 2 is left blank fill in 104
+134,|REF,sub,3=NEW,,StartChn,StartPnt,,EndChn,EndPnt
+   104,    ,SUB1,SUB2,voffset
+[135 |B amend levels: REF circular curve crossfall]
+132,|REF,sub,3=NEW,,StartChn,StartPnt,,EndChn,EndPnt
+135,5=LEN1,7=CROS,8=LEN2,10=CROSE
+[145 |B create circular]
+   // field 4 negative radius for left hand curve
+   // field 6 optional: chainage of first point.
+   // field 8&9 optional: Approximate coordinates of element centre
+   // field 10 if omitted field 7 is assumed (+ or -)
+145,|STL,STL1,M???,RADIUS,CHIN,7=RtoSTL,10=RtoSTL1
+;-------------------------------------------------------------------------------
+[GENIO | Start major option GENIO]
+GENIO,|ModelName
+[081 |B general output of strings]
+081,|StringMask
+;-------------------------------------------------------------------------------
+[REPORT | Start major option REPORT]
+REPORT,|ModelToReport,RefModel
+[980 |B Report G-String Information]
+   // field 1 geomatry string label
+   // field 2 geomatry string code
+   //  ALL   all geomatry string points
+   //  HTPS  horizontal tangent points
+   //  HIPS  horizontal intersection points
+   //  HCEN  horizontal arc centres
+   //  VTPS  Vertical tangent points
+   //  VIPS  Vertical intersection points
+   //  VFPS  Vertical flat points
+   //  VMOS  Vertical mid-ordinate points
+   //  SUPE  Superelevation points
+   //  CANT  Cant at HTPS
+   //  RAIL  Railway geomatry points
+980,|REF,ALL,5=StartChn,6=StartPnt,,8=EndChn,9=EndPnt
+[988 |B check for loops in strings]
+988,|STL
+[990 |B Report ModelNames]
+   // field 1,2 up to eight caracters to report
+   //           all names beginning with the typed letters
+   // fiels 3   SORT to sort the models alphabeticly
+   //           DATE to sort the models on date last updated
+990,|ModelMask
+[991 |B Report StringNames]
+   // fiels 3   SORT to report the string labels alphabeticly
+   //           SUMM to report the 991 terminating sumary only
+991,|StringMask
+[992 |B Report string details]
+   // fiels 2   FULL to report the plan-,slope and running distance
+   //           SLOP to report the slope lengths
+   //           ZERO to report only strings with zero levels
+   //           NULL to report only strings with null levels
+   // fiels 3   SORT to report the string labels alphabeticly
+992,|StringMask,full,5=StartChn,6=StartPnt,,8=EndChn,9=EndPnt
+[997 |B Report intersection of 2 strings]
+   // if  2 models are typed on the major option record field 2
+   // must be coded
+997,|STL,STL1,5=StartChn,StartPnt,pnr,EndChn,EndPnt
+;-------------------------------------------------------------------------------
+[SECTION |M Start major option SECTION]
+SECTION,|ModelToSection,RefModel
+SECTION,ModelToStoreSections
+[170 |B long between 2 points]
+170,    ,SINT,|NEW,,COX1,COY1,,COX2,COY2
+[171 |B long along a string]
+171,|REF,SINT,NEW,,StartChn,StartPnt,,EndChn,EndPnt
+[173 |B cross relative to a string]
+   // field 3 initial character
+173,|REF,SINT,C,,StartChn,StartPnt,offl,EndChn,EndPnt,offr
+[174 |B cross relative to a master]
+   // field 3 initial character
+174,|REF,SINT,D,chain,StartPnt,offl,EndChn,EndPnt,offr
+[177 |B long trough triangulation]
+   // if field 3 is the same as the label in field 1
+   // only the levels of the reference strings are amended
+177,|REF,tria,NEW,,StartChn,StartPnt,,EndChn,EndPnt
+[178 |B cross trough triangulation]
+   // field 3 initial character
+178,|REF,tria,NEW,chi,StartChn,StartPnt,offl,EndChn,EndPnt,offr
+;-------------------------------------------------------------------------------
+[Macro |G Call a MX command macro]
+   // MacroName max 8 chars
+900,|MacroName
+[900 |G Call a MX command macro]
+   // MacroName max 8 chars
+900,|MacroName
+;-------------------------------------------------------------------------------
+; sample how to use Macro Definitions
+[808 TTF |B Define a True Type text style]
+808,5=%TTFHeight%
+001,%TTFFont%
+;-------------------------------------------------------------------------------
+[INPUT |M Major Option Input]
+INPUT,.\|InputFileName
+[Delete File |M Delete a file]
+SUBSYS
+   // Delete file...
+SYSDEL,.\|FileName
+999
+[SysDel |M Delete a file]
+SUBSYS
+   // Delete file...
+SYSDEL,.\|FileName
+999
+[999 |B End Minor Option]
+999
+[DISPLAY |M Major Option Display - show what has been drawn]
+DISPLAY
+|
+[DISP,EMPTY |M Clear the current drawing]
+DISPLAY,EMPTY
+|

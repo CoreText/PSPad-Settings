@@ -1,0 +1,14 @@
+[Macro definition]
+[procedure | PROCEDURE]
+PROCEDURE NewProc|();
+BEGIN
+
+END NewProc;
+[if | IF]
+IF | THEN
+
+ELSE
+
+END;
+[comment | comment]*Ctrl+Shift+C
+(*§*)

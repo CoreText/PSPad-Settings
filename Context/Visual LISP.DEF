@@ -1,0 +1,950 @@
+; PSPad clip definition file for Visual LISP
+; author:  PhilK
+; last revision = 31 March 2014  14:38
+;
+[Macro definition]
+%True_False%=@C True/False:,,,;T;nil,
+%VL_True_False%=@C True/False:,,,;:vlax-true;:vlax-false,
+%file%=@O FileName:,,,,",R
+%varname%=@E Variable Name:,
+%funcname%=@E Function Name:,
+%number%=@E Enter a Number:,
+%Integer%=@E Enter an Integer:,
+%string%=@E Enter a String:,,,,",
+%angunits%=@C Select Angular Units Option:,,,;0;1;2;3;4,
+%laytrans%=@C Select Option:,,,;0;1;2;4;8,
+%0or1%=@C Enter 0 or 1:,,,;0;1,
+%OperatorBit%=@C Select Operator Bit Value:,,,;0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15,
+%ssMethod%=@C Select Selection Filter:,,,;A;C;CP;F;I;L;P;W;WP;X;:E;:N;:R;:S;:U,
+;
+;
+;
+[(abs number) | Returns the Absolute Value of a number]
+(abs %number%)
+[(acad_colordlg colornum <flag>) | Displays the AutoCAD color selection dialog and returns the selected color]
+(acad_colordlg §|)
+[(acad_helpdlg helpfile topic) | Invokes the help facility (obsolete)]
+(acad_helpdlg §|)
+[(acad_strlsort list) | Sorts a list of strings in alphabetical order]
+(acad_strlsort §|)
+[(acad_truecolorcli color <allowbylayer> <alternatePrompt>) | Prompts for colors at the command line]
+(acad_truecolorcli §|)
+[(acad_truecolordlg color <allowbylayer> <currentlayercolor>) | Displays the AutoCAD color selection dialog box with tabs for index color, true color, and color books]
+(acad_truecolordlg §|)
+[(acad-pop-dbmod) | Restores the value of the DBMOD system variable to the value that was most recently stored with acad-push-dbmod]
+(acad-pop-dbmod)
+[(acad-push-dbmod) | Stores the current value of the DBMOD system variable]
+(acad-push-dbmod)
+[(acdimenableupdate T/nil) | Controls the automatic updating of associative dimensions]
+(acdimenableupdate %True_False%)
+[(acet-layerp-mark <status>) | Places beginning and ending marks for Layer Previous recording]
+(acet-layerp-mark %True_False%)
+[(acet-layerp-mode <status>) | Queries and sets the LAYERPMODE setting]
+(acet-layerp-mode %True_False%)
+[(acet-laytrans filename <settings>) | Translates drawing layers to standards defined in another drawing or standards file]
+(acet-laytrans %file% %laytrans%)
+[(acet-ms-to-ps <value><viewport>) | Converts a real value from model space units to paper space units]
+;;Note: Acspacetrans.arx must be loaded before you can use this function. Use the ARXLOAD function to load the file, (arxload "acspacetrans.arx").
+(acet-ms-to-ps §|)
+[(acet-ps-to-ms <value><viewport>) | Converts a real value from paper space units to model space units]
+;;Note: Acspacetrans.arx must be loaded before you can use this function. Use the ARXLOAD function to load the file, (arxload "acspacetrans.arx").
+(acet-ps-to-ms §|)
+[(action_tile key action-expression) | Assigns an action to evaluate when the user selects the specified tile in a dialog box]
+(action_tile §|)
+[(add_list string) | Adds or modifies a string in the currently active dialog box list]
+(add_list §|)
+[(alert string) | Displays a dialog box containing an error or warning message]
+(alert §|)
+[(alloc n-alloc) | Sets the size of the segment to be used by the expand function]
+(alloc §|)
+[(and <expr ...>) | Returns the logical AND of the supplied arguments]
+(and §|)
+[(angle pt1 pt2) | Returns an angle in radians of a line defined by two endpoints]
+(angle §|)
+[(angtof string <units>) | Converts a string representing an angle into a real (floating-point) value in radians]
+(angtof %string% %angunits%)
+[(angtos angle <unit <precision>>) | Converts an angular value in radians into a string]
+(angtos §| %angunits%)
+[(append <list ...>) | Takes any number of lists and appends them together as one list]
+(append §|)
+[(apply 'function <list ...>) | Passes a list of arguments to, and executes, a specified function]
+(apply §|)
+[(arx) | Returns a list of the currently loaded ObjectARX applications]
+(arx)
+[(arxload application <onfailure>) | Loads an ObjectARX application]
+(arxload §|)
+[(arxunload application <onfailure>) | Unloads an ObjectARX application]
+(arxunload §|)
+[(ascii string) | Returns the conversion of the first character of a string into its ASCII character code (an integer)]
+(ascii §|)
+[(assoc element alist) | Searches an association list for an element and returns that association list entry]
+(assoc §|)
+[(atan num1 <num2>) | Returns the arctangent of a number in radians]
+(atan %number%)
+[(atof string) | Converts a string into a real number]
+(atof %string%)
+[(atoi string) | Converts a string into an integer]
+(atoi %string%)
+[(atom item) | Verifies that an item is an atom]
+(atom §|)
+[(atoms-family format <symlist>) | Returns a list of the currently defined symbols]
+(atoms-family %0or1% §|)
+[(autoarxload filename cmdlist) | Predefines command names to load an associated ObjectARX file]
+(autoarxload %file% §|)
+[(autoload filename cmdlist) | Predefines command names to load an associated AutoLISP file]
+(autoload %file% §|)
+[(boole operator int1 <int2 ...>) | Serves as a general bitwise Boolean function]
+(boole %OperatorBit% %number% %number%)
+[(boundp symbol) | Verifies if a value is bound to a symbol]
+(boundp §|)
+[(car list) | Returns the first element of a list]
+(car §|)
+[(caaaar list) | List Notation]
+(caaaar §|)
+[(caaadr list) | List Notation]
+(caaadr §|)
+[(caaar list) | List Notation]
+(caaar §|)
+[(caadar list) | List Notation]
+(caadar §|)
+[(caaddr list) | List Notation]
+(caaddr §|)
+[(caadr list) | List Notation]
+(caadr §|)
+[(caar list) | List Notation]
+(caar §|)
+[(cadaar list) | List Notation]
+(cadaar §|)
+[(cadadr list) | List Notation]
+(cadadr §|)
+[(cadar list) | List Notation]
+(cadar §|)
+[(caddar list) | List Notation]
+(caddar §|)
+[(cadddr list) | List Notation]
+(cadddr §|)
+[(caddr list) | List Notation]
+(caddr §|)
+[(cadr list) | Returns the second element of a list]
+(cadr §|)
+[(cdaaar list) | List Notation]
+(cdaaar §|)
+[(cdaadr list) | List Notation]
+(cdaadr §|)
+[(cdaar list) | List Notation]
+(cdaar §|)
+[(cdadar list) | List Notation]
+(cdadar §|)
+[(cdaddr list) | List Notation]
+(cdaddr §|)
+[(cdadr) | List Notation]
+(cdadr §|)
+[(cdar list) | List Notation]
+(cdar §|)
+[(cddaar list) | List Notation]
+(cddaar §|)
+[(cddadr list) | List Notation]
+(cddadr §|)
+[(cddar list) | List Notation]
+(cddar §|)
+[(cdddar list) | List Notation]
+(cdddar §|)
+[(cddddr list) | List Notation]
+(cddddr §|)
+[(cdddr list) | List Notation]
+(cdddr §|)
+[(cddr list) | List Notation]
+(cddr §|)
+[(cdr list) | Returns a list containing all but the first element of the specified list]
+(cdr §|)
+[(chr integer) | Converts an integer representing an ASCII character code into a single-character string]
+(chr §|)
+[(client_data_tile key clientdata) | Associates application-managed data with a dialog box tile]
+(client_data_tile §|)
+[(close file-desc) | Closes an open file]
+(close §|)
+[(command <arguments ...>) | Executes an AutoCAD command]
+(command §|)
+[(command-s cmdname <arguments ...>) | Executes an AutoCAD command and the supplied input.]
+(command-s §|)
+[(cond <(test result ...) ...>) | Serves as the primary conditional function for AutoLISP]
+(cond
+   ((§|))
+)
+[(cons new-first-element list-or-atom) | Adds an element to the beginning of a list, or constructs a dotted list]
+(cons §|)
+[(cos ang) | Returns the cosine of an angle expressed in radians]
+(cos §|)
+[(cvunit) | Converts a value from one unit of measurement to another]
+(cvunit §|)
+[(defun sym (<arguments> </ variables...>) expr...) | Defines a function]
+;;;==============================================================================
+;;;  Function Name: (%funcname%)
+;;;  Arguments:
+;;;  Usage: (%funcname% )
+;;;  Returns:
+;;;  Description:
+;;;================================================================================
+(defun %funcname% ( / )
+   |
+);; End Function (%funcname%)
+[(defun-q sym (<arguments> </ variables...>) expr...) | Defines a function as a list]
+(defun-q %funcname% ( / )
+   |
+)
+[(defun-q-list-ref 'function) | Displays the list structure of a function defined with defun-q]
+(defun-q-list-ref §|)
+[(defun-q-list-set 'sym list) | Sets the value of a symbol to be a function defined by a list]
+(defun-q-list-set §|)
+[(dictadd ename symbol newobj) | Adds a nongraphical object to the specified dictionary]
+(dictadd §|)
+[(dictnext ename <rewind>) | Finds the next item in a dictionary]
+(dictnext §|)
+[(dictremove ename symbol) | Removes an entry from the specified dictionary]
+(dictremove §|)
+[(dictrename ename oldsym newsym) | Renames a dictionary entry]
+(dictrename §|)
+[(dictsearch ename symbol <setnext>) | Searches a dictionary for an item]
+(dictsearch §|)
+[(dimx_tile key) | Retrieves the length of a tile in dialog box units]
+(dimx_tile §|)
+[(dimy_tile key) | Retrieves the height of a tile in dialog box units]
+(dimy_tile §|)
+[(distance pt1 pt2) | Returns the 3D distance between two points]
+(distance §|)
+[(distof string <mode>) | Converts a string that represents a real (floating-point) value into a real value]
+(distof §|)
+[(done_dialog <status>) | Terminates a dialog box]
+(done_dialog §|)
+[(dumpallproperties ename <context>) | Retrieves an entity’s supported properties.]
+(dumpallproperties §|)
+[(end_image) | Ends creation of the currently active dialog box image]
+(end_image §|)
+[(end_list) | Ends processing of the currently active dialog box list]
+(end_list §|)
+[(entdel ename) | Deletes objects (entities) or restores previously deleted objects]
+(entdel §|)
+[(entget ename) | Retrieves an object's (entity's) definition data]
+(entget §|)
+[(entlast) | Returns the name of the last nondeleted main object (entity) in the drawing]
+(entlast)
+[(entmake elist) | Creates a new entity in the drawing]
+(entmake §|)
+[(entmakex elist) | Makes a new object or entity, gives it a handle and entity name (but does not assign an owner), and then returns the new entity name]
+(entmakex §|)
+[(entmod elist) | Modifies the definition data of an object (entity)]
+(entmod §|)
+[(entnext <ename>) | Returns the name of the next object (entity) in the drawing]
+(entnext §|)
+[(entsel <msg>) | Prompts the user to select a single object (entity) by specifying a point]
+(entsel §|)
+[(entupd ename) | Updates the screen image of an object (entity)]
+(entupd §|)
+[(eq expr1 expr2) | Determines whether two expressions are identical]
+(eq §|)
+[(equal expr1 expr2 <fuzz>) | Determines whether two expressions are equal]
+(equal §|)
+[(eval expr) | Returns the result of evaluating an AutoLISP expression]
+(eval §|)
+[(exit) | Forces the current application to quit]
+(exit)
+[(exp num) | Returns the constant e (a real number) raised to a specified power (the natural antilog)]
+(exp §|)
+[(expand n-expand) | Allocates additional memory for AutoLISP]
+(expand §|)
+[(expt number power) | Returns a number raised to a specified power]
+(expt §|)
+[(fill_image x1 y1 width height color) | Draws a filled rectangle in the currently active dialog box image tile]
+(fill_image §|)
+[(findfile filename) | Searches the AutoCAD library and trusted paths for the specified file or directory]
+(findfile §|)
+[(findtrustedfile filename) | Searches the AutoCAD trusted locations for the specified file.]
+(findtrustedfile §|)
+[(fix number) | Returns the conversion of a real number into the nearest smaller integer]
+(fix §|)
+[(float number) | Returns the conversion of a number into a real number]
+(float §|)
+[(foreach name list <expr...>) | Evaluates expressions for all members of a list]
+(foreach x §|
+	|
+)
+[(function sym / lambda expr) | Tells the Visual LISP compiler to link and optimize an argument as if it were a built-in function]
+(function §|)
+[(gc) | Forces a garbage collection, which frees up unused memory]
+(gc)
+[(gcd int1 int2) | Returns the greatest common denominator of two integers]
+(gcd §|)
+[(get_attr key attribute) | Retrieves the DCL value of a dialog box attribute]
+(get_attr §|)
+[(get_tile key) | Retrieves the current runtime value of a dialog box tile]
+(get_tile §|)
+[(getangle <pt> <msg>) | Pauses for user input of an angle, and returns that angle in radians]
+(getangle §|)
+[(getcfg cfgname) | Retrieves application data from the AppData section of the acad20xx.cfg file]
+(getcfg §|)
+[(getcname cname) | Retrieves the localized or English name of an AutoCAD command]
+(getcname §|)
+[(getcorner <pt> <msg>) | Pauses for user input of a rectangle's second corner]
+(getcorner §|)
+[(getdist <pt> <msg>) | Pauses for user input of a distance]
+(getdist §|)
+[(getenv variable-name) | Returns the string value assigned to a system environment variable]
+(getenv §|)
+[(getfiled title default ext flags) | Prompts the user for a file name with the standard AutoCAD file dialog box, and returns that file name]
+(getfiled §|)
+[(getint <msg>) | Pauses for user input of an integer, and returns that integer]
+(getint §|)
+[(getkword <msg>) | Pauses for user input of a keyword, and returns that keyword]
+(getkword §|)
+[(getorient <pt> <msg>) | Pauses for user input of an angle, and returns that angle in radians]
+(getorient §|)
+[(getpoint <pt> <msg>) | Pauses for user input of a point, and returns that point]
+(getpoint §|)
+[(getpropertyvalue ename propertyname <or collectionName index name>) | Returns the current value of an entity’s property.]
+(getpropertyvalue §|)
+[(getreal <msg>) | Pauses for user input of a real number, and returns that real number]
+(getreal §|)
+[(getstring <cr> <msg>) | Pauses for user input of a string, and returns that string]
+(getstring §|)
+[(getvar varname) | Retrieves the value of an AutoCAD system variable]
+(getvar §|)
+[(graphscr) | Displays the AutoCAD graphics screen]
+(graphscr)
+[(grclear) | Clears the current viewport (obsolete function)]
+(grclear)
+[(grdraw from to color <highlight>) | Draws a vector between two points, in the current viewport]
+(grdraw §|)
+[(grread <track> <allkeys <curtype>>) | Reads values from any of the AutoCAD input devices]
+(grread §|)
+[(grtext box text <highlight>) | Writes text to the status line or to screen menu areas]
+(grtext §|)
+[(grvecs vlist trans) | Draws multiple vectors in the drawing area]
+(grvecs §|)
+[(handent handle) | Returns an object (entity) name based on its handle]
+(handent §|)
+[(help <helpfile <topic <command>>>) | Invokes the Help facility]
+(help §|)
+[(if) | if-then conditional statement]
+(if
+   |
+)
+[(initcommandversion <version>) | Forces the next command to run with the specified version.]
+(initcommandversion §|)
+[(initdia <dialogflag>) | Forces the display of the next command's dialog box]
+(initdia §|)
+[(initget <bits> <string>) | Establishes keywords for use by the next user-input function call]
+(initget §|)
+[(inters pt1 pt2 pt3 pt4 <onseg>) | Finds the intersection of two lines]
+(inters §|)
+[(ispropertyreadonly ename propertyname <or collectionName index name>) | Returns the read-only state of an entity’s property.]
+(ispropertyreadonly §|)
+[(itoa integer) | Returns the conversion of an integer into a string]
+(itoa §|)
+[(lambda arguments expr...) | Defines an anonymous function]
+(lambda (x)
+   |
+)
+[(last lst) | Returns the last element in a list]
+(last §|)
+[(layoutlist) | Returns a list of all paper space layouts in the current drawing]
+(layoutlist)
+[(layerstate-addlayers layerstatename (list layerstate layername state color linetype lineweight plotstyle)) | Adds or updates a series of layers to a layer state]
+(layerstate-addlayers §|)
+[(layerstate-compare layerstatename viewport) | Compares a layer state to the layers in the current drawing]
+(layerstate-compare §|)
+[(layerstate-delete layerstatename) | Deletes a layer state]
+(layerstate-delete §|)
+[(layerstate-export layerstatename filename) | Exports a layer state to a specified file]
+(layerstate-export §|)
+[(layerstate-getlastrestored) | Returns the name of the last restored layer state in the current drawing]
+(layerstate-getlastrestored §|)
+[(layerstate-getlayers layerstatename <invert>) | Returns the layers saved in a layer state]
+(layerstate-getlayers §|)
+[(layerstate-getnames <includehidden> <includexref>) | Returns a list of the layer state names]
+(layerstate-getnames §|)
+[(layerstate-has layerstatename) | Checks if a layer state is present]
+(layerstate-has §|)
+[(layerstate-import filename) | Imports a layer state from a specified file]
+(layerstate-import §|)
+[(layerstate-importfromdb layerstatename filename) | Imports a layer state from a specified drawing file]
+(layerstate-importfromdb §|)
+[(layerstate-removelayers layerstatename (list layername layername layername ...)) | Removes a list of layers from a layer state]
+(layerstate-removelayers §|)
+[(layerstate-rename oldlayerstatename newlayerstatename) | Renames a layer state]
+(layerstate-rename §|)
+[(layerstate-restore layerstatename viewport <restoreflags>) | Restores a layer state into the current drawing]
+(layerstate-restore §|)
+[(layerstate-save layerstatename mask viewport) | Saves a layer state in the current drawing]
+(layerstate-save §|)
+[(length list) | Returns an integer indicating the number of elements in a list]
+(length §|)
+[(list expr...) | Takes any number of expressions and combines them into one list]
+(list §|)
+[(listp item) | Verifies that an item is a list]
+(listp §|)
+[(load filename <OnFailure>) | Evaluates the AutoLISP expressions in a file]
+(load §|)
+[(load_dialog dclfile) | Loads a DCL file]
+(load_dialog §|)
+[(log num) | Returns the natural log of a number as a real number]
+(log §|)
+[(logand <int int...>) | Returns the result of the logical bitwise AND of a list of integers]
+(logand §|)
+[(logior <int int...>) | Returns the result of the logical bitwise inclusive OR of a list of integers]
+(logior §|)
+[(lsh int numbits) | Returns the logical bitwise shift of an integer by a specified number of bits]
+(lsh §|)
+[(mapcar 'function list1 <Listn...>) | Returns a list that is the result of executing a function with a list (or lists) supplied as arguments to the function]
+(mapcar §|)
+[(max num <num...>) | Returns the largest of the numbers given]
+(max §|)
+[(mem) | Displays the current state of the AutoLISP memory]
+(mem)
+[(member expr lst) | Searches a list for an occurrence of an expression and returns the remainder of the list, starting with the first occurrence of the expression]
+(member §|)
+[(menucmd string) | Issues menu commands, or sets and retrieves menu item status]
+(menucmd §|)
+[(menugroup group) | Verifies that a menugroup is loaded]
+(menugroup §|)
+[(min num <num...>) | Returns the smallest of the numbers given]
+(min §|)
+[(minusp num) | Verifies that a number is negative]
+(minusp §|)
+[(mode_tile key mode) | Sets the mode of a dialog box tile]
+(mode_tile §|)
+[(namedobjdict) | Returns the entity name of the current drawing's named object dictionary, which is the root of all nongraphical objects in the drawing]
+(namedobjdict)
+[(nentsel <msg>) | Prompts the user to select an object (entity) by specifying a point, and provides access to the definition data contained within a complex object]
+(nentsel §|)
+[(nentselp <msg> <pt>) | Provides similar functionality to that of the nentsel function without the need for user input]
+(nentselp §|)
+[(new_dialog dlgname dcl_id <action <screen-pt>>) | Begins a new dialog box and displays it, and can also specify a default action]
+(new_dialog §|)
+[(not item) | Verifies that an item evaluates to nil]
+(not §|)
+[(nth n lst) | Returns the nth element of a list]
+(nth §|)
+[(null item) | Verifies that an item is bound to nil]
+(null §|)
+[(numberp item) | Verifies that an item is a real number or an integer]
+(numberp §|)
+[(open filename mode) | Opens a file for access by the AutoLISP I/O functions]
+(open §|)
+[(or <expr...>) | Returns the logical OR of a list of expressions]
+(or §|)
+[(osnap pt mode) | Returns a 3D point that is the result of applying an Object Snap mode to a specified point]
+(osnap §|)
+[(polar pt ang dist) | Returns the UCS 3D point at a specified angle and distance from a point]
+(polar §|)
+[(prin1 <expr <file-desc>>) | Prints an expression to the command line or writes an expression to an open file]
+(prin1 §|)
+[(princ <expr <file-desc>>) | Prints an expression to the command line, or writes an expression to an open file]
+(princ §|)
+[(print <expr <file-desc>>) | Prints an expression to the command line, or writes an expression to an open file]
+(print §|)
+[(progn <expr> ...) | Evaluates each expression sequentially and returns the value of the last expression]
+(progn
+   §|
+)
+[(prompt msg) | Displays a string on your screen's prompt area]
+(prompt §|)
+[(quit) | Forces the current application to quit]
+(quit)
+[(quote expr) | Returns an expression without evaluating it]
+(quote §|)
+[(read string) | Returns the first list or atom obtained from a string]
+(read §|)
+[(read-char <file-desc>) | Returns the decimal ASCII code representing the character read from the keyboard input buffer or from an open file]
+(read-char §|)
+[(read-line <file-desc>) | Reads a string from the keyboard or from an open file, until an end-of-line marker is encountered]
+(read-line §|)
+[(redraw <ename <mode>>) | Redraws the current viewport or a specified object (entity) in the current viewport]
+(redraw §|)
+[(regapp application) | Registers an application name with the current AutoCAD drawing in preparation for using extended object data]
+(regapp §|)
+[(rem <number number ...>) | Divides the first number by the second, and returns the remainder]
+(rem §|)
+[(repeat int <expr...>) | Evaluates each expression a specified number of times, and returns the value of the last expression]
+(repeat %Integer%
+	|
+)
+[(reverse lst) | Returns a copy of a list with its elements reversed]
+(reverse §|)
+[(rtos number <mode <precision>>) | Converts a number into a string]
+(rtos §|)
+[(set 'sym expr) | Sets the value of a quoted symbol name to an expression]
+(set §|)
+[(set_tile key value) | Sets the value of a dialog box tile]
+(set_tile §|)
+[(setcfg cfgname cfgval) | Writes application data to the AppData section of the acad20xx.cfg file]
+(setcfg §|)
+[(setenv varname value) | Sets a system environment variable to a specified value]
+(setenv §|)
+[(setfunhelp c:fname <helpfile <topic <command>>>) | Registers a user-defined command with the Help facility so the appropriate Help file and topic are called when the user requests help on that command]
+(setfunhelp §|)
+[(setpropertyvalue ename propertyname value <or collectionName index name val>) | Sets the property value for an entity.]
+(setpropertyvalue §|)
+[(setq sym expr <sym expr ...>) | Sets the value of a symbol or symbols to associated expressions]
+(setq §|)
+[(setvar varname value) | Sets an AutoCAD system variable to a specified value]
+(setvar §|)
+[(setview view_descriptor <vport_id>) | Establishes a view for a specified viewport]
+(setview §|)
+[(showhtmlmodalwindow url) | Displays a modal window with a HTML document]
+(showhtmlmodalwindow §|)
+[(sin ang) | Returns the sine of an angle as a real number expressed in radians]
+(sin §|)
+[(slide_image x1 y1 width height sldname) | Displays an AutoCAD slide in the currently active dialog box image tile]
+(slide_image §|)
+[(snvalid sym_name <flag>) | Checks the symbol table name for valid characters]
+(snvalid §|)
+[(sqrt num) | Returns the square root of a number as a real number]
+(sqrt §|)
+[(ssadd <ename <ss>>) | Adds an object (entity) to a selection set, or creates a new selection set]
+(ssadd §|)
+[(ssdel ename ss) | Deletes an object (entity) from a selection set]
+(ssdel §|)
+[(ssget <sel-method> <pt1 <pt2>> <pt-list> <filter-list>) | Creates a selection set from the selected object]
+(ssget %ssMethod% |)
+[(ssgetfirst) | Determines which objects are selected and gripped]
+(ssgetfirst)
+[(sslength ss) | Returns an integer containing the number of objects (entities) in a selection set]
+(sslength §|)
+[(ssmemb ename ss) | Tests whether an object (entity) is a member of a selection set]
+(ssmemb §|)
+[(ssname ss index) | Returns the object (entity) name of the indexed element of a selection set]
+(ssname §|)
+[(ssnamex ss <index>) | Retrieves information about how a selection set was created]
+(ssnamex §|)
+[(sssetfirst gripset <pickset>) | Sets which objects are selected and gripped]
+(sssetfirst §|)
+[(start_dialog) | Displays a dialog box and begins accepting user input]
+(start_dialog §|)
+[(start_image key) | Starts the creation of an image in the dialog box tile]
+(start_image §|)
+[(start_list key <operation <index>>) | Starts the processing of a list in the list box or in the pop-up list dialog box tile]
+(start_list §|)
+[(startapp appcmd <file>) | Starts a Windows application]
+(startapp §|)
+[(strcase string <which>) | Returns a string where all alphabetic characters have been converted to uppercase or lowercase]
+(strcase %string% %True_False%)|
+[(strcat <string <string> ...>) | Returns a string that is the concatenation of multiple strings]
+(strcat §|)
+[(strlen <string ...>) | Returns an integer that is the number of characters in a string]
+(strlen §|)
+[(subst newitem olditem lst) | Searches a list for an old item and returns a copy of the list with a new item substituted in place of every occurrence of the old item]
+(subst §|)
+[(substr string start <length>) | Returns a substring of a string]
+(substr §|)
+[(tablet code <row1 row2 row3 direction>) | Retrieves and sets digitizer (tablet) calibrations]
+(tablet %0or1% |)
+[(tblnext table-name <rewind>) | Finds the next item in a symbol table]
+(tblnext §|)
+[(tblobjname table-name symbol) | Returns the entity name of a specified symbol table entry]
+(tblobjname §|)
+[(tblsearch table-name symbol <setnext>) | Searches a symbol table for a symbol name]
+(tblsearch §|)
+[(term_dialog) | Terminates all current dialog boxes as if the user had canceled each of them]
+(term_dialog)
+[(terpri) | Prints a newline to the command line]
+(terpri)
+[(textbox elst) | Measures a specified text object, and returns the diagonal coordinates of a box that encloses the text]
+(textbox §|)
+[(textpage) | Switches focus from the drawing area to the text screen]
+(textpage)
+[(textscr) | Switches focus from the drawing area to the text screen (like the AutoCAD F2 function key)]
+(textscr)
+[(trace <function ...>) | Aids in AutoLISP debugging]
+(trace §|)
+[(trans pt from to <disp>) | Translates a point (or a displacement) from one coordinate system to another]
+(trans §|)
+[(type item) | Returns the type of a specified item]
+(type §|)
+[(unload_dialog dcl_id) | Unloads a DCL file]
+(unload_dialog §|)
+[(untrace <function ...>) | Clears the trace flag for the specified functions]
+(untrace §|)
+[(vector_image x1 y1 x2 y2 color) | Draws a vector in the currently active dialog box image]
+(vector_image §|)
+[(ver) | Returns a string that contains the current AutoLISP version number]
+(ver)
+[(vl-acad-defun 'symbol) | Defines an AutoLISP function symbol as an external subroutine]
+(vl-acad-defun §|)
+[(vl-acad-undefun 'symbol) | Undefines an AutoLISP function symbol so it is no longer available to ObjectARX applications]
+(vl-acad-undefun §|)
+[(vl-arx-import <'function / "application">) | Imports ObjectARX/ADSRX functions into a separate-namespace VLX]
+(vl-arx-import §|)
+[(vl-bb-ref 'variable) | Returns the value of a variable from the blackboard namespace]
+(vl-bb-ref §|)
+[(vl-bb-set 'symbol value) | Sets a variable in the blackboard namespace]
+(vl-bb-set §|)
+[(vl-catch-all-apply 'function list) | Passes a list of arguments to a specified function and traps any exceptions]
+(vl-catch-all-apply §|)
+[(vl-catch-all-error-message error-obj) | Returns a string from an error object]
+(vl-catch-all-error-message §|)
+[(vl-catch-all-error-p arg) | Determines whether an argument is an error object returned from vl-catch-all-apply]
+(vl-catch-all-error-p §|)
+[(vl-cmdf <arguments> ...) | Executes an AutoCAD command]
+(vl-cmdf §|)
+[(vl-consp list) | Determines whether or not a list is nil]
+(vl-consp §|)
+[(vl-directory-files <directory pattern directories>) | Lists all files in a given directory]
+(vl-directory-files §|)
+[(vl-doc-export 'function) | Makes a function available to the current document]
+(vl-doc-export §|)
+[(vl-doc-import application <'function...>) | Imports a previously exported function into a VLX namespace]
+(vl-doc-import §|)
+[(vl-doc-ref 'symbol) | Retrieves the value of a variable from the current document's namespace]
+(vl-doc-ref §|)
+[(vl-doc-set 'symbol value) | Sets the value of a variable in the current document's namespace]
+(vl-doc-set §|)
+[(vl-every predicate-function list <list> ...) | Checks whether the predicate is true for every element combination]
+(vl-every §|)
+[(vl-exit-with-error msg) | Passes control from a VLX error handler to the *error* function of the calling namespace]
+(vl-exit-with-error §|)
+[(vl-exit-with-value value) | Returns a value to the function that invoked the VLX from another namespace]
+(vl-exit-with-value §|)
+[(vl-file-copy source-file destination-file <append>) | Copies or appends the contents of one file to another file]
+(vl-file-copy §|)
+[(vl-file-delete filename) | Deletes a file]
+(vl-file-delete §|)
+[(vl-file-directory-p filename) | Determines if a file name refers to a directory]
+(vl-file-directory-p §|)
+[(vl-filename-base filename) | Returns the name of a file, after stripping out the directory path and extension]
+(vl-filename-base §|)
+[(vl-filename-directory filename) | Returns the directory path of a file, after stripping out the name and extension]
+(vl-filename-directory §|)
+[(vl-filename-extension filename) | Returns the extension from a file name, after stripping out the rest of the name]
+(vl-filename-extension §|)
+[(vl-filename-mktemp <pattern directory extension>) | Calculates a unique file name to be used for a temporary file]
+(vl-filename-mktemp §|)
+[(vl-file-rename old-filename new-filename) | Renames a file]
+(vl-file-rename §|)
+[(vl-file-size filename) | Determines the size of a file, in bytes]
+(vl-file-size §|)
+[(vl-file-systime filename) | Returns last modification time of the specified file]
+(vl-file-systime §|)
+[(vl-get-resource text-file) | Returns the text stored in a .txt file packaged in a VLX]
+(vl-get-resource §|)
+[(vlisp-compile 'mode filename <out-filename>) | Compiles AutoLISP source code into a FAS file]
+(vlisp-compile §|)
+[(vl-list* object <object> ...) | Constructs and returns a list]
+(vl-list* §|)
+[(vl-list->string char-codes-list) | Combines the characters associated with a list of integers into a string]
+(vl-list->string §|)
+[(vl-list-exported-functions <appname>) | Lists exported functions]
+(vl-list-exported-functions §|)
+[(vl-list-length list-or-cons-object) | Calculates list length of a true list]
+(vl-list-length §|)
+[(vl-list-loaded-vlx) | Returns a list of all separate-namespace VLX files associated with the current document]
+(vl-list-loaded-vlx §|)
+[(vl-load-all filename) | Loads a file into all open AutoCAD documents, and into any document subsequently opened during the current AutoCAD session]
+(vl-load-all §|)
+[(vl-load-com) | Loads Visual LISP extensions to AutoLISP]
+(vl-load-com)
+[(vl-load-reactors) | Loads reactor support functions]
+(vl-load-reactors §|)
+[(vl-member-if predicate-function list) | Determines if the predicate is true for one of the list members]
+(vl-member-if §|)
+[(vl-member-if-not predicate-function list) | Determines if the predicate is nil for one of the list members]
+(vl-member-if-not §|)
+[(vl-mkdir directoryname) | Creates a directory]
+(vl-mkdir §|)
+[(vl-position symbol list) | Returns the index of the specified list item]
+(vl-position §|)
+[(vl-prin1-to-string data) | Returns the string representation of LISP data as if it were output by the prin1 function]
+(vl-prin1-to-string §|)
+[(vl-princ-to-string data) | Returns the string representation of LISP data as if it were output by the princ function]
+(vl-princ-to-string §|)
+[(vl-propagate 'symbol) | Copies the value of a variable into all open document namespaces (and sets its value in any subsequent drawings opened during the current AutoCAD session)]
+(vl-propagate §|)
+[(vl-registry-delete reg-key <val-name>) | Deletes the specified key or value from the Windows registry]
+(vl-registry-delete §|)
+[(vl-registry-descendents reg-key <val-names>) | Returns a list of subkeys or value names for the specified registry key]
+(vl-registry-descendents §|)
+[(vl-registry-read reg-key <val-name>) | Returns data stored in the Windows registry for the specified key/value pair]
+(vl-registry-read §|)
+[(vl-registry-write reg-key <val-name val-data>) | Creates a key in the Windows registry]
+(vl-registry-write §|)
+[(vl-remove element-to-remove list) | Removes elements from a list]
+(vl-remove §|)
+[(vl-remove-if predicate-function list) | Returns all elements of the supplied list that fail the test function]
+(vl-remove-if §|)
+[(vl-remove-if-not predicate-function list) | Returns all elements of the supplied list that pass the test function]
+(vl-remove-if-not §|)
+[(vl-some predicate-function list <list> ...) | Checks whether the predicate is not nil for one element combination]
+(vl-some §|)
+[(vl-sort list comparison-function) | Sorts the elements in a list according to a given compare function]
+(vl-sort §|)
+[(vl-sort-i list comparison-function) | Sorts the elements in a list according to a given compare function, and returns the element index numbers]
+(vl-sort-i §|)
+[(vl-string->list string) | Converts a string into a list of character codes]
+(vl-string->list §|)
+[(vl-string-elt string position) | Returns the ASCII representation of the character at a specified position in a string]
+(vl-string-elt §|)
+[(vl-string-left-trim character-set string) | Removes the specified characters from the beginning of a string]
+(vl-string-left-trim §|)
+[(vl-string-mismatch str1 str2 <pos1 pos2 ignore-case-p>) | Returns the length of the longest common prefix for two strings, starting at specified positions]
+(vl-string-mismatch §|)
+[(vl-string-position char-code str <start-pos <from-end-p>>) | Looks for a character with the specified ASCII code in a string]
+(vl-string-position §|)
+[(vl-string-right-trim character-set string) | Removes the specified characters from the end of a string]
+(vl-string-right-trim §|)
+[(vl-string-search pattern string <start-pos>) | Searches for the specified pattern in a string]
+(vl-string-search §|)
+[(vl-string-subst new-str pattern string <start-pos>) | Substitutes one string for another, within a string]
+(vl-string-subst §|)
+[(vl-string-translate source-set dest-set str) | Replaces characters in a string with a specified set of characters]
+(vl-string-translate §|)
+[(vl-string-trim char-set str) | Removes the specified characters from the beginning and end of a string]
+(vl-string-trim §|)
+[(vl-symbol-name symbol) | Returns a string containing the name of a symbol]
+(vl-symbol-name §|)
+[(vl-symbolp object) | Identifies whether or not a specified object is a symbol]
+(vl-symbolp §|)
+[(vl-symbol-value symbol) | Returns the current value bound to a symbol]
+(vl-symbol-value §|)
+[(vl-unload-vlx appname) | Unload a VLX application that is loaded in its own namespace]
+(vl-unload-vlx §|)
+[(vl-vbaload filename) | Loads a VBA project]
+(vl-vbaload §|)
+[(vl-vbarun macroname) | Runs a VBA macro]
+(vl-vbarun §|)
+[(vl-vlx-loaded-p appname) | Determines whether a separate-namespace VLX is currently loaded]
+(vl-vlx-loaded-p §|)
+[(vlax-3D-point list / x y <z>) | Creates ActiveX-compatible (variant) 3D point structure]
+(vlax-3D-point §|)
+[(vlax-add-cmd global-name func-sym <local-name cmd-flags>) | Adds commands to the AutoCAD built-in command set]
+(vlax-add-cmd §|)
+[(vlax-create-object prog-id) | Creates a new instance of an application object]
+(vlax-create-object §|)
+[(vlax-curve-getArea curve-obj) | Returns the area inside the curve]
+(vlax-curve-getArea §|)
+[(vlax-curve-getClosestPointTo curve-obj givenPnt <extend>) | Returns the point (in WCS) on a curve that is nearest to the specified point]
+(vlax-curve-getClosestPointTo §|)
+[(vlax-curve-getClosestPointToProjection curve-obj givenPnt normal <extend>) | Returns the closest point (in WCS) on a curve after projecting the curve onto a plane]
+(vlax-curve-getClosestPointToProjection §|)
+[(vlax-curve-getDistAtParam curve-obj param) | Returns the length of the curve's segment from the curve's beginning to the specified parameter]
+(vlax-curve-getDistAtParam §|)
+[(vlax-curve-getDistAtPoint curve-obj point) | Returns the length of the curve's segment between the curve's start point and the specified point]
+(vlax-curve-getDistAtPoint §|)
+[(vlax-curve-getEndParam curve-obj) | Returns the parameter of the endpoint of the curve]
+(vlax-curve-getEndParam §|)
+[(vlax-curve-getEndPoint curve-obj) | Returns the endpoint (in WCS) of the curve]
+(vlax-curve-getEndPoint §|)
+[(vlax-curve-getFirstDeriv curve-obj param) | Returns the first derivative (in WCS) of a curve at the specified location]
+(vlax-curve-getFirstDeriv §|)
+[(vlax-curve-getParamAtDist curve-obj dist) | Returns the parameter of a curve at the specified distance from the beginning of the curve]
+(vlax-curve-getParamAtDist §|)
+[(vlax-curve-getParamAtPoint curve-obj point) | Returns the parameter of the curve at the point]
+(vlax-curve-getParamAtPoint §|)
+[(vlax-curve-getPointAtDist curve-obj dist) | Returns the point (in WCS) along a curve at the distance specified by the user]
+(vlax-curve-getPointAtDist §|)
+[(vlax-curve-getPointAtParam curve-obj param) | Returns the point at the specified parameter value along a curve]
+(vlax-curve-getPointAtParam §|)
+[(vlax-curve-getSecondDeriv curve-obj param) | Returns the second derivative (in WCS) of a curve at the specified location]
+(vlax-curve-getSecondDeriv §|)
+[(vlax-curve-getStartParam curve-obj) | Returns the start parameter on the curve]
+(vlax-curve-getStartParam §|)
+[(vlax-curve-getStartPoint curve-obj) | Returns the start point (in WCS) of the curve]
+(vlax-curve-getStartPoint §|)
+[(vlax-curve-isClosed curve-obj) | Determines if the specified curve is closed (that is, the start point is the same as the endpoint)]
+(vlax-curve-isClosed §|)
+[(vlax-curve-isPeriodic curve-obj) | Determines if the specified curve has an infinite range in both directions and there is a period value dT, such that a point on the curve at (u + dT) = point on curve (u), for any parameter u]
+(vlax-curve-isPeriodic §|)
+[(vlax-curve-isPlanar curve-obj) | Determines if there is a plane that contains the curve]
+(vlax-curve-isPlanar §|)
+[(vlax-dump-object obj <T>) | Lists an object's properties, and optionally, the methods that apply to the object]
+(vlax-dump-object §|)
+[(vlax-ename->vla-object entname) | Transforms an entity to a VLA-object]
+(vlax-ename->vla-object §|)
+[(vlax-erased-p obj) | Determines whether an object was erased]
+(vlax-erased-p §|)
+[(vlax-for symbol collection <expression1 <expression2 ...>>) | Iterates through a collection of objects, evaluating each expression]
+(vlax-for §|
+
+)
+[(vlax-get-acad-object) | Retrieves the top level AutoCAD application object for the current AutoCAD session]
+(vlax-get-acad-object)
+[(vlax-get-object prog-id) | Returns a running instance of an application object]
+(vlax-get-object §|)
+[(vlax-get-or-create-object prog-id) | Returns a running instance of an application object, or creates a new instance if the application is not currently running]
+(vlax-get-or-create-object §|)
+[(vlax-get-property object property) | Retrieves a VLA-object's property]
+(vlax-get-property §|)
+[(vlax-import-type-library :tlb-filename filename <:methods-prefix mprefix  :properties-prefix pprefix :constants-prefix cprefix>) | Imports information from a type library]
+(vlax-import-type-library §|)
+[(vlax-invoke obj method arg <arg...>) | Calls the specified ActiveX method]
+(vlax-invoke §|)
+[(vlax-invoke-method obj method arg <arg...>) | Calls the specified ActiveX method]
+(vlax-invoke-method §|)
+[(vlax-ldata-delete dict key <private>) | Erases LISP data from a drawing dictionary]
+(vlax-ldata-delete §|)
+[(vlax-ldata-get dict key <default-data <private>>) | Retrieves LISP data from a drawing dictionary or an object]
+(vlax-ldata-get §|)
+[(vlax-ldata-list dict <private>) | Lists AutoLISP data in a drawing dictionary]
+(vlax-ldata-list §|)
+[(vlax-ldata-put dict key data <private>) | Stores LISP data in a drawing dictionary or an object]
+(vlax-ldata-put §|)
+[(vlax-ldata-test data) | Determines if data can be saved over a session boundary]
+(vlax-ldata-test §|)
+[(vlax-machine-product-key) | Returns the AutoCAD Windows registry path in the HKLM (HKEY_LOCAL_MACHINE)]
+(vlax-machine-product-key)
+[(vlax-make-safearray type '(l-bound . u-bound) <'(l-bound . u-bound)...)>) | Creates a safearray]
+(vlax-make-safearray §|)
+[(vlax-make-variant <value <type>>) | Creates a variant data type]
+(vlax-make-variant §|)
+[(vlax-map-collection obj function) | Applies a function to all objects in a collection]
+(vlax-map-collection §|)
+[(vlax-method-applicable-p obj method) | Determines if an object supports a particular method]
+(vlax-method-applicable-p §|)
+[(vlax-object-released-p obj) | Determines if an object has been released]
+(vlax-object-released-p §|)
+[(vlax-product-key) | Returns the AutoCAD Windows registry path]
+(vlax-product-key)
+[(vlax-property-available-p obj prop <check-modify>) | Determines if an object has a specified property]
+(vlax-property-available-p §|)
+[(vlax-put-property obj property arg) | Sets the property of an ActiveX object]
+(vlax-put-property §|)
+[(vlax-read-enabled-p obj) | Determines if an object can be read]
+(vlax-read-enabled-p §|)
+[(vlax-release-object obj) | Releases a drawing object]
+(vlax-release-object §|)
+[(vlax-remove-cmd global-name) | Removes a single command or a command group]
+(vlax-remove-cmd §|)
+[(vlax-safearray->list var) | Returns the elements of a safearray in list form]
+(vlax-safearray->list §|)
+[(vlax-safearray-fill var 'element-values) | Stores data in the elements of a safearray]
+(vlax-safearray-fill §|)
+[(vlax-safearray-get-dim var) | Returns the number of dimensions in a safearray object]
+(vlax-safearray-get-dim §|)
+[(vlax-safearray-get-element var element...) | Returns an element from an array]
+(vlax-safearray-get-element §|)
+[(vlax-safearray-get-l-bound var dim) | Returns the lower boundary (starting index) of a dimension of an array]
+(vlax-safearray-get-l-bound §|)
+[(vlax-safearray-get-u-bound var dim) | Returns the upper boundary (end index) of a dimension of an array]
+(vlax-safearray-get-u-bound §|)
+[(vlax-safearray-put-element var index... value) | Adds an element to an array]
+(vlax-safearray-put-element §|)
+[(vlax-safearray-type var) | Returns the data type of a safearray]
+(vlax-safearray-type §|)
+[(vlax-tmatrix list) | Returns a suitable representation for a 4 x 4 transformation matrix to be used in VLA methods]
+(vlax-tmatrix §|)
+[(vlax-typeinfo-available-p obj) |Determines whether TypeLib information is present for the specified type of object]
+(vlax-typeinfo-available-p §|)
+[(vlax-user-product-key) | Returns the AutoCAD Windows registry path in the HKCU (HKEY_CURRENT_USER)]
+(vlax-user-product-key)
+[(vlax-variant-change-type var type) | Returns the value of a variant after changing it from one data type to another]
+(vlax-variant-change-type §|)
+[(vlax-variant-type var) | Determines the data type of a variant]
+(vlax-variant-type §|)
+[(vlax-variant-value var) | Returns the value of a variant]
+(vlax-variant-value §|)
+[(vlax-vla-object->ename obj) | Transforms a VLA-object to an AutoLISP entity]
+(vlax-vla-object->ename §|)
+[(vlax-write-enabled-p obj) | Determines if an AutoCAD drawing object can be modified]
+(vlax-write-enabled-p §|)
+[(vlr-acdb-reactor data callbacks) | Constructs a reactor object that notifies when an object is added to, modified in, or erased from a drawing database]
+(vlr-acdb-reactor §|)
+[(vlr-add obj) | Enables a disabled reactor object]
+(vlr-add §|)
+[(vlr-added-p obj) | Tests to determine if a reactor object is enabled]
+(vlr-added-p §|)
+[(vlr-beep-reaction <args>) | Produces a beep sound]
+(vlr-beep-reaction §|)
+[(vlr-command-reactor data callbacks) | Constructs an editor reactor that notifies of a command event]
+(vlr-command-reactor §|)
+[(vlr-current-reaction-name) | Returns the name (symbol) of the current event, if called from within a reactor's callback]
+(vlr-current-reaction-name §|)
+[(vlr-data obj) | Returns application-specific data associated with a reactor]
+(vlr-data §|)
+[(vlr-data-set obj data) | Overwrites application-specific data associated with a reactor]
+(vlr-data-set §|)
+[(vlr-deepclone-reactor data callbacks) | Constructs an editor reactor object that notifies of a deep clone event]
+(vlr-deepclone-reactor §|)
+[(vlr-docmanager-reactor data callbacks) | Constructs a reactor object that notifies of events relating to drawing documents]
+(vlr-docmanager-reactor §|)
+[(vlr-dwg-reactor data callbacks) | Constructs an editor reactor object that notifies of a drawing event (for example, opening or closing a drawing file)]
+(vlr-dwg-reactor §|)
+[(vlr-dxf-reactor data callbacks) | Constructs an editor reactor object that notifies of an event related to reading or writing a DXF file]
+(vlr-dxf-reactor §|)
+[(vlr-editor-reactor data callbacks) | Constructs an editor reactor object]
+(vlr-editor-reactor §|)
+[(vlr-insert-reactor data callbacks) | Constructs an editor reactor object that notifies of an event related to block insertion]
+(vlr-insert-reactor §|)
+[(vlr-linker-reactor data callbacks) | Constructs a reactor object that notifies your application every time an ObjectARX application is loaded or unloaded]
+(vlr-linker-reactor §|)
+[(vlr-lisp-reactor data callbacks) | Constructs an editor reactor object that notifies of a LISP even]
+(vlr-lisp-reactor §|)
+[(vlr-miscellaneous-reactor data callbacks) | Constructs an editor reactor object that does not fall under any other editor reactor types]
+(vlr-miscellaneous-reactor §|)
+[(vlr-mouse-reactor data callbacks) | Constructs an editor reactor object that notifies of a mouse event (for example, a double-click)]
+(vlr-mouse-reactor §|)
+[(vlr-notification reactor) | Determines whether or not a reactor will fire if its associated namespace is not active]
+(vlr-notification §|)
+[(vlr-object-reactor owners data callbacks) | Constructs a drawing object reactor object]
+(vlr-object-reactor §|)
+[(vlr-owner-add reactor owner) | Adds an object to the list of owners of an object reactor]
+(vlr-owner-add §|)
+[(vlr-owner-remove reactor owner) | Removes an object from the list of owners of an object reactor]
+(vlr-owner-remove §|)
+[(vlr-owners reactor) | Returns the list of owners of an object reactor]
+(vlr-owners §|)
+[(vlr-pers reactor) | Makes a reactor persistent]
+(vlr-pers §|)
+[(vlr-pers-list <reactor>) | Returns a list of persistent reactors in the current drawing document]
+(vlr-pers-list §|)
+[(vlr-pers-p reactor) | Determines whether a reactor is persistent]
+(vlr-pers-p §|)
+[(vlr-pers-release reactor) | Makes a reactor transient]
+(vlr-pers-release §|)
+[(vlr-reaction-name reactor-type) | Returns a list of all possible callback conditions for this reactor type]
+(vlr-reaction-name §|)
+[(vlr-reactions reactor) | Returns a list of pairs (event-name . callback_function) for the reactor]
+(vlr-reactions §|)
+[(vlr-reaction-set reactor event function) | Adds or replaces a callback function in a reactor]
+(vlr-reaction-set §|)
+[(vlr-reactors <reactor-type...>) | Returns a list of existing reactors]
+(vlr-reactors §|)
+[(vlr-remove reactor) | Disables a reactor]
+(vlr-remove §|)
+[(vlr-remove-all <reactor-type>) | Disables all reactors of the specified type]
+(vlr-remove-all §|)
+[(vlr-set-notification reactor 'range) | Defines whether a reactor's callback function will execute if its associated namespace is not active]
+(vlr-set-notification §|)
+[(vlr-sysvar-reactor data callbacks) | Constructs an editor reactor object that notifies of a change to a system variable]
+(vlr-sysvar-reactor §|)
+[(vlr-toolbar-reactor data callbacks) | Constructs an editor reactor object that notifies of a change to the bitmaps in a toolbar]
+(vlr-toolbar-reactor §|)
+[(vlr-trace-reaction) | A predefined callback function that prints one or more callback arguments in the Trace window]
+(vlr-trace-reaction §|)
+[(vlr-type reactor) | Returns a symbol representing the reactor type]
+(vlr-type §|)
+[(vlr-types) | Returns a list of all reactor types]
+(vlr-types)
+[(vlr-undo-reactor data callbacks) | Constructs an editor reactor object that notifies of an undo event]
+(vlr-undo-reactor §|)
+[(vlr-wblock-reactor data callbacks) | Constructs an editor reactor object that notifies of an event related to writing a block]
+(vlr-wblock-reactor §|)
+[(vlr-window-reactor data callbacks) | Constructs an editor reactor object that notifies of an event related to moving or sizing an AutoCAD window]
+(vlr-window-reactor §|)
+[(vlr-xref-reactor data callbacks) | Constructs an editor reactor object that notifies of an event related to attaching or modifying XREFs]
+(vlr-xref-reactor §|)
+[(vports) | Returns a list of viewport descriptors for the current viewport configuration]
+(vports)
+[(wcmatch string pattern) | Performs a wild-card pattern match on a string]
+(wcmatch §|)
+[(while testexpr <expr ...>) | Evaluates a test expression, and if it is not nil, evaluates other expressions; repeats this process until the test expression evaluates to nil]
+(while §|
+
+)
+[(write-char num <file-desc>) | Writes one character to the screen or to an open file]
+(write-char §|)
+[(write-line string <file-desc>) | Writes a string to the screen or to an open file]
+(write-line §|)
+[(xdroom ename) | Returns the amount of extended data (xdata) space that is available for an object (entity)]
+(xdroom §|)
+[(xdsize lst) | Returns the size (in bytes) that a list occupies when it is linked to an object (entity) as extended data]
+(xdsize §|)
+[(zerop num) | Verifies that a number evaluates to zero]
+(zerop §|)
