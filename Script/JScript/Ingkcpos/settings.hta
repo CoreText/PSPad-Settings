@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>ingkcpos enhanced cursor navigation settings</title>
+<!-- Move/Size script must be present BEFORE the <hta:application> tag to avoid flicker -->
+<script type="text/javascript">
+// <![CDATA[
+var windowWidth = 931;
+var windowHeight = 400;
+window.resizeTo(windowWidth, windowHeight);
+window.moveTo( (screen.width-windowWidth)/2, (screen.height-windowHeight)/2 );
+// ]]>
+</script>
+<hta:application 
+	id              = "hta"
+	applicationname = "ingkcpos"
+	border          = "thin"
+	borderstyle     = "raised"
+	maximizebutton  = "no"
+	minimizebutton  = "no"
+	sysmenu         = "yes"
+	windowstate     = "default"
+	selection       = "no"
+/>
+<script type="text/javascript">
+// <![CDATA[
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+
+// got this nifty function from http://www.nabble.com/passing-parameters-to-a-HTA-t1035065.html
+function extractArgs(str) 
+{
+	var matches = str.match(/((?!"([^"]+)")\b(\S+)\b|"([^"]+)")/g);
+	// We either want non quote stuff ([^"]+) surrounded by quotes
+	// or we want to look-ahead, see that the next character isn't
+	// a quoted argument, and then grab all the non-space stuff
+	// this will return for the line: "foo" bar
+	// the results "\"foo\"" and "bar"
+	
+	// So, let's unquote the quoted arguments:
+	var args = new Array;
+	for (var i = 0; i < matches.length; i++) {
+		args[i] = matches[i];
+		args[i] = args[i].replace(/^"(.*)"$/, "$1");
+	}
+	return args;
+}
+
+function loadSettingsFile(path) 
+{
+	var ts = fso.OpenTextFile(path, 1);
+	var settings = {};
+	var line = "";
+	var bits = null;
+	var eq = null;
+	var key, value;
+	
+	while (!ts.AtEndOfStream) {
+		// Read line and trim
+		line = ts.ReadLine().replace(/^\s+|\s+$/g, '');
+		eq = line.indexOf('=');
+		if (eq != -1) {
+			key = line.substr(0, eq);
+			value = line.substr(eq+1);
+			settings[key] = unescape(value);
+		}
+	};
+	
+	ts.Close();
+	
+	return settings;
+}
+
+function saveSettingsFile(path, settings) 
+{
+	var ts = fso.CreateTextFile(path, true);
+	for (key in settings) {
+		ts.WriteLine(key + "=" + escape(settings[key]));
+	}
+	ts.Close();
+}
+
+var cmdArgs = extractArgs(hta.commandLine);
+var dataFilePath = cmdArgs[1];
+
+// Load settings
+var config = loadSettingsFile(dataFilePath);
+// Delete temp file
+fso.DeleteFile(dataFilePath);
+
+
+// -----------------------------------------
+
+function expandString(string, args) 
+{
+	for (var key in args) {
+		string = string.replace('%' + key + '%', args[key]);
+	}
+	return string;
+}
+
+function validateField(field) 
+{
+	var rules = (field.validate instanceof Array) ? field.validate : [field.validate];
+	var matches = null;
+	
+	field.error = "";
+	for (var i=0; i<rules.length; i++) {
+		switch (rules[i].type) {
+			case 'regexp':
+				try {
+					if (matches = field.value.match(/^\/(.+)\/([gim]*)/)) {
+						var body = matches[1];
+						var extra = matches[2];
+						var re = eval(field.value);
+					
+					} else {
+						var re = new RegExp(field.value);
+					}
+				
+				} catch (e) {
+					// Not a valid regular expression
+					field.error = expandString(rules[i].error, field);
+					return false;
+				}
+				break;
+		}
+	}
+	
+	return true;
+}
+
+function hasClass(el, className) 
+{
+	var oldClasses = el.className.split(' ');
+	for (var i=0; i<oldClasses.length; i++) {
+		if (oldClasses[i] == className) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function removeClass(el, className) 
+{
+	var oldClasses = el.className.split(' ');
+	var newClasses = [];
+	for (var i=0; i<oldClasses.length; i++) {
+		if (oldClasses[i] != className) {
+			newClasses.push(oldClasses[i]);
+		}
+	}
+	el.className = newClasses.join(' ');
+}
+
+function addClass(el, className) 
+{
+	if (!hasClass(el, className)) {
+		el.className += ' ' + className;
+	}
+}
+
+function doValidation() 
+{
+	var key;
+	for (key in fields) {
+		if (typeof(fields[key].error) == 'undefined') {
+			fields[key].error = "";
+		}
+		fields[key].oldError = fields[key].error;
+		fields[key].value = document.getElementById('field-' + key).value;
+	}
+	var ok = true;
+	for (key in fields) {
+		ok = ok && validateField(fields[key]);
+		
+		try {
+			if (fields[key].error != fields[key].oldError) {
+				if (!fields[key].error) {
+					document.getElementById('error-' + key).innerText = '';
+					removeClass(document.getElementById('row-' + key), 'error');
+				
+				} else {
+					document.getElementById('error-' + key).innerText = fields[key].error;
+					addClass(document.getElementById('row-' + key), 'error');
+				}
+			}
+
+		} catch (e) {
+		//alert("Error on field " + key + "\n\n" + e);
+		}
+	}
+	
+	document.getElementById('btnOK').enabled = ok;
+	
+	return ok;
+}
+
+function handleOK() 
+{
+	if (!doValidation()) {
+		return;
+	}
+	
+	// Build up config array
+	var settings = {};
+	for (key in fields) {
+		settings[key] = fields[key].value;
+	}
+	
+	// Save it back to the same file
+	saveSettingsFile(dataFilePath, settings);
+	
+	// And exit
+	window.close();
+}
+
+function handleReset() 
+{
+	/*	Reset Ingkcpos settings to default
+	*/
+	if (!doValidation()) {
+		return;
+	}
+	
+	// Build up config array with default settings
+	var settings = new Array();
+	settings['white'] = unescape("/%5Cs/");
+	settings['alpha'] = unescape("/%5B%5E%5Cs%5C%7E%5C%21%5C@%5C%23%5C%24%5C%25%5C%5E%5C%26%5C*%5C%28%5C%29%5C_%5C+%5C%7B%5C%7D%5C%7C%5C%3A%5C%3C%5C%3E%5C%3F%5C%60%5C-%5C%3D%5C%5B%5C%5D%5C%5C%5C%3B%5C%2C%5C.%5C/%5C%22%5C%27%5D/");
+	settings['delim'] = unescape("/%5B%5C%7E%2C%5C%21%2C%5C@%2C%5C%23%2C%5C%24%2C%5C%25%2C%5C%5E%2C%5C%26%2C%5C*%2C%5C%28%2C%5C%29%2C%5C_%2C%5C+%2C%5C%7B%2C%5C%7D%2C%5C%7C%2C%5C%3A%2C%5C%3C%2C%5C%3E%2C%5C%3F%2C%5C%60%2C%5C%u2019%2C%5C-%2C%5C%u2013%2C%5C%u2014%2C%5C%3D%2C%5C%5B%2C%5C%5D%2C%5C%5C%2C%5C%3B%2C%5C%2C%2C%5C.%2C%5C/%2C%5C%22%2C%5C%27%5D/");
+	
+	// Save it back to the same file
+	saveSettingsFile(dataFilePath, settings);
+	
+	// And exit
+	window.close();
+}
+
+
+function handleCancel() 
+{
+	//alert(document.innerHTML);
+	//return;
+	window.close();
+}
+
+
+
+
+
+
+// -----------------------------------------
+
+var fields = {
+  white: {
+    label: 'Whitespace Pattern',
+    type: 'string',
+    value: '',
+    validate: {
+      type  : 'regexp',
+      error : '%label% must be a valid regular expression'
+    }
+  },
+  alpha: {
+    label: 'Alphanumerics Pattern',
+    type: 'string',
+    value: '',
+    validate: {
+      type  : 'regexp',
+      error : '%label% must be a valid regular expression'
+    }
+  },
+  delim: {
+    label: 'Delimiters Pattern',
+    type: 'string',
+    value: '',
+    validate: {
+      type  : 'regexp',
+      error : '%label% must be a valid regular expression'
+    }
+  }
+};
+
+// Set defaults from config
+for (key in fields) {
+	fields[key].error = "";
+	if (typeof(config[key]) !== 'undefined') {
+		fields[key].value = config[key];
+	}
+}
+
+window.setTimeout(doValidation, 100);
+
+
+function initFields() 
+{
+	for (key in fields) {
+		document.getElementById("field-" + key).value = fields[key].value;
+	}
+}
+
+// ]]>
+</script>
+<style type="text/css">
+html { border: none; margin: 0; padding: 0; overflow: hidden; }
+body { border: none; background: buttonface; font: message-box; color: black; overflow: hidden; }
+* { font: message-box; }
+p { margin: 1em; }
+
+.buttonholder { overflow: auto; }
+button { margin: 1em 0em 1em 1em; padding: 0.5em; width: 8em; display: block; float: left; text-align: center; }
+
+.label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.field {
+	position: relative;
+}
+
+.field .txt {
+	width: 100%;
+	background: white;
+	color: black;
+	font-family: 'DejaVu Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+}
+
+.row.error .field .txt {
+	color: red;
+}
+
+.row .error {
+	height: 0; overflow: hidden; visibility: hidden;
+	
+	border: 1px solid red;
+	font-weight: bold;
+	background: #faa;
+	color: black;
+	padding: 1em;
+}
+
+.row.error .error {
+	height: auto; visibility: visible;
+}
+
+</style>
+</head>
+<body onload="initFields()">
+<form action="#" onsubmit="handleOK(); event.returnValue=false; return false;">
+<script type="text/javascript">
+// <![CDATA[
+for (key in fields) {
+	var field = fields[key];
+	document.write('<div class="row" id="row-' + key + '">');
+	document.write('<div class="label"><label for="' + key + '">' + field.label + '</label></div>');
+	document.write('<div class="field">');
+	switch (field.type) {
+		default:
+			// Basic text
+			document.write('<input type="text" onchange="doValidation()" class="txt" id="field-' + key + '" value="" />');
+	}
+	document.write('</div>');
+	document.write('<div class="error" id="error-' + key + '"></div>');
+	document.write('</div>');
+}
+// ]]>
+</script>
+<div class="buttonholder">
+<button type="submit" id="btnOK">OK</button>
+<button onclick="handleReset()" id="btnReset">Reset to Default</button>
+<button onclick="handleCancel()" id="btnCancel">Cancel</button>
+</div>
+</form>
+</body>
+</html>
