@@ -1,0 +1,125 @@
+http://citforum.ru/internet/vbscript/vbscript1.shtml
+http://dunaevv1.narod.ru/vbs_refers.htm
+
+
+
+E:\Temp\GoogleDrive\PSPad\pspad461en\Script\JScript\emmet.js
+
+Kill Spaces or SPLIT Selected With      Alt+K
+Slect By Scope разрабатывать
+Toogle TODO.txt if Opened
+
+"something \n E:\Temp\GoogleDrive\PSPad\pspad461en\TODO.txtE:\Temp\GoogleDrive\PSPad\pspad461en\TODO.txt"
+
+
+somesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesomesome
+
+
+print  ('<pre style="color: lawngreen ;background-color: black ;padding:12px;overflow:auto;font:.8em Consolas;">');
+print_r( some );
+print  ("\r\n</pre>");
+
+
+
+переписать функцию выделения слова E:\Temp\GoogleDrive\PSPad\pspad461en\Script\JScript\sel_word.js
+Релизовать Duplicate - EditText
+
+
+<a href="https://google.com/"></a>
+
+
+If you need to know if a [ "string",
+"matches",
+"aregular"
+]
+
+somthing else
+some
+somEsomEsomEsomE
+some some some some some
+
+
+div
+
+div
+
+cm_CopyNamesToClip
+
+
+
+$some
+
+        <div class="some" id="s">
+            <ul>
+            	<li><a href="http://">hello there 001</a></li>
+            	<li><a href="http://">hello there 002</a></li>
+            	<li><a href="http://">hello there 003</a></li>
+            	<li><a href="http://">hello there 004</a></li>
+            </ul>
+        </div>
+
+
+
+echo "<some>". $some ."</some>"
+
+
+somE
+somEsome
+somE
+some
+somE
+
+some somE
+
+
+
+        '         obj.command( "ecWordLeft" )
+
+
+
+
+{
+'         obj.command( "ecWordLeft" )
+'         obj.command( "ecSelWordRight" )
+'         obj.command( "ecCopy" )
+'         obj.command( "ecPaste" )
+'         obj.command( "ecPaste" )
+}
+
+ 
+    function
+
+
+
+        <div></div>
+some:text
+
+        {
+            ( () {})
+        }
+
+Function RegExpTest(patrn, strng)
+   Dim regEx, Match, Matches            ' Create variable.
+   Set regEx = New RegExp               ' Create regular expression.
+   regEx.Pattern = patrn                ' Set pattern.
+   regEx.IgnoreCase = True              ' Set case insensitivity.
+   regEx.Global = True                  ' Set global applicability.
+   Set Matches = regEx.Execute(strng)   ' Execute search.
+   For Each Match in Matches            ' Iterate Matches collection.
+      RetStr = RetStr & "Match found at position "
+      RetStr = RetStr & Match.FirstIndex & ". Match Value is '"
+      RetStr = RetStr & Match.Value & "'." & vbCRLF
+   Next
+   RegExpTest = RetStr
+End Function
+MsgBox(RegExpTest("is.", "IS1 is2 IS3 is4"))
+
+
+
+
+
+(some)
+
+
+
+
