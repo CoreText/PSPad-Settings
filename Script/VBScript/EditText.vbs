@@ -45,11 +45,17 @@ Sub Init
     addMenuItem "console.log()"                                 , module_title , "consoleLog"                             , "Alt+J"
     addMenuItem "Pretty print_r()"                              , module_title , "prettyPrinter"                          , "Shift+Ctrl+I"
 
-    addMenuItem "List Selected Items"   , module_title , "ListSelectedItems"   , "Ctrl+0"
-    addMenuItem "List Selected Strings" , module_title , "ListSelectedStrings" , "Shift+Ctrl+0"
+    addMenuItem "List Selected Items In ()"      , module_title , "ListSelectedItems"   , "Ctrl+0"
+    addMenuItem "List Selected Strings ('')" , module_title , "ListSelectedStrings" , "Shift+Ctrl+0"
 
-    addMenuItem "List Selected Items"   , module_title , "ListSelectedItemsToArr"    , "Ctrl+]"
-    addMenuItem "List Selected Strings" , module_title , "ListSelectedStringsToSmth" , "Shift+Ctrl+]"
+    addMenuItem "List Selected Items In []" , module_title , "ListSelectedItemsToArr"    , "Ctrl+]"
+    addMenuItem "List Selected Items In {}" , module_title , "ListSelectedStringsToSmth" , "Shift+Ctrl+]"
+
+    addMenuItem "List Selected Items In ['']"   , module_title , "ListSelectedItemsToArrQ"    , "Ctrl+Alt+]"
+    addMenuItem "List Selected Items In {''}" , module_title , "ListSelectedStringsToSmthQ" , "Shift+Ctrl+Alt+]"
+
+    addMenuItem "List Selected Items In [""]"   , module_title , "ListSelectedItemsToArrDoubleQ"    , "Alt+]"
+    addMenuItem "List Selected Items In {""}" , module_title , "ListSelectedStringsToSmthDoubleQ" , "Shift+Alt+]"
 
     addMenuItem "Open &TODO.txt"                  , module_title , "OpenFileBlank"   , "Shift+Ctrl+Alt+Space"
     addMenuItem "Open Current &Folder"            , module_title , "OpenFolder"      , "Alt+O"
@@ -484,7 +490,7 @@ Sub ListSelectedItemsToArr
     If selTxt <> "" Then
         For Each item In arrLines
             If Trim(Item) <> "" Then
-                s = s & """" & Trim(item) & """, "
+                s = s & Trim(item) & ", "
             End If
         Next
         s = "[ " & Left(s, len(s)-2) & " ]" & vbCrLf
@@ -506,6 +512,130 @@ End Sub
 
 ' List selected items wrap with strings
 Sub ListSelectedStringsToSmth
+	Dim item, s
+    Set obj = NewEditor()
+    obj.assignActiveEditor()
+    s = ""
+    selTxt = obj.selText()
+    arrLines = Split(selTxt, vbCrLf)
+    If selTxt <> "" Then
+        For Each item In arrLines
+            If Trim(Item) <> "" Then
+                s = s & Trim(item) & ", "
+            End If
+        Next
+        s = "{ " & Left(s, len(s)-2) & " }" & vbCrLf
+        obj.selText(s)
+        obj.command("ecLeft")
+        setClipboardText(s)
+    Else
+        runPSPadAction "aFindWord"
+        s = obj.selText()
+        s = "{" & s & "}"
+        obj.selText(s)
+        obj.command("ecLeft")
+        InsertLineBetween()
+    End If
+
+    Set obj = Nothing
+End Sub
+
+
+' List of items
+Sub ListSelectedItemsToArrQ
+    Dim item, selTxt, objSelTxt, s
+    Set obj = NewEditor()
+    obj.assignActiveEditor()
+    s = ""
+    selTxt = obj.selText()
+    arrLines = Split(selTxt, vbCrLf)
+    If selTxt <> "" Then
+        For Each item In arrLines
+            If Trim(Item) <> "" Then
+                s = s & "'" & Trim(item) & "', "
+            End If
+        Next
+        s = "[ " & Left(s, len(s)-2) & " ]" & vbCrLf
+        obj.selText(s)
+        obj.command("ecLeft")
+        setClipboardText(s)
+    Else
+        runPSPadAction "aFindWord"
+        s = obj.selText()
+        s = "[" &  s & "]"
+        obj.selText(s)
+        obj.command("ecLeft")
+        InsertLineBetween()
+    End If
+
+    Set obj = Nothing
+End Sub
+
+
+' List selected items wrap with strings
+Sub ListSelectedStringsToSmthQ
+	Dim item, s
+    Set obj = NewEditor()
+    obj.assignActiveEditor()
+    s = ""
+    selTxt = obj.selText()
+    arrLines = Split(selTxt, vbCrLf)
+    If selTxt <> "" Then
+        For Each item In arrLines
+            If Trim(Item) <> "" Then
+                s = s & "'" & Trim(item) & "', "
+            End If
+        Next
+        s = "{ " & Left(s, len(s)-2) & " }" & vbCrLf
+        obj.selText(s)
+        obj.command("ecLeft")
+        setClipboardText(s)
+    Else
+        runPSPadAction "aFindWord"
+        s = obj.selText()
+        s = "{" & s & "}"
+        obj.selText(s)
+        obj.command("ecLeft")
+        InsertLineBetween()
+    End If
+
+    Set obj = Nothing
+End Sub
+
+
+' List of items
+Sub ListSelectedItemsToArrDoubleQ
+    Dim item, selTxt, objSelTxt, s
+    Set obj = NewEditor()
+    obj.assignActiveEditor()
+    s = ""
+    selTxt = obj.selText()
+    arrLines = Split(selTxt, vbCrLf)
+    If selTxt <> "" Then
+        For Each item In arrLines
+            If Trim(Item) <> "" Then
+                s = s & """" & Trim(item) & """, "
+            End If
+        Next
+        s = "[ " & Left(s, len(s)-2) & " ]" & vbCrLf
+        obj.selText(s)
+        obj.command("ecLeft")
+        setClipboardText(s)
+    Else
+        runPSPadAction "aFindWord"
+        s = obj.selText()
+        s = "[" &  s & "]"
+        obj.selText(s)
+        obj.command("ecLeft")
+        InsertLineBetween()
+    End If
+
+    Set obj = Nothing
+End Sub
+
+
+' List selected items wrap with strings
+Sub ListSelectedStringsToSmthDoubleQ
 	Dim item, s
     Set obj = NewEditor()
     obj.assignActiveEditor()
@@ -1138,7 +1268,10 @@ Sub InsertNewLineBeforeCurrent()
     Set obj = newEditor()
         obj.assignActiveEditor()
 
-    If obj.caretY < 2 Then
+    If obj.caretY < 2 And obj.selText() = "" Then
+        obj.command("ecInsertLine")
+    ElseIf obj.caretY < 2 And obj.selText <> "" Then
+        obj.command("ecPageLeft")
         obj.command("ecInsertLine")
     Else
         obj.command("ecPageLeft")
